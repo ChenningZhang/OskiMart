@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'login' => 'home#login'
 
-  get 'signup' => 'home#signup'
+  get 'signup' => 'users#new'
 
   get 'posts/new'
 
