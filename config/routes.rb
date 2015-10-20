@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  root 'home#home'
+
+  get 'login' => 'home#login'
+
+  get 'signup' => 'home#signup'
+
   get 'posts/new'
 
   get 'users/new'
