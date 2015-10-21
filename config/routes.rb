@@ -3,11 +3,14 @@ Rails.application.routes.draw do
 
   get 'login' => 'home#login'
 
-  get 'signup' => 'home#signup'
+  get 'signup' => 'users#new'
 
   get 'posts/new'
 
   get 'users/new'
+
+  resources :users
+  resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
