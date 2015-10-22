@@ -1,0 +1,347 @@
+/*@author: Itzel Martinez
+* Web App Part 1
+* Class CS169: Software Engineering Fall 15 */
+
+
+body {
+		margin: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        font-family: Verdana;
+        background-color: pink
+        ;
+
+
+}
+
+/* FINISH ME (Task 2.2+): add the styling for the logo and the create button */
+
+
+
+
+/* FINISH ME (Task 3): add responsive styling for the number of layout columns */
+@media screen and (min-width: 800px) {
+
+}
+
+
+header {
+	display: block;
+	width: 100%;
+	text-align: center;
+	background-color: green;
+	position: fixed;
+
+}
+
+article {
+	display: inline-block;
+
+}
+
+label {
+	padding-right: 20px;
+
+}
+
+
+
+
+
+
+.mainbody {
+	float:left;
+	clear:left;
+	width: 100%;
+	margin-top: 60px;
+
+}
+
+
+.smile {
+	background-color: red;
+	margin: 10px;
+
+}
+
+.my-button {
+	display: block;
+	width: 100%;
+	background-color: yellow;
+
+	border-style: solid;
+
+
+	border-left-color: gray;
+	border-top-color:gray;
+
+	border-bottom-width: 5px;
+	border-bottom-color: black;
+
+	border-right-width: 5px;
+	border-right-color: black;
+
+	
+
+}
+
+
+
+/*.my-button a {
+    text-decoration: none;
+}*/
+
+
+.my-button:hover {
+   background-color: pink;
+
+}
+
+.my-button.submit-input {
+	width: auto;
+
+}
+
+.my-button.cancel {
+	width: auto;
+	text-decoration: none;
+
+}
+
+.title {
+	width: 100%;
+	text-align: center;
+	font-size: 120%;
+	padding: 5px;
+	color: black;
+	font-weight: bold;
+
+
+}
+
+
+.happiness-level-col {
+	position: left;
+	margin-left: 20px;
+	margin-right: 5px;
+	width: 60px;
+	height: 80px;
+	float: left;
+	text-align: center;
+	background-position: center;
+	border:none;
+	color: transparent;
+	
+}
+
+
+.happiness-level {
+	clear:left;
+
+	
+}
+
+.happiness-level-1 {
+
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position:-5% 40% ;
+
+
+}
+
+
+.happiness-level-2 {
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position: 50% 40%;
+
+}
+
+.happiness-level-3 {
+
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position: 100% 40%;
+
+}
+
+
+
+
+.story-col {
+	width: calc(65%);
+	
+	position: center;
+	float: left;
+	margin-left: -10px;
+		
+    
+}
+
+
+.story {
+
+	clear:left;
+	position: center;
+
+}
+
+.like-col {
+
+	position:right;
+	text-align: center;
+	width: 5px;
+	float: left;
+  	margin-left: 6px;
+
+	}
+
+
+.like {
+
+	border: none;
+	background: none;
+	background-image: url('../images/heart.png');
+	height: 42px;
+	width: 48px;
+	color: transparent;
+	margin-left: 7px;
+}
+
+.count {
+
+	clear:left;
+	position: center;
+	padding: 10px;
+	width: 40px;
+
+
+
+}
+
+.timestamp {
+	clear:left;
+	margin-left: 70px;
+	padding: 5px;
+
+
+}
+
+
+
+/*CSS Part for create.html*/
+
+form {
+	display: block;
+	margin: auto;
+	width: 80%;
+	margin-top: 50px;
+	
+
+}
+
+
+
+/*
+.share-a-smile {
+	display: block;
+	margin: auto;
+	width: 100%;
+	text-decoration: none;
+
+}*/
+ 
+
+a {
+   text-decoration: none;
+}
+
+
+.title-input {
+	padding-bottom: 15px;
+	width: 100%;
+	display: block;
+
+}
+
+.story-input {
+	display:block;
+	width: 100%;
+	height: 20em;
+	margin-top: 2em;
+	margin-bottom: 2em;
+
+}
+
+.happiness-level-input {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+
+}
+
+.submit-input {
+	display: block;
+	float:right;
+	margin-top: 20px;
+
+}
+
+.cancel {
+
+	display: block;
+	float:left;
+	margin-top: 20px;
+
+}
+
+
+
+
+
+/* FINISH ME (Task 3): add responsive styling for the number of layout columns */
+@media screen and (min-width: 800px) {
+
+	.mainbody.smiles {
+		-webkit-columns: 2;
+	    -moz-columns: 2;
+        column-count: 2 200px;
+
+        -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+		-moz-column-width: 100px; /* Firefox */
+		column-width: 100px;
+
+		-webkit-column-gap: 0px;
+     	-moz-column-gap: 0px;
+        column-gap: 0px;
+
+
+  		
+
+	}
+
+@media screen and (min-width: 1200px) {
+
+	.mainbody.smiles {
+		-webkit-column-count:  3;
+		-moz-column-count: 3;
+		column-count: 3;
+		
+		-webkit-column-gap: 0px;
+     	-moz-column-gap: 0px;
+        column-gap: 0px;
+
+
+
+}

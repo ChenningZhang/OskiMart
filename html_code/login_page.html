@@ -1,0 +1,106 @@
+<!-- @author: Itzel Martinez
+    OskiMart Iteration 1  10/18/15
+    Class CS169: Software Engineering Fall 15 -->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+        <title>Oskimart</title> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <!--code to load javascript files -->
+
+
+        <script src="scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/smiles.js"></script>
+        <script type="text/javascript">
+            // This is a jQuery convention to say that once all the files
+            // load, the function Smile.start() should run.
+            // This function is defined in the smiles.js
+            $(function() {
+                Smile.start();
+            });
+        </script>
+        
+</head>
+
+<body>
+
+                <img src= "images/logo.png">
+                <!-- FINISH ME: add the logo here -->
+               
+                    <!-- FINISH ME: add a link to the create page -->
+                <div class = "share-a-smile">
+                <a href = "index.html" class = "share my-button">Share a smile</a>
+                </div>
+        </header>
+
+                 <!-- <div class="my-button">    -->   
+                       <!--  <form class = "share-a-smile" method = "get" action ="create.html" >
+                                <input class = "my-button "  type="submit" value="Share a smile" >
+                            </form> -->
+                    
+        <div class = "create">
+            <section class="mainbody">
+ 
+            <form method="get" action="create.html" >
+                <input type="text" placeholder="Title" class="title-input" name="title" />
+                <!-- FINISH ME: add the rest of the form fields -->
+                <textarea placeholder = "Share a smile..." class = "story-input" name = "story"></textarea>
+
+                <label>How happy did this make you?</label>
+                <select class = "happiness-level-input" name = "happiness-level">
+                        <option value="1">Happy</option>
+                          <option value="2">Really happy</option>
+                          <option value="3"> So ecstatic, I can't stop smiling</option>
+                </select>
+
+                <input  class = "submit-input my-button" value = "Post" type="submit"/> 
+
+
+                <a class = "my-button cancel" href= "index.html">Cancel</a>                                
+            </form>
+            </section>
+        </div>
+               <!--  </div> -->
+       
+
+        <section class="mainbody smiles">
+                <!-- FINISH ME: create 3 smile posts -->
+                <article class="smile">
+                     <!--Add HTML for the post elements: title, level, etc., as per instructions. --> 
+
+                    <div class = "title"> My Beautiful Day In Berkeley </div>
+
+                    <div class = "happiness-level-col">
+                            <div  class = "happiness-level-1"></div>
+                            <div class = "happiness-level"> Lvl </div>
+                    </div>
+
+
+                  
+                    
+                    <div class = "story-col">
+                        <div class = "story"> This is my first smile. Today was a great day, my best friend made me breakfast and it was really good. I had a meeting with my board for my team for the club that I am a part of and it was productive. I feel happy, it's been a while since I've been really really happy. I kinda feel like singing "because I'm Happy". Something that happened today that also made my day was that I had pasta for dinner, it had veggies which was really good! yum! I ate a really good lunch too. I am really happy because I am alive and I am healthy and I had a chance to talk to my mom today, I hadn't talked to her in a while. :).
+                        </div>
+                    </div> 
+                    
+                    <div class = "like-col">
+                        <button class = "like"> Like </button>
+                        <div class = "count"> 8237 </div> 
+
+                    </div>
+                    
+
+                    <div class = "timestamp">Posted at 10:20pm September 10, 2015 </div>
+
+                </article>
+               
+               
+
+     </section>
+</body>
+</html>
