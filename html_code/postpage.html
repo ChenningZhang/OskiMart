@@ -1,0 +1,49 @@
+<!-- @author: Itzel Martinez
+    OskiMart Iteration 1  10/18/15
+    Class CS169: Software Engineering Fall 15 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Smile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--     <link rel="icon" type="image/png" href="logo.png">
+     -->    <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+<body>
+    <header class = "logo">
+        <!-- Add logo and fix size-->
+               <img src= "oskimart.png" style="width:50%;height:86px;">
+                <!-- FINISH ME: add here a message -->
+                <div class = "message">Tell us what you are selling </div>
+    </header>
+        <section class="mainbody">
+       <form method="get" action="index.html">
+        <input type="text" placeholder="Enter a title for your post" class="title-input" name="title" />
+
+        <!-- FINISH ME: add the rest of the form fields -->
+        <textarea placeholder = "Tell us what you are selling" class = "story-input" name = "story"></textarea>
+
+        <label >Category</label>
+        <select class = "happiness-level-input" name = "happiness-level">
+                <option value="1">Books</option>
+                <option value="2">Technology</option>
+                  <option value="3">Furniture</option>
+                  <option value="4">Service</option>
+                    <option value="5">Other</option>
+
+        </select>
+
+        <a class = "my-button submit-input">post</a>
+
+
+        <a class = "my-button cancel" >cancel</a>
+        
+
+
+
+
+       </form>
+        </section>         
+</body>
+</html>
