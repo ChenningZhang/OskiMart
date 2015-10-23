@@ -2,8 +2,13 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-gem 'bcrypt', '3.1.7'
+
+#bcrypt
+gem 'bcrypt', '3.1.9'
+gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
+
 gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,6 +28,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 #mysterious tzinfo-data error will be solved
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# gem for code coverage
+gem 'simplecov', :require => false, :group => :test
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
