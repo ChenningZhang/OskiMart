@@ -1,22 +1,92 @@
 /*@author: Itzel Martinez
-* Web App Part 1
-* Class CS169: Software Engineering Fall 15 */
+    OskiMart Iteration 1  10/18/15
+    Class CS169: Software Engineering Fall 15 */
+
+
+header {
+	display: block;
+	width: 100%;
+	text-align: center;
+	background-color: black;
+	position: fixed;
+}
+
 
 
 body {
-		/*margin: 0;
+		margin: 0;
         width: 100%;
-        height: 100%;*/
-      /*  position: relative;
-        font-family: Verdana;*/
-        /*background-color: white;
-        font-color: white; 
-        ;*/
+        height: 100%;
+        position: relative;
+        font-family: Verdana;
+        background-color: black;
 
 
 }
 
-/* FINISH ME (Task 2.2+): add the styling for the logo and the create button */
+
+
+.button.submit {
+	margin-left: 20%;
+	margin-top:5%;
+
+
+}
+
+
+.button.cancel {
+	position:relative;
+	margin-left: 50%;
+	margin-top:10%;
+
+
+}
+
+.homepage {
+	margin-left: 20%;
+	margin-top:5%;
+
+
+}
+
+.button.login {
+
+	position:relative;
+	margin-left: 50%;
+	margin-top:10%;
+
+
+
+}
+
+.button.signup {
+	position:relative;
+	margin-left: 50%;
+	margin-top:5%;
+
+
+
+}  
+
+
+
+/*.button.submit {
+
+	position:relative;
+	margin-left: 30%;
+	margin-top:10%;
+
+
+}
+
+.button.cancel {
+	position:relative;
+	margin-left: 30%;
+	margin-top:5%;
+
+
+} */
+
 
 
 
@@ -27,40 +97,9 @@ body {
 }
 
 
-header {
-	display: block;
-	width: 100%;
-	text-align: center;
-/*	background-color: black;
-*/	position: fixed;
-
-}
 
 
-.login_button {	
-
-	position:center;
-	margin-top: 250px;
-	margin-left: 300px;
-		float: left;
-
-
-
-
-}
-
-.signup_button {	
-	position:center;
-	margin-top: 250px;
-	margin-left: 200px;
-	float: left;
-
-}
-
-
-
-
-/*article {
+article {
 	display: inline-block;
 
 }
@@ -68,15 +107,32 @@ header {
 label {
 	padding-right: 20px;
 
-}*/
+}
 
 
 
+
+
+
+.mainbody {
+	float:left;
+	clear:left;
+	width: 100%;
+	margin-top: 60px;
+
+}
+
+
+.smile {
+	background-color: white;
+	margin: 10px;
+
+}
 
 .my-button {
 	display: block;
 	width: 100%;
-	background-color: yellow;
+	background-color: white;
 
 	border-style: solid;
 
@@ -102,7 +158,7 @@ label {
 
 
 .my-button:hover {
-   background-color: pink;
+   background-color: yellow;
 
 }
 
@@ -129,6 +185,60 @@ label {
 }
 
 
+.happiness-level-col {
+	position: left;
+	margin-left: 20px;
+	margin-right: 5px;
+	width: 60px;
+	height: 80px;
+	float: left;
+	text-align: center;
+	background-position: center;
+	border:none;
+	color: transparent;
+	
+}
+
+
+.happiness-level {
+	clear:left;
+
+	
+}
+
+.happiness-level-1 {
+
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position:-5% 40% ;
+
+
+}
+
+
+.happiness-level-2 {
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position: 50% 40%;
+
+}
+
+.happiness-level-3 {
+
+
+	background-image: url('../images/happiness-level.png');
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 80px;
+	background-position: 100% 40%;
+
+}
 
 
 
@@ -216,7 +326,7 @@ form {
 
 }*/
  
-/*
+
 a {
    text-decoration: none;
 }
@@ -252,7 +362,6 @@ a {
 
 }
 
-*/
 .cancel {
 
 	display: block;
@@ -299,4 +408,5 @@ a {
 
 
 
+>>>>>>> part2
 }
