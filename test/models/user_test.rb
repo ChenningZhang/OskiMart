@@ -9,4 +9,8 @@ class UserTest < ActiveSupport::TestCase
 	  assert_equal('Bob', User.find(1).name, "User is wrong")
 	end 
 
+	test "should not save user without fields" do
+	  user = User.new
+	  assert_not user.save
+	end
 end
