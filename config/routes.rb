@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
 
-  get 'login' => 'home#login'
+  get 'login' => 'sessions#new'
+
+  post 'login' => 'sessions#create'
+
+  delete 'logout' => 'sessions#destroy'
 
   get 'signup' => 'users#new'
 
