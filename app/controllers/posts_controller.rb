@@ -1,22 +1,45 @@
 class PostsController < ApplicationController
-  def create
-  	@post = Post.new
-  end
 
-  def index
-  	@user = Post.find(params[:id])
-  end
+    def new
+        @post = Post.new
+    end
 
-  def update
-  	
-  end
+    def create
+      	@post = Post.new(post_params)
+        if @post.save
+          flash[:success] = "Your post has been posted!"
+          # redirect_to_newsfeed page
+        else
+          render 'newsfeed'
+        end
+    end
 
-  def delete
-  end
+    # not sure if needed
+    def show
+    	 @post = Post.all
+    end
 
-  private
-  	def user_params
-  		params.require(:post).permit(:title, :description, :category, :price)
-  	end
+    def edit
+        @post = Post.find(params[:id])
+    end
 
+    def update
+        @post = Post.find(params[:id])
+        if @post.update_attributes(post_params)
+          flash[:success] = "Your post has been updated!"
+          redirect_to @post
+        else
+          render 'edit'
+        end
+    end
+
+    def destroy
+        Post.destroy(params[:id])
+        # redirect_to newsfeed
+    end
+
+    private
+      	def post_params
+      		  params.require(:post).permit(:title, :description, :category, :price)
+      	end
 end

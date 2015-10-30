@@ -12,12 +12,11 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
 
-  get 'posts' => 'posts#new'
 
-  get 'posts/all' => 'posts#index'
+  get 'posts/all' => 'posts#show'
   post 'posts/:id' => 'posts#update'
   post 'posts' => 'posts#create'
-  delete 'posts' => 'posts#delete'
+  delete 'posts' => 'posts#destroy'
 
   get 'users/new'
 
