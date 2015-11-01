@@ -5,12 +5,13 @@ class PostsController < ApplicationController
     end
 
     def create
+        flash[:success] = "here"
       	@post = Post.new(post_params)
         if @post.save
           flash[:success] = "Your post has been posted!"
-          # redirect_to_newsfeed page
+          render 'show'
         else
-          render 'newsfeed'
+          render 'new'
         end
     end
 
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          redirect_to @post
+          render 'show'
         else
           render 'edit'
         end

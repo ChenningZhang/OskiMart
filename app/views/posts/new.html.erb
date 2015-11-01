@@ -1,2 +1,22 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<title>Create post</title>
+<h1>Create Post</h1>
+<div class='row'>
+	<div class='col-md-6 col-md-offset-3'>
+		<%= form_for(@post) do |f| %>
+
+			<%= f.label :title %>
+			<%= f.text_field :title, class: 'form-control' %>
+
+			<%= f.label :description %>
+			<%= f.text_field :description, class: 'form-control' %>
+
+			<%= f.label :category %>
+			<%= f.text_field :category, class: 'form-control' %>
+
+			<%= f.label :price%>
+			<%= f.text_field :price, class: 'form-control' %>
+
+			<%= f.submit "Create Post", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
