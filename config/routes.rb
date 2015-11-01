@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#home'
+  
 
   resources :users
   resources :posts
@@ -12,12 +13,20 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
 
+<<<<<<< HEAD
   get 'posts' => 'posts#new'
 
   get 'posts/all' => 'posts#index'
   post 'posts/:id' => 'posts#update'
   post 'posts' => 'posts#create'
   delete 'posts' => 'posts#delete'
+=======
+  get 'posts' => 'posts#show'
+  post 'posts/:id' => 'posts#update'
+  get 'post_new' => 'posts#new'
+  post 'post' => 'posts#create'
+  delete 'posts' => 'posts#destroy'
+>>>>>>> a7ed8b7f13409944f692d9c2adeb5f804acd05e6
 
   get 'users/new'
 
