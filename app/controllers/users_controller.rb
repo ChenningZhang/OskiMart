@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
   		flash[:success] = "Thanks for signing up. Welcome to OskiMart!"
-  		render 'posts/show'
+  		render 'posts/index'
   	else
   		render 'new'
   	end

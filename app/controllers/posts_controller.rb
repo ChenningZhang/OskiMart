@@ -6,19 +6,21 @@ class PostsController < ApplicationController
     end
 
     def create
-        flash[:success] = "here"
       	@post = Post.new(post_params)
         if @post.save
           flash[:success] = "Your post has been posted!"
-          render 'show'
+          render 'index'
         else
           render 'new'
         end
     end
 
-    # not sure if needed
     def show
-    	 @post = Post.all
+        @post = Post.find(params[:id])
+    end
+
+    def index
+        @posts = Post.all
     end
 
     def edit
@@ -29,9 +31,9 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          render 'show'
+          render 'index'
         else
-          render 'edit'
+          render 'new'
         end
     end
 
