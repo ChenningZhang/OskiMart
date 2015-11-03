@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,10 +22,8 @@
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
 
-	<title>Create post</title>
-<!-- 	<h1>Create Post</h1>
- -->
-</head>
+	<title>Newsfeed Page</title>
+ </head>
 
 <body>
 	<!-- container section start -->
@@ -128,6 +128,7 @@
 						</ul>
 					</li>
 					<!-- inbox notificatoin end -->
+
 	<!-- ALERT NOTIFICATION -->
 					<!-- alert notification start-->
 					<li id="alert_notificatoin_bar" class="dropdown">
@@ -175,6 +176,7 @@
 						</ul>
 					</li>
 					<!-- alert notification end-->
+
 	<!-- USER LOGIN BAR -->
 					<!-- user login dropdown start-->
 					<li class="dropdown">
@@ -236,34 +238,31 @@
 						</ul>
 					</li>       
 
-
-
 					<li>
 						<a class="" href="following.html">
 							<i class="icon_genius"></i>
 							<span>Following</span>
 						</a>
 					</li>
-	                  
+
 					<li class="sub-menu">
 						<a href="javascript:;" class="">
 							<i class="icon_documents_alt"></i>
 							<span>My Posts</span>
-							<span class="menu-arrow arrow_carrot-down"></span>
+							<span class="menu-arrow arrow_carrot-right"></span>
 						</a>
-
-						<ul class="sub-menu">                          
+						<ul class="sub">                          
 							<li><a class="" href="my_posts.html"><span>Posts</span></a></li>
-							<li class = "active"><a class="" href="post.html">Create Post</a></li>
+							<li><a class="" href="post.html">Create Post</a></li>
 
 							<li><a class="" href="profile.html">Profile</a></li>
 						</ul>
 					</li>
-	                  
+
 				</ul>
-	              <!-- sidebar menu end-->
-	          </div>
-	      </aside>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
 	<!--SIDEBAR MENU END -->
 	
 
@@ -271,11 +270,22 @@
 	  <section id="main-content">
 	  	<section class="wrapper">            
 	  		<!--overview start-->
+
+	  		<div class="row">
+	  			<div class="col-lg-12">
+	  				<h3 class="page-header"><i class="fa fa-home"></i> Newsfeed</h3>
+	  				<ol class="breadcrumb">
+	  					<li><i class="fa fa-home"></i><a href="index.html">Newsfeed</a></li>
+	  				</ol>
+	  			</div>
+	  		</div>
+
+
 	  		<div class="row">
 	  			<div class="col-lg-12">
 	  				<div class="panel panel-default">
 	  					<div class="panel-heading">
-	  						<div class="pull-left">Quick Post</div>
+	  						<div class="pull-left">Newsfeed</div>
 	  						<div class="widget-icons pull-right">
 	  							<a href="#" class="wclose"><i class="fa fa-times"></i></a>
 	  						</div>  
@@ -291,32 +301,15 @@
 
 	  									<!-- <div class='row'> -->
 	  										<div class='col-md-6 col-md-offset-3'>
-	  											<%= form_for(@post) do |f| %>
-	  											<!-- Title -->
-
-	  											<%= f.label :title %>
-
-	  											<%= f.text_field :title, class: 'form-control' %>
-
-	  											<%= f.label :description %>
-	  											<%= f.text_field :description, class: 'form-control' %>
+	  											<div class='logo'>
+	  											</div>
+	  											<div class='post' >
+	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
+	  											</div>
 
 
-												<div class = "control-label post_buttons">
-		  											<%= f.label :category %>
-		  											<%= f.select :category, [['Technology', 1], ['Books', 2], ['Furniture', 3], ['Service', 4]], class: 'form-control' %>
-
-		  											<%= f.label :price%>
-		  											<%= f.select :price, [['1', 1], ['2', 2], ['3', 3]], class: 'form-control' %>
-		                   							
-		                   							
-		                   							<div class="col-lg-offset-2">
-		  												<%= f.submit "Create Post", class: "btn btn-primary" %>		  											
-		  											</div>
-		  										</div>
 
 
-	  											<% end %>
 	  										</div>
 	  									<!-- </div> -->
 
@@ -350,3 +343,5 @@
 
 
 </html>
+
+
