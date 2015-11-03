@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_messageable
 	has_many :posts
 	#Valid sign up fields presence as well as email format.
 	before_save { self.email = email.downcase }
