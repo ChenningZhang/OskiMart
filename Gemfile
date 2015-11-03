@@ -7,7 +7,15 @@ gem 'rails', '4.2.4'
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+#database
 gem 'pg'
+gem 'sqlite3'
+
+#messaging system
+gem 'mailboxer'
+
+#authentication
+gem 'devise'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -28,9 +36,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 #mysterious tzinfo-data error will be solved
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

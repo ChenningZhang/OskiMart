@@ -1,27 +1,64 @@
 <title>Sign Up</title>
 <h1>Sign up</h1>
-<div class='row'>
+<%#<div class='row'>
 	<div class='col-md-6 col-md-offset-3'>
 		<%= form_for(@user) do |f| %>
-			<%= render 'shared/error_messages' %>
+<%#<%= render 'shared/error_messages' %>
 
-			<%= f.label :name %>
-			<%= f.text_field :name, class: 'form-control' %>
+<%#		<%= f.label :first_name %>
+<%#		<%= f.text_field :first_name, class: 'form-control' %>
+<%#
+   <%#         <%= f.label :last_name %>
+<%#      <%= f.text_field :last_name, class: 'form-control' %>
+<%#
+	<%#		<%= f.label :email %>
+<%#	<%= f.email_field :email, class: 'form-control' %>
+<%#
+	<%#		<%= f.label :password %>
+<%#	<%= f.password_field :password, class: 'form-control' %>
+<%#
+	<%#		<%= f.label :password_confirmation, "Comfirm Password" %>
+<%#	<%= f.password_field :password_confirmation, class: 'form-control' %>
+<%#
+	<%#		<%= f.submit "Create Account", class: "btn btn-primary" %>
+<%#<% end %>
+<%#</div>
+</div>%>
 
-			<%= f.label :email %>
-			<%= f.email_field :email, class: 'form-control' %>
+<%#<%= form_for(@user, as: @user, url: registration_path(resource_name)) do |f| %>
+<%= form_for(@user) do |f| %>
+    <%#<%= devise_error_messages! %>
 
-			<%= f.label :username %>
-			<%= f.text_field :username, class: 'form-control' %>
+    <div class="field">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, autofocus: true %>
+    </div>
 
-			<%= f.label :password %>
-			<%= f.password_field :password, class: 'form-control' %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
 
-			<%= f.label :password_confirmation, "Comfirm Password" %>
-			<%= f.password_field :password_confirmation, class: 'form-control' %>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-			<%= f.submit "Create Account", class: "btn btn-primary" %>
-		<% end %>
-	</div>
-</div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
 
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+<% end %>
+
+<%#<%= render "devise/shared/links" %>
