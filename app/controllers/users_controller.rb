@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
   		flash[:success] = "Thanks for signing up. Welcome to OskiMart!"
-  		render 'posts/index'
-  	else
+      redirect_to posts_path
+    else
   		render 'new'
   	end
   end

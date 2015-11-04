@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-
     def new
         @post = Post.new
     end
@@ -9,7 +8,7 @@ class PostsController < ApplicationController
       	@post = Post.new(post_params)
         if @post.save
           flash[:success] = "Your post has been posted!"
-          render 'index'
+          redirect_to posts_path
         else
           render 'new'
         end
@@ -31,15 +30,15 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          render 'index'
+          redirect_to(@post)
         else
-          render 'new'
+          render 'edit'
         end
     end
 
     def destroy
         Post.destroy(params[:id])
-        # redirect_to newsfeed
+        redirect_to posts_path
     end
 
     private

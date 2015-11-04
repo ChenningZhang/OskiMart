@@ -286,43 +286,37 @@
 
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
-	  								<form class="form-horizontal">
-	  									<!-- Content -->
+	  								<div class='row'>
+									  <div class='col-md-6 col-md-offset-3'>
+									    <%= form_for(:post, :method => :post, url: posts_path) do |f| %>
 
-	  									<!-- <div class='row'> -->
-	  										<div class='col-md-6 col-md-offset-3'>
-	  											<%= form_for(@post) do |f| %>
-	  											<!-- Title -->
+									        <%= render 'shared/post_errors' %>
+		  											<%= f.label :title %>
 
-	  											<%= f.label :title %>
+		  											<%= f.text_field :title, class: 'form-control' %>
 
-	  											<%= f.text_field :title, class: 'form-control' %>
+		  											<%= f.label :description %>
+		  											<%= f.text_field :description, class: 'form-control' %>
+													
+													<div class = "control-label post_buttons">
+			  											<%= f.label :category %>
+			  											<%= f.select :category, ['Technology', 'Books','Furniture', 'Service'], class: 'form-control' %>
+			  										</div>
+			  										<div class = "control-label post_buttons">
 
-	  											<%= f.label :description %>
-	  											<%= f.text_field :description, class: 'form-control' %>
+			  											<%= f.label :price%>
+			  											<%= f.select :price, ['$', '$$','$$$'], class: 'form-control' %>
+			  										</div>
 
-
-												<div class = "control-label post_buttons">
-		  											<%= f.label :category %>
-		  											<%= f.select :category, [['Technology', 1], ['Books', 2], ['Furniture', 3], ['Service', 4]], class: 'form-control' %>
-
-		  											<%= f.label :price%>
-		  											<%= f.select :price, [['1', 1], ['2', 2], ['3', 3]], class: 'form-control' %>
-		                   							
-		                   							
 		                   							<div class="col-lg-offset-2">
-		  												<%= f.submit "Create Post", class: "btn btn-primary" %>		  											
+		  												<%= f.submit "Create Post", class: "btn btn-primary" %>
+
 		  											</div>
-		  										</div>
 
-
-	  											<% end %>
-	  										</div>
-	  									<!-- </div> -->
-
-
-
-	  								</form>
+	  										<% end %>
+									  </div>
+									</div>
+	  								
 	  							</div>
 
 
