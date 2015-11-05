@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
     def index
         if params[:search]
-          @posts = Post.search(params[:search]).order("created_at DESC")
+          @posts = Post.search(params[:search], params[:search_category]).order("created_at DESC")
         @posts = Post.all.order('created_at DESC')
     end
 
