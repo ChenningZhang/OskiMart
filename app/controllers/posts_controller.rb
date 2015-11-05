@@ -23,9 +23,11 @@ class PostsController < ApplicationController
       puts params
         if params[:keywords]
           @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC")
+          #redirect_to posts_path
           puts @posts.inspect
-        end
-        @posts = Post.all.order('created_at DESC')
+        else
+          @posts = Post.all.order('created_at DESC')
+       end
     end
 
     def edit

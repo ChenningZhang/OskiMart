@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
 
   def self.search(search, search_category)
     puts "model self.search called"
+    puts(search)
+    puts(search_category)
     where("title LIKE ?", "%#{search}%")
     where("description LIKE ?", "%#{search}%")
     where("category LIKE ?", "%#{search_category}%")
