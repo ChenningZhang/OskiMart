@@ -19,7 +19,13 @@ class PostsController < ApplicationController
     end
 
     def index
+      if params[:price]
+        @posts = Post.filter(params[:price])
+
+      else
         @posts = Post.all
+      end
+
     end
 
     def edit
