@@ -53,8 +53,8 @@
 			</div>
 
 			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-			<%= text_field_tag :search, params[:search_query], placeholder: "Search keywords" %>
-			<%= text_field_tag :category, params[:search_category], placeholder: "Category" %>
+			<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
+			<%= text_field_tag :category, params[:search], placeholder: "Category" %>
 			<%= submit_tag "Search" %>
 			<% end %>
 
