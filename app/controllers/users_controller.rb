@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
-  def new
+	before_action :authenticate_user!
+	after_action :verify_authorized
+
+	def new
   	@user = User.new
   end
 
   def show
   	@user = User.find(params[:id])
-		puts user_signed_in?
-		puts current_user
+		authorize @user
 	end
 
   def create

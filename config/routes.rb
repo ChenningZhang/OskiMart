@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+
   devise_for :users
-  root 'home#home'
+  root to: 'home#home'
 
   get 'login' => 'sessions#new'
 

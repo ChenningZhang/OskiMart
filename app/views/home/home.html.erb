@@ -1,8 +1,14 @@
 <div class='logo'>
 </div>
+<% if user_signed_in? %>
+    <p>You are signed in. Click <%= link_to 'here', user_path(current_user) %> to go to your page</p>
+    <p>Alternatively, Click <%= link_to 'here', destroy_user_session_path, :method=>'delete' %> to sign out</p>
+<% else %>
 <div class='login'>
-	<%= link_to "Log in", login_path, class: "btn btn-lg btn-primary" %>
+	<%#<%= link_to "Log in", login_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Log in", new_user_session_path, class: "btn btn-lg btn-primary" %>
 </div>
 <div class='signup'>
-	<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+	<%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
 </div>
+<% end %>
