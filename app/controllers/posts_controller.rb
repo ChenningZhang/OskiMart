@@ -23,10 +23,8 @@ class PostsController < ApplicationController
       puts params
         if params[:keywords]
           @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC")
-          puts @posts
-          redirect_to posts_path
+          puts @posts.inspect
         end
-        puts @posts
         @posts = Post.all.order('created_at DESC')
     end
 
