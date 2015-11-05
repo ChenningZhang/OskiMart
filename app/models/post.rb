@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
 	validates :price, presence: true	
 
   def self.search(search, search_category)
+    puts "model self.search called"
     where("title LIKE ?", "%#{search}%")
     where("description LIKE ?", "%#{search}%")
     where("category LIKE ?", "%#{search_category}%")
