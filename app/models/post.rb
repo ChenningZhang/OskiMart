@@ -10,4 +10,5 @@ class Post < ActiveRecord::Base
     where("title LIKE ?", "%#{search}%")
     where("description LIKE ?", "%#{search}%")
     where("category LIKE ?", "%#{search_category}%")
+  end
 end
