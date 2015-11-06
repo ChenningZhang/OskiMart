@@ -58,6 +58,10 @@
 			<%= submit_tag "Search" %>
 			<% end %>
 
+			<%# if :search_error.present?%>
+				<%#= search_error%>
+			<%# end %>
+
 			<%# if @posts.present? %>
 			  <%#= render @posts %>
 			<%# else %>

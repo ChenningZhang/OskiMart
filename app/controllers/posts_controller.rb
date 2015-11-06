@@ -23,6 +23,10 @@ class PostsController < ApplicationController
       puts params
         if params[:keywords]
           @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC")
+
+          if @posts.empty?
+            render "posts/index", :locals=> {:search_err => 'No search results returned'}
+          end
           #redirect_to posts_path
           puts @posts.inspect
         else
