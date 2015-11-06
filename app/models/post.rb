@@ -9,4 +9,16 @@ class Post < ActiveRecord::Base
   def self.filter(price)
     where(:price => price)
   end
+
+  def self.search(search, search_category)
+    puts "model self.search called"
+    puts(search)
+    puts(search_category)
+    keyword_regex = "%#{search}%"
+    category_regex = "%#{search_category}%"
+    where("(title ILIKE ? or description ILIKE ?) and category ILIKE ?", keyword_regex, keyword_regex, category_regex)
+    #where("title LIKE ?", "%#{search}%")
+    #where("description LIKE ?", "%#{search}%")
+    #where("category LIKE ?", "%#{search_category}%")
+  end
 end
