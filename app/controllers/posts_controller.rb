@@ -19,7 +19,12 @@ class PostsController < ApplicationController
     end
 
     def index
-        @posts = Post.all
+        if not params[:category_id].nil? and not params[:category_id].empty? 
+          @posts = Post.where(:category => params[:category_id])
+        else
+          @posts = Post.all
+
+        end
     end
 
     def edit

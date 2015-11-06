@@ -13,7 +13,7 @@
 		
 			<div class = "control-label post_buttons">
 				<%= f.label :category %>
-				<%= f.select :category, ['Technology', 'Books','Furniture', 'Service'], class: 'form-control' %>
+				<%= f.select :category, ['Technology', 'Books','Furniture', 'Service', 'Other'], class: 'form-control' %>
 			</div>
 			<div class = "control-label post_buttons">
 				<%= f.label :price%>
@@ -24,6 +24,7 @@
 			</div>
 
 		<% end %>
+		
 		<p><%= link_to 'Back', posts_path %></p>
 
 	</div>
