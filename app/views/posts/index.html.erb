@@ -318,12 +318,13 @@
 								<select name="category_id">
 								  <option value="">Please select a category</option>
 								  <option value="1">Books</option>
-								  <option value="2">Technology</option>
+								  <option value="2" selected="selected">Technology</option>
 								  <option value="3">Furniture</option>
 								  <option value="4">Service</option>
 								  <option value="5">Other</option>
 								</select>
-								<%= link_to "Go", posts_path(category_id: 'category_id') %>
+								<!-- hard coded to technology; will be changed ITER 3 -->
+								<%= link_to "Go", posts_path(category_id: 'Technology') %>
 								<br>
 	  								<form class="form-horizontal">
 	  										<div class='col-md-6 col-md-offset-3'>
