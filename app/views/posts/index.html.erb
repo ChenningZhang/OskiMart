@@ -312,7 +312,8 @@
 
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
-	  								<table>
+	  					<%= will_paginate @posts %>
+	  						<table>
 								  <tr>
 								    <th>Title </th>
 								    <th>Description </th>
@@ -335,7 +336,7 @@
 
 								<% end %>
 								</table>
-								 
+							<%= will_paginate @posts %>
 								<br>
 	  								<form class="form-horizontal">
 	  									<!-- Content -->

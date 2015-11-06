@@ -31,6 +31,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 # gem for code coverage
 gem 'simplecov', :require => false, :group => :test
 
+#pagination for search and displaying posts
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

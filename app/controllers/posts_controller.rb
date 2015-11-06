@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       puts "search/index called"
       puts params
         if params[:keywords]
-          @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC")
+          @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
 
           if @posts.empty?
             render "posts/index", :locals=> {:search_err => 'No search results returned'}
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
           #redirect_to posts_path
           puts @posts.inspect
         else
-          @posts = Post.all.order('created_at DESC')
+          @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
        end
     end
 
