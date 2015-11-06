@@ -283,7 +283,6 @@
 	  					</div>
 	  					<div class="panel-body">
 	  						<div class="padd">
-
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
 	  								<div class='row'>
@@ -300,7 +299,7 @@
 													
 													<div class = "control-label post_buttons">
 			  											<%= f.label :category %>
-			  											<%= f.select :category, ['Technology', 'Books','Furniture', 'Service'], class: 'form-control' %>
+			  											<%= f.select :category, ['Technology', 'Books','Furniture', 'Service', 'Other'], class: 'form-control' %>
 			  										</div>
 			  										<div class = "control-label post_buttons">
 
@@ -310,9 +309,7 @@
 
 		                   							<div class="col-lg-offset-2">
 		  												<%= f.submit "Create Post", class: "btn btn-primary" %>
-
 		  											</div>
-
 	  										<% end %>
 									  </div>
 									</div>
