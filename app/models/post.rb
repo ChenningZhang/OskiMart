@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
     puts(search_category)
     keyword_regex = "%#{search}%"
     category_regex = "%#{search_category}%"
-    where("(title LIKE ? or description LIKE ?) and category LIKE ?", keyword_regex, keyword_regex, category_regex)
+    where("(title ILIKE ? or description ILIKE ?) and category ILIKE ?", keyword_regex, keyword_regex, category_regex)
     #where("title LIKE ?", "%#{search}%")
     #where("description LIKE ?", "%#{search}%")
     #where("category LIKE ?", "%#{search_category}%")
