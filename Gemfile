@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-
+#mailboxer
+gem 'mailboxer'
 #bcrypt
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
@@ -39,6 +40,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 #mysterious tzinfo-data error will be solved
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# gem for code coverage
+gem 'simplecov', :require => false, :group => :test
+
+#pagination for search and displaying posts
+gem 'will_paginate'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -46,7 +52,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
   gem 'byebug'
@@ -54,10 +60,16 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard-minitest'
+end
+
 group :production do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'pg'
-  gem 'rails_12factor'
+    gem 'rails_12factor'
   gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
