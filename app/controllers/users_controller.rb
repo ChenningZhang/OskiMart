@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
+	def index
+		@users = User.order('created_at DESC')
+	end
+
   def show
   	@user = User.find(params[:id])
 		authorize @user
