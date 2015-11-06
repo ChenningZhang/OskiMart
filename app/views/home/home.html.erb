@@ -48,10 +48,10 @@
       <!--   <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button> -->
 
 
-
+            <% if user_signed_in? %>
                   <p>You are signed in. Click <%= link_to 'here', user_path(current_user) %> to go to your page</p>
                   <p>Alternatively, Click <%= link_to 'here', destroy_user_session_path, :method=>'delete' %> to sign out</p>
-
+            <% else %>
                   <div class="btn btn-primary btn-lg btn-block">
                     <%= link_to "Log in", new_user_session_path %>
                   </div>
@@ -61,6 +61,7 @@
                   <div class="btn btn-info btn-lg btn-block" >
                     <%= link_to "Sign up now!", new_user_registration_path %>
                   </div>
+                  <% end %>
     </div>
 </form>
 </div>
