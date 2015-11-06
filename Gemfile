@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-
+#mailboxer
+gem 'mailboxer'
 #bcrypt
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
@@ -33,6 +34,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 # gem for code coverage
 gem 'simplecov', :require => false, :group => :test
 
+#pagination for search and displaying posts
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
