@@ -54,7 +54,6 @@
 
 			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
 			<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
-			<%= text_field_tag :category, params[:search_category], placeholder: "Category" %>
 			<%= submit_tag "Search" %>
 			<% end %>
 
@@ -296,11 +295,11 @@
 	  			</div>
 	  		</div>
 
+
 	  		<h1> Filter By: </h1>
 	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
-
 
 	  		<div class="row">
 	  			<div class="col-lg-12">
@@ -314,11 +313,12 @@
 	  					</div>
 	  					<div class="panel-body">
 	  						<div class="padd">
-
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
+
 	  					<%= will_paginate @posts %>
 	  						<table>
+
 								  <tr>
 								    <th>Title </th>
 								    <th>Description </th>
@@ -328,7 +328,6 @@
 								    <th></th>
 								    <th></th>
 								  </tr>
-								 
 								<% @posts.each do |post| %>
 								  <tr>
 								    <td><%= post.title %></td>
@@ -338,30 +337,30 @@
 								    <td><%= link_to "Show", post_path(post) %></td>
 								    <td><%= link_to "Update", edit_post_path(post) %></td>
     								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
-
 								<% end %>
-								</table>
+							</table>
+
 							<%= will_paginate @posts %>
+
+								<select name="category_id">
+								  <option value="">Please select a category</option>
+								  <option value="1">Books</option>
+								  <option value="2" selected="selected">Technology</option>
+								  <option value="3">Furniture</option>
+								  <option value="4">Service</option>
+								  <option value="5">Other</option>
+								</select>
+								<!-- hard coded to technology; will be changed ITER 3 -->
+								<%= link_to "Go", posts_path(category_id: 'Technology') %>
 								<br>
 	  								<form class="form-horizontal">
-	  									<!-- Content -->
-
-	  									<!-- <div class='row'> -->
 	  										<div class='col-md-6 col-md-offset-3'>
 	  											<div class='logo'>
 	  											</div>
 	  											<div class='post' >
 	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
 	  											</div>
-
-
-
-
 	  										</div>
-	  									<!-- </div> -->
-
-
-
 	  								</form>
 	  							</div>
 

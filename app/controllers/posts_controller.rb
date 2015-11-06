@@ -23,16 +23,16 @@ class PostsController < ApplicationController
         @posts = Post.filter(params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
 
       elsif params[:keywords] #if search
-        @posts = Post.search(params[:keywords], params[:category]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        @posts = Post.search(params[:keywords]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
 
         #if @posts.empty?
           #render "posts/index", :locals=> {:search_err => 'No search results returned'}
+      elsif not params[:category_id].nil? and not params[:category_id].empty? 
+        @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
         #end
-        #redirect_to posts_path
-        #puts @posts.inspect
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
-     end
+      end
 
     end
 
