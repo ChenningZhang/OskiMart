@@ -10,13 +10,9 @@ gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
 #database
 gem 'pg'
-<<<<<<< HEAD
-=======
 
 gem 'web-console'
 gem 'spring'
->>>>>>> a5eedd4f439d456bc00d2e30afdcaa2b88696433
-
 #messaging system
 gem 'mailboxer'
 
@@ -62,7 +58,6 @@ gem 'will_paginate'
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
   gem 'byebug'
 end
 
@@ -75,11 +70,5 @@ end
 group :production do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'rails_12factor'
-<<<<<<< HEAD
-=======
-  
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  
->>>>>>> a5eedd4f439d456bc00d2e30afdcaa2b88696433
 end
 
