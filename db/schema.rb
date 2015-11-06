@@ -12,6 +12,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20151105205325) do
+<<<<<<< HEAD
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+=======
+>>>>>>> 6579deb7ec07ce49b75d95c5a6b2d1167de3c94f
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
