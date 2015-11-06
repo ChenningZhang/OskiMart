@@ -11,6 +11,8 @@ gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 #database
 gem 'pg'
 
+gem 'web-console'
+gem 'spring'
 #messaging system
 gem 'mailboxer'
 
@@ -56,7 +58,6 @@ gem 'will_paginate'
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
   gem 'byebug'
 end
 

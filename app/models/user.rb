@@ -5,9 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-	#mailboxer shit
-  #acts_as_messageable
-
 	has_many :posts
 
 	#Valid sign up fields presence as well as email format.
