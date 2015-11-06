@@ -8,9 +8,20 @@ gem 'mailboxer'
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+#database
 gem 'pg'
+
 gem 'web-console'
 gem 'spring'
+
+#messaging system
+gem 'mailboxer'
+
+#authentication
+gem 'devise'
+
+#authorization
+gem 'pundit'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -36,9 +47,6 @@ gem 'simplecov', :require => false, :group => :test
 
 #pagination for search and displaying posts
 gem 'will_paginate'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
