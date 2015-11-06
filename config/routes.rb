@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   delete 'post' => 'posts#destroy'
 
   get 'users/new'
+  get 'home/login'
+  get 'home/signup'
 
   
 
