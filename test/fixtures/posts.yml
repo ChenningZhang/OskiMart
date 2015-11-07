@@ -1,9 +1,4 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-test_post:
-  title: "Test Title"
-  description: "Test description"
-  category: "1"
-  price: "2"
 
 refrigerator:
   title: 'Refrigerator'

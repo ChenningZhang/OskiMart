@@ -52,6 +52,30 @@ class PostTest < ActiveSupport::TestCase
 		search_posts = Post.search(keyword5) #should return 2 books
 		assert_includes(search_posts, posts(:harry_potter), 'Harry Potter book not in search for book')
 		assert_includes(search_posts, posts(:finance_book), 'Finance textbook not in search for book')
+	end
+	test "filter by price" do
+		filter1 = '1'
+		filter2 = '2'
+		filter3 = '3'
+
+		filtered_posts = Post.filter(filter1)
+		assert_equal(1, filtered_posts.count())
+		for post in filtered_posts
+			assert_equal('1', post.price)
+		end
+
+		filtered_posts = Post.filter(filter2)
+		assert_equal(3, filtered_posts.count())
+		for post in filtered_posts
+			assert_equal('2', post.price)
+		end
+
+		filtered_posts = Post.filter(filter3)
+		assert_equal(1, filtered_posts.count())
+		for post in filtered_posts
+			assert_equal('3', post.price)
+		end
+		
 
 
 
