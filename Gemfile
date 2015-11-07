@@ -2,12 +2,28 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-
+#mailboxer
+gem 'mailboxer'
 #bcrypt
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+#database
 gem 'pg'
+
+gem 'web-console'
+gem 'spring'
+#messaging system
+gem 'mailboxer'
+
+#authentication
+gem 'devise'
+
+#authorization
+gem 'pundit'
+
+gem 'web-console'
+gem 'spring'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -31,9 +47,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 # gem for code coverage
 gem 'simplecov', :require => false, :group => :test
 
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+#pagination for search and displaying posts
+gem 'will_paginate'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -43,10 +58,7 @@ gem 'simplecov', :require => false, :group => :test
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
   gem 'byebug'
-  gem 'web-console'
-  gem 'spring'
 end
 
 group :test do
@@ -57,11 +69,6 @@ end
 
 group :production do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'pg'
-    gem 'rails_12factor'
-  gem 'web-console'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'rails_12factor'
 end
 

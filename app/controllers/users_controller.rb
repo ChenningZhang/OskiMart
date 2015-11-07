@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
-  def new
+	before_action :authenticate_user!
+	after_action :verify_authorized
+
+	def new
   	@user = User.new
   end
 
+	#def index
+	#	@users = User.order('created_at DESC')
+	#end
+
   def show
   	@user = User.find(params[:id])
-  end
+		authorize @user
+	end
 
   def create
   	@user = User.new(user_params)
@@ -19,6 +27,6 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:name, :email, :username, :password, :password_confirmation)
+  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   	end
 end

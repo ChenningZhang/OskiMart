@@ -52,6 +52,21 @@
 				<!--  search form end -->                
 			</div>
 
+			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+			<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
+			<%= submit_tag "Search" %>
+			<% end %>
+
+			<%# if :search_error.present?%>
+				<%#= search_error%>
+			<%# end %>
+
+			<%# if @posts.present? %>
+			  <%#= render @posts %>
+			<%# else %>
+			  <!--<p>There are no posts containing the term(s) <%= params[:search] %>.</p>-->
+			<%# end %>
+
 
 
 
@@ -280,6 +295,12 @@
 	  			</div>
 	  		</div>
 
+
+	  		<h1> Filter By: </h1>
+	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
+
 	  		<div class="row">
 	  			<div class="col-lg-12">
 	  				<div class="panel panel-default">
@@ -294,7 +315,10 @@
 	  						<div class="padd">
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
-	  							<table>
+
+	  					<%= will_paginate @posts %>
+	  						<table>
+
 								  <tr>
 								    <th>Title </th>
 								    <th>Description </th>
@@ -314,16 +338,25 @@
 								    <td><%= link_to "Update", edit_post_path(post) %></td>
     								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
 								<% end %>
-								</table>
-								<select name="category_id">
-								  <option value="">Please select a category</option>
-								  <option value="1">Books</option>
-								  <option value="2">Technology</option>
-								  <option value="3">Furniture</option>
-								  <option value="4">Service</option>
-								  <option value="5">Other</option>
-								</select>
-								<%= link_to "Go", posts_path(category_id: 'category_id') %>
+							
+							</table>
+						<%= will_paginate @posts %>
+
+								
+								<%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
+								
+								<script>
+								    $(function(){
+								      $('#category_id').bind('change', function () {
+								         var url = "/posts?category_id=" + $(this).val()
+								          if (url) {
+								              window.location.replace(url);
+								          }
+								          return false;
+								      });
+								    });
+								</script>
+
 								<br>
 	  								<form class="form-horizontal">
 	  										<div class='col-md-6 col-md-offset-3'>
