@@ -3,8 +3,10 @@
 one:
   id: 1
   first_name: Bob
-  last_name: Alice
+  last_name: Jam
   email: abc@berkeley.edu
+  encrypted_password: 89124iopkjaf;kdsf
+
 
 
 
