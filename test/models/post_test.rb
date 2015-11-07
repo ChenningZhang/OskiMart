@@ -76,12 +76,6 @@ class PostTest < ActiveSupport::TestCase
 		assert_empty(Post.filter(improperFilter))
 		assert_empty(Post.filter(improperFilter2))
 
-		improperFilter = 'aasdf'
-		improperFilter2 = '4'
-
-		assert_empty(Post.filter(improperFilter))
-		assert_empty(Post.filter(improperFilter2))
-
 		filtered_posts = Post.filter(filter1)
 		assert_equal(3, filtered_posts.count())
 		for post in filtered_posts

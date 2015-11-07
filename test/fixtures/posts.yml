@@ -4,32 +4,38 @@ refrigerator:
   title: 'Refrigerator'
   description: 'Awesome appliance that will preserve your food'
   category: 'Furniture'
-  price: 2
+  price: '$'
 
 jacket:
   title: 'North Face Jacket'
   description: 'Black jacket that is very warm during winter'
   category: 'Other'
-  price: 2
+  price: '$$'
 
 
 computer:
   title: 'Awesome computer'
   description: 'This computer will satisfy your academic and school needs!'
   category: 'Technology'
-  price: 3
+  price: '$$$'
 
 harry_potter:
   title: 'Paperback Copy of Harry Potter'
   description: 'This book is a classic'
   category: 'Books'
-  price: 1
+  price: '$'
 
 finance_book:
   title: 'Corporate Finance'
   description: 'This book is really helpful!'
   category: 'Books'
-  price: 2
+  price: '$$'
+
+service_item:
+  title: 'Help pass out flyers on Sproul'
+  description: 'Read title'
+  category: 'Service'
+  price: '$'
 
 
 
