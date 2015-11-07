@@ -2,10 +2,9 @@
 
 one:
   id: 1
-  name: Bob
+  first_name: Bob
+  last_name: Alice
   email: abc@berkeley.edu
-  username: Bob
-  password: password
 
 
 
