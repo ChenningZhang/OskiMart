@@ -41,9 +41,6 @@ class PostsControllerTest < ActionController::TestCase
 	# 	assert_redirected_to posts_path
 	# end
 
-  
-
-
   # test "should display all posts" do
   # 	get :index
   # 	assert_response :success
