@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
   		flash[:success] = "Thanks for signing up. Welcome to OskiMart!"
-      redirect_to posts_path
+      puts 'lol'
+			redirect_to posts_path
     else
   		render 'new'
   	end
