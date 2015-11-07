@@ -315,15 +315,21 @@
     								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
 								<% end %>
 								</table>
-								<select name="category_id">
-								  <option value="">Please select a category</option>
-								  <option value="1">Books</option>
-								  <option value="2">Technology</option>
-								  <option value="3">Furniture</option>
-								  <option value="4">Service</option>
-								  <option value="5">Other</option>
-								</select>
-								<%= link_to "Go", posts_path(category_id: 'category_id') %>
+								
+								<%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
+								
+								<script>
+								    $(function(){
+								      $('#category_id').bind('change', function () {
+								         var url = "/posts?category_id=" + $(this).val()
+								          if (url) {
+								              window.location.replace(url);
+								          }
+								          return false;
+								      });
+								    });
+								</script>
+
 								<br>
 	  								<form class="form-horizontal">
 	  										<div class='col-md-6 col-md-offset-3'>
