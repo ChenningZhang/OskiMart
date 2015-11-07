@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs"> -->
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="img/favicon.png">
+  <!-- Bootstrap CSS -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="/css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/style-responsive.css" rel="stylesheet" />
+</head>
+<body class="login-img3-body">
+<div class="container">
+  <div class='row'>
+    <div class='col-md-6 col-md-offset-3'>
+      <div class="login-form">
+        <div class="login-wrap">
+          <p class="login-img"><i>Welcome!</i></p>
+          <div class="input-group">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <%= f.label :email %>
+                <%= f.text_field :email, class: 'form-control' %>
+
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+
+                <label class="checkbox">
+                  <% if devise_mapping.rememberable? -%>
+                        <%= f.check_box :remember_me %>
+                        <%= f.label :remember_me %>
+                  <% end -%>
+                  <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+                </label>
+                <%= f.submit "Sign In", class: "btn btn-primary" %>
+            <% end %>
+
+            <div class = "btn-block">Don't have an account? Berkeley student? </div>
+            <div class = "btn-block">
+              <%= link_to "Sign up here", new_user_registration_path %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
