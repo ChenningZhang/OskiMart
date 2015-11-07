@@ -66,9 +66,9 @@ class PostTest < ActiveSupport::TestCase
 
 	end
 	test "filter by price" do
-		filter1 = '1'
-		filter2 = '2'
-		filter3 = '3'
+		filter1 = '$'
+		filter2 = '$$'
+		filter3 = '$$$'
 
 		improperFilter = 'aasdf'
 		improperFilter2 = '4'
@@ -77,21 +77,21 @@ class PostTest < ActiveSupport::TestCase
 		assert_empty(Post.filter(improperFilter2))
 
 		filtered_posts = Post.filter(filter1)
-		assert_equal(1, filtered_posts.count())
+		assert_equal(3, filtered_posts.count())
 		for post in filtered_posts
-			assert_equal('1', post.price)
+			assert_equal('$', post.price)
 		end
 
 		filtered_posts = Post.filter(filter2)
-		assert_equal(3, filtered_posts.count())
+		assert_equal(2, filtered_posts.count())
 		for post in filtered_posts
-			assert_equal('2', post.price)
+			assert_equal('$$', post.price)
 		end
 
 		filtered_posts = Post.filter(filter3)
 		assert_equal(1, filtered_posts.count())
 		for post in filtered_posts
-			assert_equal('3', post.price)
+			assert_equal('$$$', post.price)
 		end
 		
 	end
