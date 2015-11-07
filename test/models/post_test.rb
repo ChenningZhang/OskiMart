@@ -12,7 +12,7 @@ class PostTest < ActiveSupport::TestCase
 
 	test "title should be present" do
 		@post.title = "  "
-		assert_not @title.valid?
+		assert_not @post.valid?
 	end
 
 	test "description should be present" do
@@ -27,6 +27,6 @@ class PostTest < ActiveSupport::TestCase
 
 	test "price should be present" do
 		@post.price = "  "
-		assert_not @price.valid?
+		assert_not @post.valid?
 	end
 end
