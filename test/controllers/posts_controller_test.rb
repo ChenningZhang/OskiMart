@@ -4,7 +4,8 @@ class PostsControllerTest < ActionController::TestCase
 
 	# include Devise::TestHelpers
 
-	# def setup
+
+	#=def setup
  #    	@user = User.new(first_name: 'Test', last_name: 'Example', email: 'test@example.com',
  #        password: '12345678', password_confirmation: '12345678')
  #    	@user.save
@@ -14,10 +15,10 @@ class PostsControllerTest < ActionController::TestCase
  #    	@post.save
  #  	end
 
- #  	test "should get new" do
- #    	get :new
- #    	assert_response :success
- #  	end
+   	# test "should get new" do
+    # 	get :new
+    #  	assert_response :success
+   	# end
 
  #  # index show create
 	# test  "should get index" do
