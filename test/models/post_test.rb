@@ -76,11 +76,6 @@ class PostTest < ActiveSupport::TestCase
 			assert_equal('3', post.price)
 		end
 		
-
-
-
-
-
 	end
 
 end
