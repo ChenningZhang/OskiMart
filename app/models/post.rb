@@ -11,7 +11,6 @@ class Post < ActiveRecord::Base
   end
 
   def self.search(search)
-
     keyword_regex = "%#{search}%"
     where("(title ILIKE ? or description ILIKE ?)", keyword_regex, keyword_regex)
   end
