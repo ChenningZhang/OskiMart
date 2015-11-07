@@ -45,17 +45,17 @@
 				<ul class="nav top-menu">                    
 					<li>
 						<form class="navbar-form">
-							<input class="form-control" placeholder="Search" type="text">
+ 							<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+							<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
+							<%= submit_tag "Search" %>
+							<% end %>
 						</form>
 					</li>                    
 				</ul>
 				<!--  search form end -->                
 			</div>
 
-			<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-			<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
-			<%= submit_tag "Search" %>
-			<% end %>
+			
 
 			<%# if :search_error.present?%>
 				<%#= search_error%>
@@ -296,7 +296,7 @@
 	  		</div>
 
 
-	  		<h1> Filter By: </h1>
+	  		<text> Filter By: </text>
 	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
