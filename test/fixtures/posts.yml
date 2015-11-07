@@ -1,15 +1,42 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+test_post:
+  title: "Test Title"
+  description: "Test description"
+  category: "1"
+  price: "2"
 
 refrigerator:
-  title: 'refrigerator'
+  title: 'Refrigerator'
   description: 'Awesome appliance that will preserve your food'
+  category: 'Furniture'
+  price: 2
+
+jacket:
+  title: 'North Face Jacket'
+  description: 'Black jacket that is very warm during winter'
+  category: 'Other'
+  price: 2
+
+
+computer:
+  title: 'Awesome computer'
+  description: 'This computer will satisfy your academic and school needs!'
   category: 'Technology'
+  price: 3
+
+harry_potter:
+  title: 'Paperback Copy of Harry Potter'
+  description: 'This book is a classic'
+  category: 'Books'
   price: 1
 
-two:
-  title: MyString
-  description: MyString
-  category: MyString
-  price: 1
+finance_book:
+  title: 'Corporate Finance'
+  description: 'This book is really helpful!'
+  category: 'Books'
+  price: 2
+
+
+
 
 
