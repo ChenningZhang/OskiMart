@@ -39,6 +39,10 @@ class PostTest < ActiveSupport::TestCase
 		keyword4 = 'clAssic'
 		keyword5 = 'book'
 
+		keywordFail1 = 'aiwero;q'
+		keywordFail2 = 'wintery'
+		keywordFail3 = 'SalAD'
+
 		search_posts = Post.search(keyword1)
 		assert_equal(posts(:refrigerator), search_posts.first, 'Exact search for Refrigerator returns wrong post')
 		search_posts = Post.search(keyword2)
@@ -47,16 +51,30 @@ class PostTest < ActiveSupport::TestCase
 		assert_equal(posts(:jacket), search_posts.first, 'Search for warm does not return jacket post')
 		search_posts = Post.search(keyword4)
 		assert_equal(posts(:harry_potter), search_posts.first, 'Case insensitive search for clAssic does not return harry potter book')
-
-
 		search_posts = Post.search(keyword5) #should return 2 books
 		assert_includes(search_posts, posts(:harry_potter), 'Harry Potter book not in search for book')
 		assert_includes(search_posts, posts(:finance_book), 'Finance textbook not in search for book')
+
+		no_posts = Post.search(keywordFail1)
+		no_posts2 = Post.search(keywordFail2)
+		no_posts3 = Post.search(keywordFail3)
+		assert_empty(no_posts)
+		assert_empty(no_posts2)
+		assert_empty(no_posts3)
+
+
+
 	end
 	test "filter by price" do
 		filter1 = '1'
 		filter2 = '2'
 		filter3 = '3'
+
+		improperFilter = 'aasdf'
+		improperFilter2 = '4'
+
+		assert_empty(Post.filter(improperFilter))
+		assert_empty(Post.filter(improperFilter2))
 
 		filtered_posts = Post.filter(filter1)
 		assert_equal(1, filtered_posts.count())
