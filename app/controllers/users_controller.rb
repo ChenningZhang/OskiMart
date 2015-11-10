@@ -14,17 +14,17 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
 		authorize @user
 	end
-
-  def create
-  	@user = User.new(user_params)
-  	if @user.save
-  		flash[:success] = "Thanks for signing up. Welcome to OskiMart!"
-      puts 'lol'
-			redirect_to posts_path
-    else
-  		render 'new'
-  	end
-  end
+	#deprecated because devise takes care of everything for us
+  # def create
+  # 	@user = User.new(user_params)
+  # 	if @user.save
+  # 		flash[:success] = "Thanks for signing up. Welcome to OskiMart!"
+  #     puts 'lol'
+		# 	redirect_to posts_path
+  #   else
+  # 		render 'new'
+  # 	end
+  # end
 
   private
   	def user_params

@@ -49,10 +49,7 @@
 
 
             <% if user_signed_in? %>
-                  <p>yay<%= current_user.id %></p>
-                  <p><%= current_user %></p>
-                  <p><%= current_user.first_name %></p>
-                  <p>You are signed in. Click <%= link_to 'here', user_path(current_user) %> to go to your page</p>
+                  <p>You are signed in. Click <%= link_to 'here', posts_path %> to go to your page</p>
                   <p>Alternatively, Click <%= link_to 'here', destroy_user_session_path, :method=>'delete' %> to sign out</p>
             <% else %>
                   <div class="btn btn-primary btn-lg btn-block">
