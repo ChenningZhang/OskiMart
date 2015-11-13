@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :messages, only: [:new, :create]
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :reply
+    end
+  end
 
   get 'post_new' => 'posts#new'
   

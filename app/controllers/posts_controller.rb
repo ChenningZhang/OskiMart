@@ -33,7 +33,6 @@ class PostsController < ApplicationController
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
       end
-
     end
 
     def edit

@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   protect_from_forgery with: :exception
+
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:warning] = 'Resource not found'
+    redirect_back_or root_path
+  end
+
+  def redirect_back_or(path)
+    redirect_to request.referer || path
+  end
+
+  # Devise stuf
   include SessionsHelper
 
   def after_sign_in_path_for(resource)
@@ -25,4 +36,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :first_name
     devise_parameter_sanitizer.for(:account_update) << :last_name
   end
+
+
+
+
 end
