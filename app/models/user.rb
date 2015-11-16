@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	#Valid sign up fields presence as well as email format.
 	before_save { self.email = email.downcase }
 	validates :first_name, presence: true
-  validates :last_name, presence: true
+  	validates :last_name, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@berkeley+\.edu+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: {minimum: 8}

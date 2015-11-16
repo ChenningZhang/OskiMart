@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
     def new
+      if user_signed_in?
         @post = Post.new
+        @post.user = current_user
+      else
+
     end
 
     def create
