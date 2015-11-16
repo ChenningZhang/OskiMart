@@ -59,6 +59,8 @@ group :development do
   gem 'byebug'
   # rspec-rails testing framework
   gem 'rspec-rails', '~> 3.0'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :test do
@@ -67,6 +69,8 @@ group :test do
   gem 'guard-minitest'
   # rspec-rails testing framework
   gem 'rspec-rails', '~> 3.0'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :production do
