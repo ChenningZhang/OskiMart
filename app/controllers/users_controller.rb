@@ -10,6 +10,11 @@ class UsersController < ApplicationController
 	#	@users = User.order('created_at DESC')
 	#end
 
+  # if we need to edit user profile use the following 
+  #  def edit
+  #   @user = User.find(params[:id])
+  # end
+
   def show
   	@user = User.find(params[:id])
 		authorize @user
