@@ -1,0 +1,31 @@
+<h1> Updating post </h1>
+<div class='row'>
+	<div class='col-md-6 col-md-offset-3'>
+	    <%= form_for(@post, :method => :put, url: post_path) do |f| %>
+
+	        <%= render 'shared/post_errors' %>
+			<%= f.label :title %>
+
+			<%= f.text_field :title, class: 'form-control' %>
+
+			<%= f.label :description %>
+			<%= f.text_field :description, class: 'form-control' %>
+		
+			<div class = "control-label post_buttons">
+				<%= f.label :category %>
+				<%= f.select :category, ['Technology', 'Books','Furniture', 'Service', 'Other'], class: 'form-control' %>
+			</div>
+			<div class = "control-label post_buttons">
+				<%= f.label :price%>
+				<%= f.select :price, ['$', '$$','$$$'], class: 'form-control' %>
+			</div>
+			<div class="col-lg-offset-2">
+				<%= f.submit "Update", class: "btn btn-primary" %>
+			</div>
+
+		<% end %>
+		
+		<p><%= link_to 'Back', posts_path %></p>
+
+	</div>
+</div>

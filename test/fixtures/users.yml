@@ -2,10 +2,10 @@
 
 one:
   id: 1
-  name: Bob
+  first_name: Bob
+  last_name: Jam
   email: abc@berkeley.edu
-  username: Bob
-  password: password
+  encrypted_password: 89124iopkjaf;kdsf
 
 
 

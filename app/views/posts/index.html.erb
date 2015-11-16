@@ -45,12 +45,27 @@
 				<ul class="nav top-menu">                    
 					<li>
 						<form class="navbar-form">
-							<input class="form-control" placeholder="Search" type="text">
+ 							<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+							<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
+							<%= submit_tag "Search" %>
+							<% end %>
 						</form>
 					</li>                    
 				</ul>
 				<!--  search form end -->                
 			</div>
+
+			
+
+			<%# if :search_error.present?%>
+				<%#= search_error%>
+			<%# end %>
+
+			<%# if @posts.present? %>
+			  <%#= render @posts %>
+			<%# else %>
+			  <!--<p>There are no posts containing the term(s) <%= params[:search] %>.</p>-->
+			<%# end %>
 
 
 
@@ -281,6 +296,11 @@
 	  		</div>
 
 
+	  		<text> Filter By: </text>
+	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
+
 	  		<div class="row">
 	  			<div class="col-lg-12">
 	  				<div class="panel panel-default">
@@ -293,28 +313,59 @@
 	  					</div>
 	  					<div class="panel-body">
 	  						<div class="padd">
-
 	  							<div class="form quick-post">
 	  								<!-- Edit profile form (not working)-->
-	  								<form class="form-horizontal">
-	  									<!-- Content -->
 
-	  									<!-- <div class='row'> -->
+	  					<%= will_paginate @posts %>
+	  						<table>
+
+								  <tr>
+								    <th>Title </th>
+								    <th>Description </th>
+								    <th>Category </th>
+								    <th>Price </th>
+								    <th></th>
+								    <th></th>
+								    <th></th>
+								  </tr>
+								<% @posts.each do |post| %>
+								  <tr>
+								    <td><%= post.title %></td>
+								    <td><%= post.description %></td>
+								    <td><%= post.category %></td>
+								    <td><%= post.price %></td>
+								    <td><%= link_to "Show", post_path(post) %></td>
+								    <td><%= link_to "Update", edit_post_path(post) %></td>
+    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+								<% end %>
+							
+							</table>
+						<%= will_paginate @posts %>
+
+								
+								<%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
+								
+								<script>
+								    $(function(){
+								      $('#category_id').bind('change', function () {
+								         var url = "/posts?category_id=" + $(this).val()
+								          if (url) {
+								              window.location.replace(url);
+								          }
+								          return false;
+								      });
+								    });
+								</script>
+
+								<br>
+	  								<form class="form-horizontal">
 	  										<div class='col-md-6 col-md-offset-3'>
 	  											<div class='logo'>
 	  											</div>
 	  											<div class='post' >
 	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
 	  											</div>
-
-
-
-
 	  										</div>
-	  									<!-- </div> -->
-
-
-
 	  								</form>
 	  							</div>
 

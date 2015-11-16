@@ -1,27 +1,22 @@
 Rails.application.routes.draw do
-  root 'home#home'
-  
+  devise_for :users, controllers: { registrations: "registrations" }
+
+  root to: 'home#home'
 
   resources :users
   resources :posts
 
-  get 'login' => 'sessions#new'
-
-  post 'login' => 'sessions#create'
-
-  delete 'logout' => 'sessions#destroy'
-
-  get 'signup' => 'users#new'
-
-
-  get 'posts' => 'posts#index'
-  get 'post' => 'posts#show'
-  post 'post_edit' => 'posts#update'
   get 'post_new' => 'posts#new'
-  post 'post' => 'posts#create'
+  
+  get 'posts' => 'posts#index'
+  
+  get 'post' => 'posts#show'
+    
   delete 'post' => 'posts#destroy'
 
   get 'users/new'
+  get 'home/login'
+  get 'home/signup'
 
   
 

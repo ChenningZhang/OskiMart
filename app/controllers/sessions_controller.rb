@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:session][:username].downcase)
     if user && user.authenticate(params[:session][:password])
 
-      render 'posts/index'
+      redirect_to posts_path
     else
       render 'new'
     end
