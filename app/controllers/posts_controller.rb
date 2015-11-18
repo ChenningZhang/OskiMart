@@ -1,15 +1,14 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+
     def new
-      if user_signed_in?
         @post = Post.new
-        @post.user = current_user
-      else
 
     end
 
     def create
       	@post = Post.new(post_params)
+        @post.user_id = current_user.id
         if @post.save
           flash[:success] = "Your post has been posted!"
           redirect_to posts_path
@@ -61,6 +60,6 @@ class PostsController < ApplicationController
 
     private
       	def post_params
-      		  params.require(:post).permit(:title, :description, :category, :price)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price)
       	end
 end
