@@ -17,6 +17,7 @@
 
     <!-- Custom CSS -->
     <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,33 +57,44 @@
             </div>
         </div>
     </nav>
+<div class = "col-md-offset-1">
+    <h1 class = "newsfeed-title">General Newsfeed</h1> 
+</div>
+
 
   <div class = "container">
   	<div class = "row">
-  		<div class = "col-md-offset-5">
+  		<div class = "col-md-offset-3">
 		    <form class="navbar-form">
 		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-		        <%= text_field_tag :class=>"search-input", :keywords, params[:search], placeholder: "Search keywords" %>
-		        <%= submit_tag "Search" %>
+		        <%= text_field_tag :keywords, params[:search], placeholder: "Search keywords", :class=>"search-input" %>
+		        <%= submit_tag "Search", :class=>"search-button"%>
 		        <% end %>
 		    </form>
 		  </div>
 	   </div>
   </div>
 
-
+<div class = "container">
+	<div class = "row">
     <text> Filter By: </text>
 	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
 	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
+	</div>
     <br><br><br>
-    <%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
+  <div class = "row">
+  	<div class = "col-md-offset-4">
+    	<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
 
     <%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
 
+</div>
+
 
     <div class = "container">
-	    <%= will_paginate @posts %>
 	            <% @posts.each do |post| %>
 	            <div class = "row top-buffer-25 blue-background">
 	            	<h3><%= post.title %></h3>
@@ -107,7 +119,7 @@
 		           </div>
 
 	            <% end %>
-	    <%= will_paginate @posts %>
+	    <%= will_paginate @posts, :class=>"pagination" %>
   </div>
 
 
