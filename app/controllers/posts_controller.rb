@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+
     def new
         @post = Post.new
+
     end
 
     def create
       	@post = Post.new(post_params)
+        @post.user_id = current_user.id
+        current_user.posts << @post
+
         if @post.save
           flash[:success] = "Your post has been posted!"
           redirect_to posts_path
@@ -16,6 +21,7 @@ class PostsController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
+        @comments = @post.comments
     end
 
     def index
@@ -38,6 +44,9 @@ class PostsController < ApplicationController
 
     def edit
         @post = Post.find(params[:id])
+        if current_user.id != @post.user_id
+          redirect_to posts_path
+        end
     end
 
     def update
@@ -51,8 +60,13 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        Post.destroy(params[:id])
-        redirect_to posts_path
+      @post = Post.find(params[:id])
+      if current_user.id != @post.user_id
+          redirect_to '/'
+      else
+          Post.destroy(params[:id])
+          redirect_to posts_path
+      end
     end
 
 
@@ -63,6 +77,6 @@ class PostsController < ApplicationController
       
     private
       	def post_params
-      		  params.require(:post).permit(:title, :description, :category, :price)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price)
       	end
 end
