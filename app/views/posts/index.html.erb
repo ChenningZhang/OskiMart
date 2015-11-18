@@ -16,7 +16,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/1-col-portfolio.css" rel="stylesheet">
+    <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,7 +32,6 @@
     <!-- Navigation -->
     <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -42,7 +41,6 @@
                 </button>
                 <a class="navbar-brand" href="#">Oskimart</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -56,60 +54,63 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
 
-    <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">                    
-            <li>
-                <form class="navbar-form">
-                    <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-                    <%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
-                    <%= submit_tag "Search" %>
-                    <% end %>
-                </form>
-            </li>                    
-        </ul>
-        <!--  search form end -->                
-    </div>
+  <div class = "container">
+  	<div class = "row">
+  		<div class = "col-md-offset-5">
+		    <form class="navbar-form">
+		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+		        <%= text_field_tag :class=>"search-input", :keywords, params[:search], placeholder: "Search keywords" %>
+		        <%= submit_tag "Search" %>
+		        <% end %>
+		    </form>
+		  </div>
+	   </div>
+  </div>
 
-    <%= will_paginate @posts %>
-        <table>
 
-              <tr>
-                <th>Title </th>
-                <th>Description </th>
-                <th>Category </th>
-                <th>Price </th>
-                <th>User</th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            <% @posts.each do |post| %>
-              <tr>
-                <td><%= post.title %></td>
-                <td><%= post.description %></td>
-                <td><%= post.category %></td>
-                <td><%= post.price %></td>
-                <td><%= User.find(post.user_id).first_name %></td>
-
-                <td><%= link_to "Show", post_path(post) %></td>
-                <% if current_user.id == post.user_id %>
-                    <td><%= link_to "Update", edit_post_path(post) %></td>
-                    <td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
-                <% end %>
-                <td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
-
-            <% end %>
-        
-        </table>
-    <%= will_paginate @posts %>
+    <text> Filter By: </text>
+	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
+    <br><br><br>
+    <%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
 
     <%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
+
+
+    <div class = "container">
+	    <%= will_paginate @posts %>
+	            <% @posts.each do |post| %>
+	            <div class = "row top-buffer-25 blue-background">
+	            	<h3><%= post.title %></h3>
+	            	<div class ="col-md-4">
+	            		<img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
+	            	</div>
+
+		            <div class = "col-md-7 col-sm-1 col-md-offset-1">
+		                
+		                <p><%= post.description %></p>
+		                <td><%= post.category %></td>
+		                <td><%= post.price %></td>
+		                <td><%= User.find(post.user_id).first_name %></td>
+
+		                <td><%= link_to "Show", post_path(post) %></td>
+		                <% if current_user.id == post.user_id %>
+		                    <td><%= link_to "Update", edit_post_path(post) %></td>
+		                    <td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+		                <% end %>
+		                <td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
+		            </div>
+		           </div>
+
+	            <% end %>
+	    <%= will_paginate @posts %>
+  </div>
+
+
 
 <script>
     $(function(){
@@ -122,19 +123,14 @@
       });
     });
 </script>
-
+	<!--
     <div class="container">
-
-        <!-- Page Heading -->
         <div class="row">
             <div class=" col-lg-10">
                 <h1 class="page-header">General newsfeed
                 </h1>
             </div>
         </div>
-        <!-- /.row -->
-
-        <!-- Project One -->
         <div class="row">
             <div class="top-buffer-25 col-md-4 col-md-offset-0">
                 <a href="#">
@@ -148,9 +144,8 @@
             </div>
         </div>
 
-
-
     </div>
+  -->
 
         <!-- /#wrapper -->
 
