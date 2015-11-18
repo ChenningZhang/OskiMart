@@ -335,7 +335,7 @@
 								    <td><%= post.description %></td>
 								    <td><%= post.category %></td>
 								    <td><%= post.price %></td>
-								    <td><%= post.user_id %></td>
+								    <td><%= User.find(post.user_id).first_name %></td>
 
 								    <td><%= link_to "Show", post_path(post) %></td>
 								   	<% if current_user.id == post.user_id %>

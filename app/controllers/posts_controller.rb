@@ -9,6 +9,8 @@ class PostsController < ApplicationController
     def create
       	@post = Post.new(post_params)
         @post.user_id = current_user.id
+        current_user.posts << @post
+
         if @post.save
           flash[:success] = "Your post has been posted!"
           redirect_to posts_path
@@ -19,7 +21,7 @@ class PostsController < ApplicationController
 
     def show
         @post = Post.find(params[:id])
-        @comment = Comment.new
+        @comments = @post.comments
     end
 
     def index
@@ -42,6 +44,9 @@ class PostsController < ApplicationController
 
     def edit
         @post = Post.find(params[:id])
+        if current_user.id != @post.user_id
+          redirect_to posts_path
+        end
     end
 
     def update
@@ -55,8 +60,13 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        Post.destroy(params[:id])
-        redirect_to posts_path
+      @post = Post.find(params[:id])
+      if current_user.id != @post.user_id
+          redirect_to '/'
+      else
+          Post.destroy(params[:id])
+          redirect_to posts_path
+      end
     end
 
     private

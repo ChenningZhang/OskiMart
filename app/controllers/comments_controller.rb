@@ -10,6 +10,9 @@ class CommentsController < ApplicationController
 	   @comment = Comment.new(comment_params)
 	   @comment.user_id = current_user.id
 	   @comment.post_id = @post.id
+	   current_user.comments << @comment
+	   @post.comments << @comment
+
 	   if @comment.save
 		  flash[:success] = "Your comment has been posted!"
 		  redirect_to comments_path(:post_id => @post.id)
