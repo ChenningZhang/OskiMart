@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :comments
 
   get 'post_new' => 'posts#new'
   
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
   get 'post' => 'posts#show'
     
   delete 'post' => 'posts#destroy'
+
+  get 'comments/:post_id/' => 'comments#index'
+
+  get 'comments/:post_id/new' => 'comments#new'
 
   get 'users/new'
   get 'home/login'

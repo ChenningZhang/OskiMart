@@ -18,6 +18,22 @@
   <%=h @post.price %>
 </p>
 
+<p>
+	<b>Comments:</b>
+	<table>
+		<tr>
+			<th>Text</th>
+		</tr>
+	<%= Comment.all.where(:post_id => @post.id).each do |comment| %>
+	<tr>
+		<td><%= comment.text %><td>
+	<% end %>
+
+	</table>
+	
+
+</p>
+
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
