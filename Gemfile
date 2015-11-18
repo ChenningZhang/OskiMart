@@ -47,6 +47,7 @@ gem 'will_paginate'
 
 # capybara for testing
 gem 'capybara'
+gem 'faker'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -59,7 +60,8 @@ group :development do
   gem 'byebug'
   # rspec-rails testing framework
   gem 'rspec-rails', '~> 3.0'
-  gem 'cucumber-rails', :require => false
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', :require => false
   gem 'database_cleaner'
 end
 
@@ -69,7 +71,8 @@ group :test do
   gem 'guard-minitest'
   # rspec-rails testing framework
   gem 'rspec-rails', '~> 3.0'
-  gem 'cucumber-rails', :require => false
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', :require => false
   gem 'database_cleaner'
 end
 
