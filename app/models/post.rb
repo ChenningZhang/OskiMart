@@ -6,9 +6,13 @@ class Post < ActiveRecord::Base
 	validates :category, presence: true
 	validates :price, presence: true	
 
+
   def self.filter(price)
     where(:price => price)
   end
+
+
+
 
   def self.search(search)
     keyword_regex = "%#{search}%"

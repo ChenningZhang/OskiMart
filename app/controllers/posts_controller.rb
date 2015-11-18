@@ -55,7 +55,10 @@ class PostsController < ApplicationController
         redirect_to posts_path
     end
 
-    
+
+    # def author
+    #     @post.user = current_user.first_name
+    # end    
 
       
     private
