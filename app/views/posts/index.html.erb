@@ -1,405 +1,166 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Bootstrap CSS -->    
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- bootstrap theme -->
-	<link href="css/bootstrap-theme.css" rel="stylesheet">
 
-	<!-- font icon -->
-	<link href="css/elegant-icons-style.css" rel="stylesheet" />
-	<link href="css/font-awesome.min.css" rel="stylesheet" />    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<!-- owl carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-	<!-- Custom styles -->
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/style-responsive.css" rel="stylesheet" />
-	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <title>Newsfeed</title>
 
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
-	<title>Newsfeed Page</title>
- </head>
+    <!-- Custom CSS -->
+    <link href="css/1-col-portfolio.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
 
 <body>
-	<!-- container section start -->
-	<section id="container" class="">
 
-	<!-- HEADER -->
-		<header class="header dark-bg">
-			<div class="toggle-nav">
-				<div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-			</div>
+    <!-- Navigation -->
+    <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Oskimart</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-	<!--logo start-->
-			<a href="index.html" class="logo"><i>OskiMart</i></a>
-			<!--logo end-->
+    <div class="nav search-row" id="top_menu">
+        <!--  search form start -->
+        <ul class="nav top-menu">                    
+            <li>
+                <form class="navbar-form">
+                    <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+                    <%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
+                    <%= submit_tag "Search" %>
+                    <% end %>
+                </form>
+            </li>                    
+        </ul>
+        <!--  search form end -->                
+    </div>
 
-	<!-- SEARCH -->
-			<div class="nav search-row" id="top_menu">
-				<!--  search form start -->
-				<ul class="nav top-menu">                    
-					<li>
-						<form class="navbar-form">
- 							<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-							<%= text_field_tag :keywords, params[:search], placeholder: "Search keywords" %>
-							<%= submit_tag "Search" %>
-							<% end %>
-						</form>
-					</li>                    
-				</ul>
-				<!--  search form end -->                
-			</div>
+    <%= will_paginate @posts %>
+        <table>
 
-			
+              <tr>
+                <th>Title </th>
+                <th>Description </th>
+                <th>Category </th>
+                <th>Price </th>
+                <th>User</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= post.description %></td>
+                <td><%= post.category %></td>
+                <td><%= post.price %></td>
+                <td><%= User.find(post.user_id).first_name %></td>
 
-			<%# if :search_error.present?%>
-				<%#= search_error%>
-			<%# end %>
+                <td><%= link_to "Show", post_path(post) %></td>
+                <% if current_user.id == post.user_id %>
+                    <td><%= link_to "Update", edit_post_path(post) %></td>
+                    <td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+                <% end %>
+                <td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
 
-			<%# if @posts.present? %>
-			  <%#= render @posts %>
-			<%# else %>
-			  <!--<p>There are no posts containing the term(s) <%= params[:search] %>.</p>-->
-			<%# end %>
+            <% end %>
+        
+        </table>
+    <%= will_paginate @posts %>
 
+    <%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
 
+<script>
+    $(function(){
+      $('#category_id').bind('change', function () {
+         var url = "/posts?category_id=" + $(this).val()
+          if (url) {
+              window.location.replace(url);
+          }
+          return false;
+      });
+    });
+</script>
 
+    <div class="container">
 
+        <!-- Page Heading -->
+        <div class="row">
+            <div class=" col-lg-10">
+                <h1 class="page-header">General newsfeed
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
 
-	<!-- NOTIFICATION BAR -->
-			<div class="top-nav notification-row">                
-				<!-- notificatoin dropdown start-->
-				<ul class="nav pull-right top-menu">
-
-
-					<!-- inbox notificatoin start-->
-					<li id="mail_notificatoin_bar" class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<i class="icon-envelope-l"></i>
-							<span class="badge bg-important">5</span>
-						</a>
-						<ul class="dropdown-menu extended inbox">
-							<div class="notify-arrow notify-arrow-red"></div>
-							<li>
-								<p class="red">You have 5 new messages</p>
-							</li>
-							<li>
-								<a href="#">
-									<span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
-									<span class="subject">
-										<span class="from">Greg  Martin</span>
-										<span class="time">1 min</span>
-									</span>
-									<span class="message">
-										I really like this admin panel.
-									</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="photo"><img alt="avatar" src="./img/avatar-mini2.jpg"></span>
-									<span class="subject">
-										<span class="from">Bob   Mckenzie</span>
-										<span class="time">5 mins</span>
-									</span>
-									<span class="message">
-										Hi, What is next project plan?
-									</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="photo"><img alt="avatar" src="./img/avatar-mini3.jpg"></span>
-									<span class="subject">
-										<span class="from">Phillip   Park</span>
-										<span class="time">2 hrs</span>
-									</span>
-									<span class="message">
-										I am like to buy this Admin Template.
-									</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="photo"><img alt="avatar" src="./img/avatar-mini4.jpg"></span>
-									<span class="subject">
-										<span class="from">Ray   Munoz</span>
-										<span class="time">1 day</span>
-									</span>
-									<span class="message">
-										Icon fonts are great.
-									</span>
-								</a>
-							</li>
-
-							<li>
-								<a href="#">See all messages</a>
-							</li>
-						</ul>
-					</li>
-					<!-- inbox notificatoin end -->
-
-	<!-- ALERT NOTIFICATION -->
-					<!-- alert notification start-->
-					<li id="alert_notificatoin_bar" class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-							<i class="icon-bell-l"></i>
-							<span class="badge bg-important">7</span>
-						</a>
-						<ul class="dropdown-menu extended notification">
-							<div class="notify-arrow notify-arrow-red"></div>
-							<li>
-								<p class="red">You have 4 new notifications</p>
-							</li>
-							<li>
-								<a href="#">
-									<span class="label label-primary"><i class="icon_profile"></i></span> 
-									Friend Request
-									<span class="small italic pull-right">5 mins</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="label label-warning"><i class="icon_pin"></i></span>  
-									John location.
-									<span class="small italic pull-right">50 mins</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="label label-danger"><i class="icon_book_alt"></i></span> 
-									Project 3 Completed.
-									<span class="small italic pull-right">1 hr</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="label label-success"><i class="icon_like"></i></span> 
-									Mick appreciated your work.
-									<span class="small italic pull-right"> Today</span>
-								</a>
-							</li>                            
-							<li>
-								<a href="#">See all notifications</a>
-							</li>
-						</ul>
-					</li>
-					<!-- alert notification end-->
-
-	<!-- USER LOGIN BAR -->
-					<!-- user login dropdown start-->
-					<li class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="profile-ava">
-								<img alt="" src="img/avatar1_small.jpg">
-							</span>
-							<span class="username">Jenifer Smith</span>
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu extended logout">
-							<div class="log-arrow-up"></div>
-							<li class="eborder-top">
-								<a href="profile.html"><i class="icon_profile"></i> My Profile</a>
-							</li>
-							<li>
-								<a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
-							</li>
+        <!-- Project One -->
+        <div class="row">
+            <div class="top-buffer-25 col-md-4 col-md-offset-0">
+                <a href="#">
+                    <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-7 col-md-offset-1">
+                <h3>Project One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+                <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
 
 
-							<li>
-								<a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
-							</li>
 
-						</ul>
-					</li>
-					<!-- user login dropdown end -->
-				</ul>
-				<!-- notificatoin dropdown end-->
-			</div>
-		</header>      
-	<!--HEADER END-->
+    </div>
 
-	<!--SIDEBAR START-->
-		<aside>
-			<div id="sidebar"  class="nav-collapse ">
-				<!-- sidebar menu start-->
-				<ul class="sidebar-menu">                
-					<li class="sub-menu">
-						<a class="" href="index.html">
-							<i class="icon_house_alt"></i>
-							<span>Newsfeed</span>
-						</a>
-					</li>
+        <!-- /#wrapper -->
 
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-					<li class="sub-menu">
-						<a href="javascript:;" class="">
-							<i class="icon_document_alt"></i>
-							<span>Categories</span>
-							<span class="menu-arrow arrow_carrot-right"></span>
-						</a>
-						<ul class="sub">
-							<li><a class="" href="books_newsfeed.html">Books</a></li>                          
-							<li><a class="" href="tech_newsfeed.html">Technology</a></li>
-							<li><a class="" href="furniture_newsfeed.html">Furniture</a></li>
-							<li><a class="" href="service_newsfeed.html">Service</a></li>
-							<li><a class="" href="other_newsfeed.html">Other</a></li>
-						</ul>
-					</li>       
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-					<li>
-						<a class="" href="following.html">
-							<i class="icon_genius"></i>
-							<span>Following</span>
-						</a>
-					</li>
-
-					<li class="sub-menu">
-						<a href="javascript:;" class="">
-							<i class="icon_documents_alt"></i>
-							<span>My Posts</span>
-							<span class="menu-arrow arrow_carrot-right"></span>
-						</a>
-						<ul class="sub">                          
-							<li><a class="" href="my_posts.html"><span>Posts</span></a></li>
-							<li><a class="" href="post.html">Create Post</a></li>
-
-							<li><a class="" href="profile.html">Profile</a></li>
-						</ul>
-					</li>
-
-				</ul>
-				<!-- sidebar menu end-->
-			</div>
-		</aside>
-	<!--SIDEBAR MENU END -->
-	
-
-	<!--MAIN CONTENT START-->
-	  <section id="main-content">
-	  	<section class="wrapper">            
-	  		<!--overview start-->
-
-	  		<div class="row">
-	  			<div class="col-lg-12">
-	  				<h3 class="page-header"><i class="fa fa-home"></i> Newsfeed</h3>
-	  				<ol class="breadcrumb">
-	  					<li><i class="fa fa-home"></i><a href="index.html">Newsfeed</a></li>
-	  				</ol>
-	  			</div>
-	  		</div>
-
-
-	  		<text> Filter By: </text>
-	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
-
-	  		<div class="row">
-	  			<div class="col-lg-12">
-	  				<div class="panel panel-default">
-	  					<div class="panel-heading">
-	  						<div class="pull-left">Newsfeed</div>
-	  						<div class="widget-icons pull-right">
-	  							<a href="#" class="wclose"><i class="fa fa-times"></i></a>
-	  						</div>  
-	  						<div class="clearfix"></div>
-	  					</div>
-	  					<div class="panel-body">
-	  						<div class="padd">
-	  							<div class="form quick-post">
-	  								<!-- Edit profile form (not working)-->
-
-	  					<%= will_paginate @posts %>
-	  						<table>
-
-								  <tr>
-								    <th>Title </th>
-								    <th>Description </th>
-								    <th>Category </th>
-								    <th>Price </th>
-								    <th>User</th>
-								    <th></th>
-								    <th></th>
-								    <th></th>
-								  </tr>
-								<% @posts.each do |post| %>
-								  <tr>
-								    <td><%= post.title %></td>
-								    <td><%= post.description %></td>
-								    <td><%= post.category %></td>
-								    <td><%= post.price %></td>
-								    <td><%= User.find(post.user_id).first_name %></td>
-
-								    <td><%= link_to "Show", post_path(post) %></td>
-								   	<% if current_user.id == post.user_id %>
-									    <td><%= link_to "Update", edit_post_path(post) %></td>
-	    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
-	    							<% end %>
-    								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
-
-								<% end %>
-							
-							</table>
-						<%= will_paginate @posts %>
-
-								
-								<%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
-								
-								<script>
-								    $(function(){
-								      $('#category_id').bind('change', function () {
-								         var url = "/posts?category_id=" + $(this).val()
-								          if (url) {
-								              window.location.replace(url);
-								          }
-								          return false;
-								      });
-								    });
-								</script>
-
-								<br>
-	  								<form class="form-horizontal">
-	  										<div class='col-md-6 col-md-offset-3'>
-	  											<div class='logo'>
-	  											</div>
-	  											<div class='post' >
-	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
-	  											</div>
-	  										</div>
-	  								</form>
-	  							</div>
-
-
-	  						</div>
-
-
-	  						<!-- end of post -->
-
-
-	  					</div>
-	  				</div>
-
-	  			</div>
-
-	  		</div> 
-	  		<!-- project team & activity end -->
-
-	  	</section>
-	  </section>
-	  <!--main content end-->
-	</section>
 
 </body>
 
-
-
 </html>
-
-
