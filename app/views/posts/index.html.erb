@@ -57,68 +57,71 @@
             </div>
         </div>
     </nav>
-<div class = "col-md-offset-1">
-    <h1 class = "newsfeed-title">General Newsfeed</h1> 
-</div>
 
 
-  <div class = "container">
-  	<div class = "row">
-  		<div class = "col-md-offset-3">
+
+<div class = "container">
+		<div class = "row">
+    		<h1 class = "newsfeed-title">General Newsfeed</h1> 
+		</div>
+	  <div class = "row">
+  		<div class = "col-md-offset-3 col-xs-offset-3">
 		    <form class="navbar-form">
 		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-		        <%= text_field_tag :keywords, params[:search], placeholder: "Search keywords", :class=>"search-input" %>
+		        <%= text_field_tag :keywords, params[:search], placeholder: "Search posts by title or description", :class=>"search-input" %>
 		        <%= submit_tag "Search", :class=>"search-button"%>
 		        <% end %>
 		    </form>
 		  </div>
-	   </div>
-  </div>
+	  </div>
 
-<div class = "container">
-	<div class = "row">
-    <text> Filter By: </text>
-	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
-	</div>
-    <br><br><br>
-  <div class = "row">
-  	<div class = "col-md-offset-4">
-    	<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
-    </div>
-  </div>
+  	<div class = "row top-buffer-15">
+  		<div class = "col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1">
+  			<h5>Filter by price:</h5>
+	  		<%= link_to "$", posts_path(price: '$'), class: "price-button" %>
+	  		<%= link_to "$$", posts_path(price: '$$'), class: "price-button" %>
+	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "price-button" %>
+	  	</div>
+  		<div class = "col-md-4 col-md-offset-5 col-xs-4 col-xs-offset-5 shift-up-20">
+  			<%= link_to "Create Post!", post_new_path, class: "create-button" %>
+  		</div>
+  	</div>
 
-    <%= select_tag(:category_id, options_for_select(['Please select a category', '', 'Books', 'Technology', 'Furniture', 'Service', 'Other'], {:prompt => 'Select Gender'}))%>
 
 </div>
 
-
-    <div class = "container">
+						<div class = "container">
 	            <% @posts.each do |post| %>
-	            <div class = "row top-buffer-25 blue-background">
-	            	<h3><%= post.title %></h3>
-	            	<div class ="col-md-4">
-	            		<img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
-	            	</div>
+		            <div class = "row top-buffer-25 newsfeed-post">
+		            		<h2 class = "post-title">Post Title: <%= post.title%></h2>
+				            <div class = "col-md-4">
+				            		<img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
+				            </div>
+					          <div class = "col-md-7">
+					            	<div class = "row post-description">
+					            		Description: <%= post.description %>
+					            	</div>
+					            	<div class = "row">
+					                Category: <%= post.category %>
+					                Price: <%= post.price %>
+					                Posted By: <%= User.find(post.user_id).first_name %>
+					          		</div>
+							         	<div class = "row">
+							                <%= link_to "Show", post_path(post), class: "post-option-button" %>
+							                <% if current_user.id == post.user_id %>
+							                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
+							                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
+							                <% end %>
+							                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+							           </div>
 
-		            <div class = "col-md-7 col-sm-1 col-md-offset-1">
-		                
-		                <p><%= post.description %></p>
-		                <td><%= post.category %></td>
-		                <td><%= post.price %></td>
-		                <td><%= User.find(post.user_id).first_name %></td>
+					          </div>
+					                
 
-		                <td><%= link_to "Show", post_path(post) %></td>
-		                <% if current_user.id == post.user_id %>
-		                    <td><%= link_to "Update", edit_post_path(post) %></td>
-		                    <td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
-		                <% end %>
-		                <td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
-		            </div>
-		           </div>
+					        </div>
 
 	            <% end %>
+	          </div>
 	    <%= will_paginate @posts, :class=>"pagination" %>
   </div>
 

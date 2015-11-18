@@ -9,12 +9,21 @@ body {
   font-family: Raleway;
 }
 
+a {
+  text-decoration: none;
+}
+
 footer {
     margin: 50px 0;
 }
-.top-buffer-25 {
-  padding-top: 25px;
+.top-buffer-15 {
+  margin-top: 15px;
 }
+.top-buffer-25 {
+  margin-top: 25px;
+}
+
+
 .navbar-color {
   background-color: #5A37DB;
 
@@ -32,6 +41,42 @@ input.search-input {
   width: 70px;
   height: 40px;
 }
-.blue-background {
-  background-color: ;
+
+.price-button {
+  background-color: #22E653;
+  color: white;
+  border-radius: 3px;
+  padding: 8px 20px 8px 20px;
+}
+
+.create-button {
+  background-color: #5A37DB;
+  color: white;
+  border-radius: 5px;
+  padding: 15px 30px 15px 30px;
+}
+.shift-up-20 {
+  position:relative;
+  top: -20px;
+}
+.newsfeed-post {
+  background-color: #7ABEF5;
+  border-radius: 5px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+.post-option-button {
+  background-color: #FCCF47;
+  border-radius: 3px;
+  padding: 10px 20px 10px 20px;
+}
+h2.post-title {
+  margin-bottom: 30px;
+}
+
+div.post-description{
+  font-size: 24px;
+}
+.blue-color{
+  background-color: #5A37DB;
 }
