@@ -1,0 +1,8 @@
+<h1>Adding a comment</h1>
+
+<%= form_for(:comment, :method => :post, url: comments_path(:post_id => params[:post_id])) do |f| %>
+    <%= render 'shared/comment_errors' %>
+	<%= f.label :text %>
+	<%= f.text_field :text, class: 'form-control' %>
+	<%= f.submit "Comment", class: "btn btn-primary" %>
+<% end %>

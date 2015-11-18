@@ -1,0 +1,20 @@
+<h1>Comments</h1>
+<table>
+	<tr>
+	    <th>User </th>
+	    <th>Text </th>
+	    <th></th>
+	    <th></th>
+	</tr>
+	<% @comments.each do |comment| %>
+	<tr>
+	    <td><%= comment.user_id %></td>
+	    <td><%= comment.text %></td>
+	    <% if current_user.id == comment.user_id %>
+	    	    <td><%= link_to "Update", edit_comment_path(comment) %></td>
+	    	    <td><%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" } %></td>
+		<% end %>
+	<% end %>
+</table>
+<%= link_to "Add Comment", new_comment_path(:post_id => params[:post_id]), class: "btn btn-lg btn-primary" %>
+<%= link_to "Back", posts_path, class: "btn btn-lg btn-primary" %>
