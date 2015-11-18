@@ -324,6 +324,7 @@
 								    <th>Description </th>
 								    <th>Category </th>
 								    <th>Price </th>
+								    <th>User</th>
 								    <th></th>
 								    <th></th>
 								    <th></th>
@@ -334,9 +335,15 @@
 								    <td><%= post.description %></td>
 								    <td><%= post.category %></td>
 								    <td><%= post.price %></td>
+								    <td><%= User.find(post.user_id).first_name %></td>
+
 								    <td><%= link_to "Show", post_path(post) %></td>
-								    <td><%= link_to "Update", edit_post_path(post) %></td>
-    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+								   	<% if current_user.id == post.user_id %>
+									    <td><%= link_to "Update", edit_post_path(post) %></td>
+	    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+	    							<% end %>
+    								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
+
 								<% end %>
 							
 							</table>
