@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
         @post = Post.find(@comment.post_id)
         if @comment.update_attributes(comment_params)
           flash[:success] = "Your comment has been updated!"
-          redirect_to(@post)
+          redirect_to comments_path(:post_id => @post.id)
         else
           render 'edit'
         end

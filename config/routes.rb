@@ -15,10 +15,6 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
-  get 'comments/:post_id/' => 'comments#index'
-
-  get 'comments/:post_id/new' => 'comments#new'
-
   get 'users/new'
   get 'home/login'
   get 'home/signup'

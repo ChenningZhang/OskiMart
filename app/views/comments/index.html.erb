@@ -1,10 +1,8 @@
-<h1>comments</h1>
-
+<h1>Comments</h1>
 <table>
 	<tr>
 	    <th>User </th>
 	    <th>Text </th>
-	    <th>ID</th>
 	    <th></th>
 	    <th></th>
 	</tr>
@@ -12,11 +10,9 @@
 	<tr>
 	    <td><%= comment.user_id %></td>
 	    <td><%= comment.text %></td>
-	    <td><%= comment.id %></td>
 	    <% if current_user.id == comment.user_id %>
 	    	    <td><%= link_to "Update", edit_comment_path(comment) %></td>
 	    	    <td><%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" } %></td>
-
 		<% end %>
 	<% end %>
 </table>
