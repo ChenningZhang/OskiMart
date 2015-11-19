@@ -9,9 +9,11 @@ body {
   font-family: Raleway;
 }
 
-a {
-  text-decoration: none;
-}
+a:hover {
+    color: white;
+    text-decoration: none;
+} 
+
 
 footer {
     margin: 50px 0;
@@ -53,12 +55,19 @@ input.search-input {
   border-radius: 3px;
   padding: 8px 20px 8px 20px;
 }
+.price-button:hover{
+  background-color: #34F765;
+}
 
 .create-button {
   background-color: #5A37DB;
   color: white;
   border-radius: 5px;
   padding: 15px 30px 15px 30px;
+}
+
+.create-button:hover {
+  background-color: #7D5FED
 }
 .shift-up-20 {
   position:relative;

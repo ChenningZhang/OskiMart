@@ -1,0 +1,45 @@
+
+
+.updated-post {
+  background-color: #7ABEF5;
+  border-radius: 4px;
+}
+
+.update-header {
+
+}
+
+.update-button {
+  background-color: #2ABF61;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+
+}
+.update-button:hover {
+  color: black;
+  background-color: #32C96A;
+}
+.button-center{
+  text-align: center;
+}
+.description-box {
+  height: 100px;
+}
+.back-button:hover {
+  background-color: #ED5867;
+  color: black;
+}
+.back-button {
+  position: relative;
+  top: 10px;
+  background-color: #E82E41;
+  color: white;
+  padding: 12px 24px 12px 24px;
+  border: none;
+  border-radius: 5px;
+}
+.bottom-padding-30 {
+  padding-bottom: 30px;
+}
