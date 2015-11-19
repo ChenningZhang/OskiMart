@@ -76,13 +76,13 @@
 	  </div>
 
   	<div class = "row top-buffer-15">
-  		<div class = "col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1">
+  		<div class = "col-md-6 col-md-offset-1 col-xs-8 col-xs-offset-1">
   			<h5>Filter by price:</h5>
 	  		<%= link_to "$", posts_path(price: '$'), class: "price-button" %>
 	  		<%= link_to "$$", posts_path(price: '$$'), class: "price-button" %>
 	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "price-button" %>
 	  	</div>
-  		<div class = "col-md-4 col-md-offset-5 col-xs-4 col-xs-offset-5 shift-up-20">
+  		<div class = "col-md-4 col-md-offset-5 col-xs-6 col-xs-offset-7 shift-up-20">
   			<%= link_to "Create Post!", post_new_path, class: "create-button" %>
   		</div>
   	</div>
@@ -92,21 +92,24 @@
 
 						<div class = "container">
 	            <% @posts.each do |post| %>
-		            <div class = "row top-buffer-25 newsfeed-post">
+		            <div class = "row top-buffer-35 newsfeed-post">
 		            		<h2 class = "post-title">Post Title: <%= post.title%></h2>
 				            <div class = "col-md-4">
 				            		<img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
 				            </div>
-					          <div class = "col-md-7">
-					            	<div class = "row post-description">
+					          <div class = "col-md-7 col-md-offset-1">
+					            	<div class = "row post-description top-buffer-25">
 					            		Description: <%= post.description %>
 					            	</div>
-					            	<div class = "row">
-					                Category: <%= post.category %>
-					                Price: <%= post.price %>
-					                Posted By: <%= User.find(post.user_id).first_name %>
+					            	<div class = "row top-buffer-25">
+					                <div class = "col-md-3">
+					                	Category: <%= post.category %>
+					                </div>
+
+					                <div class = "col-md-3 col-md-offset-1"> Price: <%= post.price %> </div>
+					                <div class = "col-md-3 col-md-offset-1"> Posted By: <%= User.find(post.user_id).first_name %> </div>
 					          		</div>
-							         	<div class = "row">
+							         	<div class = "row top-buffer-25">
 							                <%= link_to "Show", post_path(post), class: "post-option-button" %>
 							                <% if current_user.id == post.user_id %>
 							                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
