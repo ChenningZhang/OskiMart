@@ -142,21 +142,22 @@
 					            		Description: <%= post.description %>
 					            	</div>
 					            	<div class = "row top-buffer-25">
-					                <div class = "col-md-3">
-					                	Category: <%= post.category %>
-					                </div>
+    					                <div class = "col-md-3">
+    					                	Category: <%= post.category %>
+    					                </div>
 
-					                <div class = "col-md-3 col-md-offset-1"> Price: <%= post.price %> </div>
-					                <div class = "col-md-3 col-md-offset-1"> Posted By: <%= User.find(post.user_id).first_name %> </div>
+    					                <div class = "col-md-3 col-md-offset-1"> Price: <%= post.price %> </div>
+    					                <div class = "col-md-3 col-md-offset-1"> Posted By: <%= User.find(post.user_id).first_name %> 
+                                        </div>
 					          		</div>
-							         	<div class = "row top-buffer-25">
-							                <%= link_to "Show", post_path(post), class: "post-option-button" %>
-							                <% if current_user.id == post.user_id %>
-							                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
-							                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
-							                <% end %>
-							                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
-							           </div>
+						         	<div class = "row top-buffer-25">
+						                <%= link_to "Show", post_path(post), class: "post-option-button" %>
+						                <% if current_user.id == post.user_id %>
+						                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
+						                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
+						                <% end %>
+						                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+						           </div>
 
 					          </div>
 					                
