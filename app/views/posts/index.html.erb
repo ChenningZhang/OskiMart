@@ -48,10 +48,36 @@
                         <a href="#">About</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#">Categories</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
+
+                    <%if user_signed_in? %>
+                			<li>
+              					<%=link_to user_path(current_user.id) do%>
+              						<%=User.find(current_user.id).first_name%>
+              						<span class="glyphicon glyphicon-user"></span> 
+              					<%end%>
+                			</li>
+                			<li>
+                				
+                				<%=link_to destroy_user_session_path, :method=>'delete' do%>
+                					Logout
+                					<span class="glyphicon glyphicon-log-out"></span> 
+                				<%end%>
+                					
+                			</li>
+
+                		<% else %>
+                			<li>
+                				<%=link_to new_user_session_path do%>
+                					Login
+                					<span class="glyphicon glyphicon-log-in"></span> 
+                				<% end %>
+                			</li>
+                		<%end%>
+
+
+                        </a>
                     </li>
                 </ul>
             </div>
