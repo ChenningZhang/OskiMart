@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
-  username: Zheryu
+  username: anushajain
   password: password
   database: oskimart_development
 
@@ -10,7 +10,7 @@ development:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  username: Zheryu
+  username: anushajain
   password: password
   database: oskimart_development
 

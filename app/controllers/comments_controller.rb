@@ -31,6 +31,9 @@ class CommentsController < ApplicationController
 
     def edit
         @comment = Comment.find(params[:id])
+        if current_user.id != @comment.user_id
+          redirect_to comments_path(:post_id => @comment.post_id)
+        end
     end
 
     def update
@@ -45,8 +48,13 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        Comment.destroy(params[:id])
-        redirect_to posts_path
+      @comment = Comment.find(params[:id])
+      if current_user.id != @comment.user_id
+          redirect_to comments_path(:post_id => @comment.post_id)
+      else
+          Comment.destroy(params[:id])
+          redirect_to comments_path(:post_id => @comment.post_id)
+      end
     end
 
     private

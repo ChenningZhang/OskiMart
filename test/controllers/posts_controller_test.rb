@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-	# devise bullshit
+	# setting up devise 
 	include Devise::TestHelpers
 
 	def setup
