@@ -1,39 +1,122 @@
-<p>
-  <b>Title:</b>
-  <%=h @post.title %>
-</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-  <b>Desctiption:</b>
-  <%=h @post.description%>
-</p>
+<head>
 
-<p>
-  <b>Category:</b>
-  <%=h @post.category %>
-</p>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<p>
-  <b>Price:</b>
-  <%=h @post.price %>
-</p>
+    <title>Viewing post</title>
 
-<p>
-	<b>Comments:</b>
-	<table>
-		<tr>
-			<th>Text</th>
-		</tr>
-	<%= Comment.all.where(:post_id => @post.id).each do |comment| %>
-	<tr>
-		<td><%= comment.text %><td>
-	<% end %>
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
 
-	</table>
-	
+    <!-- Custom CSS -->
+    <link href="../../css/newsfeed/newsfeed.css" rel="stylesheet">
+    <link href="../../css/update/update.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+        <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
 
-</p>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+</head>
+    <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/posts">Oskimart</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a>About</a>
+                    </li>
+                    <li class = "dropdown">
+                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                          Categories <b class="caret"></b>
+                        </a>
+              <ul class="dropdown-menu">
+                <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
+                <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
+                <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
+                <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
+                <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+              </ul>
+                          
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <%if user_signed_in? %>
+                      <li>
+                        <%=link_to user_path(current_user.id) do%>
+                          <%=User.find(current_user.id).first_name%>
+                          <span class="glyphicon glyphicon-user"></span> 
+                        <%end%>
+                      </li>
+                      <li>
+                        
+                        <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                          Logout
+                          <span class="glyphicon glyphicon-log-out"></span> 
+                        <%end%>
+                          
+                      </li>
+
+                    <% else %>
+                      <li>
+                        <%=link_to new_user_session_path do%>
+                          Login
+                          <span class="glyphicon glyphicon-log-in"></span> 
+                        <% end %>
+                      </li>
+                    <%end%>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class = "container">
+        <h1>View Post</h1>
+            <div class = "row top-buffer-35 newsfeed-post">
+                <h2 class = "post-title">Post Title: <%= @post.title%></h2>
+                <div class = "col-md-4">
+                    <img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
+                </div>
+                <div class = "col-md-7 col-md-offset-1">
+                    <div class = "row post-description top-buffer-25">
+                      Description: <%= @post.description %>
+                    </div>
+                    <div class = "row top-buffer-25">
+                      <div class = "col-md-3">
+                        Category: <%= @post.category %>
+                      </div>
+
+                      <div class = "col-md-3 col-md-offset-1"> Price: <%= @post.price %> </div>
+                      <div class = "col-md-3 col-md-offset-1"> Posted By: <%= User.find(@post.user_id).first_name %> </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    	<%Comment.all.where(:post_id => @post.id).each do |comment| %>
+    		<%= comment.text %>
+    	<% end %>
 
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+
+
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %>
