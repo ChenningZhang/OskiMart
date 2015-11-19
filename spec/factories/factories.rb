@@ -14,6 +14,6 @@ FactoryGirl.define do
 		description "Test description"
 		category "Technology"
 		price "$$"
-		association :user, factory: :user, strategy: :build
+		#association :user, factory: :user, strategy: :build
 	end
 end
