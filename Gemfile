@@ -13,17 +13,12 @@ gem 'pg'
 
 gem 'web-console'
 gem 'spring'
-#messaging system
-gem 'mailboxer'
 
 #authentication
 gem 'devise'
 
 #authorization
 gem 'pundit'
-
-gem 'web-console'
-gem 'spring'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -50,6 +45,10 @@ gem 'simplecov', :require => false, :group => :test
 #pagination for search and displaying posts
 gem 'will_paginate'
 
+# capybara for testing
+gem 'capybara'
+gem 'faker'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -59,12 +58,22 @@ gem 'will_paginate'
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # rspec-rails testing framework
+  gem 'rspec-rails', '~> 3.0'
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :test do
   gem 'minitest-reporters'
   gem 'mini_backtrace'
   gem 'guard-minitest'
+  # rspec-rails testing framework
+  gem 'rspec-rails', '~> 3.0'
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :production do
