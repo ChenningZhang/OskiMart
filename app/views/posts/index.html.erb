@@ -329,9 +329,14 @@
 								    
 
 								  </tr>
+
+								  
+
+
+
 								<% @posts.each do |post| %>
 								  <tr>
-								    <td><% post.title %></td>
+								    <td><%= post.title %></td>
 								    <td><%= post.description %></td>
 								    <td><%= post.category %></td>
 								    <td><%= post.price %></td>
@@ -344,6 +349,12 @@
 	    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
 	    							<% end %>
     								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
+									
+									<% if current_user %>
+									  <%=link_to "favorite", favorite_posts_path(post, type: "favorite"), method: :put %>
+									  <%=link_to "unfavorite", favorite_posts_path(post, type: "unfavorite"), method: :put %>
+									<% end %>
+    							
 
 								<% end %>
 							

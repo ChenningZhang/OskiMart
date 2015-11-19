@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :comments
+  resources :favorite_post
+
+
+  resources :posts do 
+      put :favorites, on: :member
+  end
+
 
   get 'post_new' => 'posts#new'
   
@@ -18,6 +25,10 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'home/login'
   get 'home/signup'
+
+  
+
+  
 
   
 
