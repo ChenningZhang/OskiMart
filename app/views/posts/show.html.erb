@@ -1,3 +1,4 @@
+<% provide(:title, @post.title) %>
 <p>
   <b>Title:</b>
   <%=h @post.title %>
@@ -16,6 +17,22 @@
 <p>
   <b>Price:</b>
   <%=h @post.price %>
+</p>
+
+<p>
+	<b>Comments:</b>
+	<table>
+		<tr>
+			<th>Text</th>
+		</tr>
+	<%= Comment.all.where(:post_id => @post.id).each do |comment| %>
+	<tr>
+		<td><%= comment.text %><td>
+	<% end %>
+
+	</table>
+	
+
 </p>
 
 

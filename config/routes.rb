@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
+  devise_for :users, controllers: { registrations: "registrations"}
 
   root to: 'home#home'
 
-  resources :users
+  resources :users, only: [:show]
   resources :posts
   resources :conversations, only: [:index, :show, :destroy, :new, :create] do
     member do
@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     end
   end
   post 'create_conversation' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
-
+  resources :comments
+  resources :favorite_post
+  
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
@@ -25,9 +27,23 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
+
+
+  # this is a get request that calls post controller with action fav_index to include in favorites route. 
+
+  get 'favorites' => 'posts#fav_index'
+
+  # this is a put request that calls post controller with action favorite to include in favorite route. 
+
+  put 'favorite' => 'posts#favorite'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'
+
+  
+
+  
 
   
 

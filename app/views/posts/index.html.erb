@@ -1,6 +1,5 @@
-
-
 <!DOCTYPE html>
+<% provide(:title, 'Newsfeed Page') %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -297,9 +296,9 @@
 
 
 	  		<text> Filter By: </text>
-	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary" %>
-	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary" %>
+	  		<%= link_to "$", posts_path(price: '$'), class: "btn btn-md btn-primary", value: 'cheap' %>
+	  		<%= link_to "$$", posts_path(price: '$$'), class: "btn btn-md btn-primary", value: 'expensive' %>
+	  		<%= link_to "$$$", posts_path(price: '$$$'), class: "btn btn-md btn-primary", value: 'very expensive' %>
 
 	  		<div class="row">
 	  			<div class="col-lg-12">
@@ -324,22 +323,33 @@
 								    <th>Description </th>
 								    <th>Category </th>
 								    <th>Price </th>
+								    <th>User</th>
 								    <th></th>
-								    <th></th>
-								    <th></th>
+								    
+
 								  </tr>
+
+								 
 								<% @posts.each do |post| %>
-								  <tr>
+								<tr>
 								    <td><%= post.title %></td>
 								    <td><%= post.description %></td>
 								    <td><%= post.category %></td>
 								    <td><%= post.price %></td>
-								    <td><%= link_to "Show", post_path(post) %></td>
-								    <td><%= link_to "Update", edit_post_path(post) %></td>
-    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" } %></td>
+
+								    <td><%= User.find(post.user_id).first_name %></td>
+
+								    <td><%= link_to "Show", post_path(post), id: "Show Post" %></td>
+								    <td><%= link_to "Update", edit_post_path(post), id: "Update Post" %></td>
+    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, id: "Remove Post" %></td>
+
+								
+    								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
+									
+									 <td><%= link_to "favorite", favorite_path(:post_id => post.id), method: :put, :title => "Favorite" %> </td>
 								<% end %>
-							
 							</table>
+							<%= link_to "Favorite", favorites_path %>
 						<%= will_paginate @posts %>
 
 								
@@ -363,7 +373,7 @@
 	  											<div class='logo'>
 	  											</div>
 	  											<div class='post' >
-	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary" %>
+	  												<%= link_to "Create Post!", post_new_path, class: "btn btn-lg btn-primary", value: "Create Post!" %>
 	  											</div>
 	  										</div>
 	  								</form>

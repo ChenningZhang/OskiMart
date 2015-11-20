@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-	# single devise bullshit
+	# setting up devise 
 	include Devise::TestHelpers
 
 	self.use_instantiated_fixtures = true
