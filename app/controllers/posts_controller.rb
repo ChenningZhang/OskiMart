@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
 
 
+    # favorite a post method
     def favorite
       @post = Post.find(params[:post_id])
 
@@ -21,6 +22,7 @@ class PostsController < ApplicationController
     end
 
 
+    # render favorite list on view
     def fav_index
       @posts = current_user.favorites
       render 'favorites'
