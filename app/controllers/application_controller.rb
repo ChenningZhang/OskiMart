@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     redirect_to request.referer || path
   end
 
-  # Devise stuf
+  # Devise stuff
   include SessionsHelper
 
   def after_sign_in_path_for(resource)

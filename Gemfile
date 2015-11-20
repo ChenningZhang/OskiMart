@@ -22,8 +22,13 @@ gem 'pundit'
 gem 'web-console'
 gem 'spring'
 
-#stylin!
-gem 'will_paginate'
+#misc stuff that can't hurt
+gem 'gravatar_image_tag'
+gem 'thin'
+gem 'bootstrap-sass'
+gem 'bootstrap-will_paginate'
+
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

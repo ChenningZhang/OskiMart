@@ -15,4 +15,20 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: {minimum: 8}
 
+	#mailboxer mcMagicSauce
+	acts_as_messageable
+
+	def full_name
+		first_name + ' ' + last_name
+	end
+
+	def mailboxer_email(object)
+		email
+	end
+
+
+
+
+
+
 end

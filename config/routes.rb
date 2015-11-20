@@ -5,12 +5,17 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
-  resources :messages, only: [:new, :create]
-  resources :conversations, only: [:index, :show, :destroy] do
+  resources :conversations, only: [:index, :show, :destroy, :new, :create] do
     member do
       post :reply
+      post :restore
+      post :mark_as_read
+    end
+    collection do
+      delete :empty_trash
     end
   end
+  post 'create_conversation' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
 
   get 'post_new' => 'posts#new'
   
