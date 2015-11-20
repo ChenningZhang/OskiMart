@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :comments
-
+  get '/about', :to => redirect('/about.html')
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
