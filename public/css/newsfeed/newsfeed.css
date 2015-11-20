@@ -6,7 +6,8 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-  font-family: Raleway;
+  font-family: 'Raleway';
+
 }
 
 a:hover {
@@ -28,6 +29,16 @@ footer {
   margin-top: 35px;
 }
 
+.top-buffer-50 {
+  margin-top: 50px;
+}
+
+.top-buffer-75 {
+  margin-top: 75px;
+}
+.top-buffer-100 {
+  margin-top: 100px;
+}
 /*
 .navbar-color {
   background-color: #5A37DB;
@@ -74,11 +85,12 @@ input.search-input {
   top: -20px;
 }
 .newsfeed-post {
-  background-color: #7ABEF5;
+  background-color: #4F64FF;
   border-radius: 5px;
   padding-left: 30px;
   padding-right: 20px;
   padding-bottom: 30px;
+  color:white;
 }
 .post-option-button {
   background-color: #FCCF47;
@@ -95,4 +107,31 @@ div.post-description{
 }
 .blue-color{
   background-color: #5A37DB;
+}
+.background, .overlay {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: -50px;
+  width: 100%;
+  height: 100%;
+
+  margin: 0px 0px 0px 0px;
+  background-size:cover;
+}
+.background2 {
+  position: absolute;
+  z-index: -500;
+  left: 0;
+  top: 0;
+
+}
+.background {
+  z-index: -1000;
+  opacity: 0.3;
+}
+.overlay {
+  z-index: -800;
+  opacity: 0.7;
+  background-color: #9AD5FC;
 }

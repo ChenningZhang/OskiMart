@@ -18,18 +18,13 @@
     <!-- Custom CSS -->
     <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -98,13 +93,14 @@
         </div>
     </nav>
 
+<div class = "overlay">
+</div>
+<div class = "container top-buffer-35">
 
-
-<div class = "container">
 		<div class = "row">
     		<h1 class = "newsfeed-title">General Newsfeed</h1> 
 		</div>
-	  <div class = "row">
+	  <div class = "row top-buffer-25">
   		<div class = "col-md-offset-3 col-xs-offset-3">
 		    <form class="navbar-form">
 		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
@@ -115,7 +111,7 @@
 		  </div>
 	  </div>
 
-  	<div class = "row top-buffer-15">
+  	<div class = "row top-buffer-25">
   		<div class = "col-md-6 col-md-offset-1 col-xs-8 col-xs-offset-1">
   			<h5>Filter by price:</h5>
 	  		<%= link_to "$", posts_path(price: '$'), class: "price-button" %>
@@ -130,8 +126,9 @@
 
 </div>
 
-		    <div class = "container">
+		    <div class = "container top-buffer-50">
 	            <% @posts.each do |post| %>
+
 		            <div class = "row top-buffer-35 newsfeed-post">
 		            		<h2 class = "post-title">Post Title: <%= post.title%></h2>
 				            <div class = "col-md-4">
