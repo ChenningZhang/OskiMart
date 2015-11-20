@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
 
 
 	
-  validates :user_id, presence: true
+  validates :user_id, presence: true, numericality: true
 	validates :title, presence: true
 	validates :description, presence: true
 	validates :category, presence: true

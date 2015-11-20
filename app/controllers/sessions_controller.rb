@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < Devise::SessionsController
   def new
   end
 
@@ -14,5 +14,4 @@ class SessionsController < ApplicationController
 
   def destroy
   end
-
 end

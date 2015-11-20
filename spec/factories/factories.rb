@@ -1,6 +1,5 @@
 require 'faker'
 
-
 FactoryGirl.define do
 	factory :user do
 		first_name "Chenning"
@@ -14,6 +13,12 @@ FactoryGirl.define do
 		description "Test description"
 		category "Technology"
 		price "$$"
-		#association :user, factory: :user, strategy: :build
+		association :user, factory: :user, strategy: :build
+	end
+
+	factory :comment do
+		text "New comment"
+		association :user, factory: :user
+		association :post, factory: :post
 	end
 end
