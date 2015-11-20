@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
 	has_many :posts, dependent: :destroy
 	has_many :comments, dependent: :destroy
 
+
+	# favorite projects implementation 
 	has_many :favorite_posts
-	has_many :favorited_by, through: :favorite_posts, source: :post
+	has_many :favorites, through: :favorite_posts, source: :post
 
 	#Valid sign up fields presence as well as email format.
 	before_save { self.email = email.downcase }

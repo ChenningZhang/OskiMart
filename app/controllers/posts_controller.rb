@@ -6,25 +6,25 @@ class PostsController < ApplicationController
 
     end
 
+
+
     def favorite
-      type = params[:type]
+      @post = Post.find(params[:post_id])
 
-      if type == "favorite"
-        current_user.favorites << @post
-        redirect_to :back, notice: 'You favorited #{@post.title}'
-
-      elsif type == "unfavorite"
+      if current_user.favorites.include?(@post)
         current_user.favorites.delete(@post)
-        redirect_to :back, notice: 'Unfavorited #{@post.title}'
-
       else
-
-        # Type missing, nothing happens
-        redirect_to :back, notice: 'Nothing happened.'
+        current_user.favorites << @post
       end
+
+      redirect_to :back   
     end
 
 
+    def fav_index
+      @posts = current_user.favorites
+      render 'favorites'
+    end
 
 
 

@@ -350,16 +350,14 @@
 	    							<% end %>
     								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
 									
-									<% if current_user %>
-									  <%=link_to "favorite", favorite_posts_path(post, type: "favorite"), method: :put %>
-									  <%=link_to "unfavorite", favorite_posts_path(post, type: "unfavorite"), method: :put %>
-									<% end %>
-    							
+									 <td><%= link_to "favorite", favorite_path(:post_id => post.id), method: :put, :title => "Favorite" %> </td>
+
 
 
 								<% end %>
 							
 							</table>
+							<%= link_to "Favorite", favorites_path %>
 						<%= will_paginate @posts %>
 
 								

@@ -22,6 +22,16 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
+
+
+  # this is a get request that calls post controller with action fav_index to include in favorites route. 
+
+  get 'favorites' => 'posts#fav_index'
+
+  # this is a put request that calls post controller with action favorite to include in favorite route. 
+
+  put 'favorite' => 'posts#favorite'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'
