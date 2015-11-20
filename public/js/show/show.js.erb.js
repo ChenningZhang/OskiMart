@@ -14,6 +14,8 @@ $(document).ready(function(){
     }
   });
 
-  
+  $('.new-comment-button').click(function(){
+
+  });
 
 })
