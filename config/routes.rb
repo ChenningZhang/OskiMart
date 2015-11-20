@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   resources :favorite_post
 
 
-  resources :posts do 
-      put :favorites, on: :member
-  end
 
 
   get 'post_new' => 'posts#new'
