@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: "registrations"}
+  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions"}
 
   root to: 'home#home'
 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   post 'create_conversation' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
   resources :comments
   resources :favorite_post
-  
+
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
