@@ -5,7 +5,7 @@
  */
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
   font-family: 'Raleway';
 
 }
@@ -133,5 +133,5 @@ div.post-description{
 .overlay {
   z-index: -800;
   opacity: 1;
-  background-color: white;
+  background-color: #F7F7F7;
 }
