@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<% provide(:title, 'OskiMart') %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -6,7 +7,7 @@
     <!-- <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs"> -->
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- <link rel="shortcut icon" href="img/favicon.png"> -->
 
     <!-- Bootstrap CSS -->    
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -52,13 +53,13 @@
                   <p>You are signed in. Click <%= link_to 'here', posts_path %> to go to your page</p>
                   <p>Alternatively, Click <%= link_to 'here', destroy_user_session_path, :method=>'delete' %> to sign out</p>
             <% else %>
-                  <div class="btn btn-primary btn-lg btn-block">
+                  <div class="btn btn-primary btn-lg btn-block" value="Log in">
                     <%= link_to "Log in", new_user_session_path %>
                   </div>
                   <!--
                           <button class="btn btn-info btn-lg btn-block" type="submit" formaction = "signup.html">Signup</button> -->
 
-                  <div class="btn btn-info btn-lg btn-block" >
+                  <div class="btn btn-info btn-lg btn-block" value="Sign up">
                     <%= link_to "Sign up now!", new_user_registration_path %>
                   </div>
                   <% end %>

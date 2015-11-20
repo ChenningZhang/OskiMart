@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'home#home'
 
-  resources :users
+  resources :users, only: [:show]
   resources :posts
   resources :comments
   resources :favorite_post
