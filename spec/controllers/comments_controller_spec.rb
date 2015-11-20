@@ -30,16 +30,11 @@ RSpec.describe CommentsController, :type => :controller do
 
 			response.should render_template 'new'
 		end
-	end
-	# 	it 'renders the post_new page when missing post description' do
-	# 		@post = FactoryGirl.attributes_for(:post, description: "   ")
-	# 		expect{
-	# 			post :create, post: @post, commit: "Create Post"
-	# 		}.to_not change(Post, :count)
 
-	# 		response.should render_template 'new'
-	# 	end
-	# end
+	
+
+
+	end
 
 	# describe "GET #show" do
 	# 	create_post
