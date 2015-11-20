@@ -333,9 +333,9 @@
 								    <td><%= post.description %></td>
 								    <td><%= post.category %></td>
 								    <td><%= post.price %></td>
-								    <td><%= link_to "Show", post_path(post), value: "Show Post" %></td>
-								    <td><%= link_to "Update", edit_post_path(post), value: "Update Post" %></td>
-    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, value: "Remove Post" %></td>
+								    <td><%= link_to "Show", post_path(post), id: "Show Post" %></td>
+								    <td><%= link_to "Update", edit_post_path(post), id: "Update Post" %></td>
+    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, id: "Remove Post" %></td>
 								<% end %>
 							
 							</table>
