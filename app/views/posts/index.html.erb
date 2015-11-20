@@ -317,7 +317,6 @@
 
 	  					<%= will_paginate @posts %>
 	  						<table>
-
 								  <tr>
 								    <th>Title </th>
 								    <th>Description </th>
@@ -325,11 +324,7 @@
 								    <th>Price </th>
 								    <th>User</th>
 								    <th></th>
-								    
-
 								  </tr>
-
-								 
 								<% @posts.each do |post| %>
 								<tr>
 								    <td><%= post.title %></td>
@@ -340,8 +335,10 @@
 								    <td><%= User.find(post.user_id).first_name %></td>
 
 								    <td><%= link_to "Show", post_path(post), id: "Show Post" %></td>
-								    <td><%= link_to "Update", edit_post_path(post), id: "Update Post" %></td>
-    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, id: "Remove Post" %></td>
+								    <% if current_user.id == post.user_id %>
+									    <td><%= link_to "Update", edit_post_path(post), id: "Update Post" %></td>
+	    								<td><%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, id: "Remove Post" %></td>
+	    							<% end %>
 
 								
     								<td><%= link_to "Comments", comments_path(:post_id => post.id) %></td>
