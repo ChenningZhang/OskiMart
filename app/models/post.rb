@@ -25,8 +25,10 @@ class Post < ActiveRecord::Base
     where(:price => price)
   end
 
+  def self.favorites(user)
+    user.favorites
 
-
+  end
 
   def self.search(search)
     keyword_regex = "%#{search}%"

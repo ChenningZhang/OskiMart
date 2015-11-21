@@ -22,13 +22,7 @@ class PostsController < ApplicationController
     end
 
 
-    # render favorite list on view
-    def fav_index
-      @posts = current_user.favorites
-      render 'favorites'
-    end
-
-
+    # render favorite list on vie
 
 
     def create
@@ -58,9 +52,13 @@ class PostsController < ApplicationController
 
         #if @posts.empty?
           #render "posts/index", :locals=> {:search_err => 'No search results returned'}
+
       elsif not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
         #end
+      elsif params[:favorites]
+        puts "favorite elsif entered"
+        @posts = Post.favorites(current_user).order('created_at DESC').paginate(page: params[:page], per_page: 5)
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
       end
