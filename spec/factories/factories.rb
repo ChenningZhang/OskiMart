@@ -8,6 +8,14 @@ FactoryGirl.define do
 		password "12345678"
 	end
 
+	factory :user2 do
+		first_name "Anusha"
+		last_name "Jain"
+		email "aj@berkeley.edu"
+		password "1234567a"
+	end
+
+
 	factory :post do
 		title "Test Title"
 		description "Test description"
@@ -17,7 +25,7 @@ FactoryGirl.define do
 	end
 
 	factory :comment do
-		text "New comment"
+		text "Test comment"
 		association :user, factory: :user
 		association :post, factory: :post
 	end
