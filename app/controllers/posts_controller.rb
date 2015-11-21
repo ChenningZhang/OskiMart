@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
         if @post.save
           flash[:success] = "Your post has been posted!"
-          redirect_to posts_path
+          redirect_to :back
         else
           render 'new'
         end
@@ -50,19 +50,25 @@ class PostsController < ApplicationController
     end
 
     def index
-      if params[:price] #if filter
-        @posts = Post.filter(params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
 
-      elsif params[:keywords] #if search
-        @posts = Post.search(params[:keywords]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-
-        #if @posts.empty?
-          #render "posts/index", :locals=> {:search_err => 'No search results returned'}
-      elsif not params[:category_id].nil? and not params[:category_id].empty? 
+      if not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
-        #end
+        @title = params[:category_id]
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
+        @title = "General"
+      end
+
+
+      if params[:price] #if filter
+        @posts = Post.filter(params[:price], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        @title = params[:price]   
+      end 
+
+      if params[:keywords] #if search
+        @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        #if @posts.empty?
+          #render "posts/index", :locals=> {:search_err => 'No search results returned'}
       end
 
     end
