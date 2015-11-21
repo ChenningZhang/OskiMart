@@ -44,23 +44,26 @@ class PostsController < ApplicationController
     end
 
     def index
+
       if params[:price] #if filter
         @posts = Post.filter(params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-
+        @title = params[:price]
       elsif params[:keywords] #if search
         @posts = Post.search(params[:keywords]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-
+        @title = "Searching:" + params[:keywords]
         #if @posts.empty?
           #render "posts/index", :locals=> {:search_err => 'No search results returned'}
 
       elsif not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
+        @title = params[:category_id]
         #end
       elsif params[:favorites]
-        puts "favorite elsif entered"
         @posts = Post.favorites(current_user).order('created_at DESC').paginate(page: params[:page], per_page: 5)
+        @title = "Favorites"
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
+        @title = "General Newsfeed"
       end
 
     end

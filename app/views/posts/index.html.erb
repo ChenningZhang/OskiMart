@@ -104,7 +104,12 @@
     <div class = "container top-buffer-35">
 
     		<div class = "row">
-        		<h1 class = "newsfeed-title">General Newsfeed</h1> 
+
+                 <h1 class = "newsfeed-title"><%= @title %></h1> 
+            
+        		
+
+
     		</div>
     	  <div class = "row top-buffer-25">
       		<div class = "col-md-offset-3 col-xs-offset-3">
@@ -159,6 +164,8 @@
 				                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
 				                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
 				                <% end %>
+
+                                
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
 				                <%= link_to "Favorite", favorite_path(:post_id => post.id), method: :put, :id => "Favorite" %>
                            </div>
