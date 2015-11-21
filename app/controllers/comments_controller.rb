@@ -6,19 +6,19 @@ class CommentsController < ApplicationController
     end
 
 	def create
-	   @post = Post.find(params[:post_id])
 	   @comment = Comment.new(comment_params)
+     @post = Post.find(params[:post_id])
 	   @comment.user_id = current_user.id
 	   @comment.post_id = @post.id
 	   current_user.comments << @comment
 	   @post.comments << @comment
 
-	   if @comment.save
-		  flash[:success] = "Your comment has been posted!"
-		  redirect_to comments_path(:post_id => @post.id)
-        else
-          render 'new'
-        end
+     if @comment.save
+  	  flash[:success] = "Your comment has been posted!"
+  	  redirect_to comments_path(:post_id => @post.id)
+    else
+      render 'new'
+    end
 	end
 
 	def show
@@ -31,6 +31,9 @@ class CommentsController < ApplicationController
 
     def edit
         @comment = Comment.find(params[:id])
+        if current_user.id != @comment.user_id
+          redirect_to comments_path(:post_id => @comment.post_id)
+        end
     end
 
     def update
@@ -45,8 +48,13 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        Comment.destroy(params[:id])
-        redirect_to posts_path
+      @comment = Comment.find(params[:id])
+      if current_user.id != @comment.user_id
+          redirect_to comments_path(:post_id => @comment.post_id)
+      else
+          Comment.destroy(params[:id])
+          redirect_to comments_path(:post_id => @comment.post_id)
+      end
     end
 
     private

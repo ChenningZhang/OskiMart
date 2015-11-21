@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: "registrations"}
 
   root to: 'home#home'
 
-  resources :users
+  resources :users, only: [:show]
   resources :posts
   resources :comments
+  resources :favorite_post
+  
   get '/about' => 'home#about'
+  
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
@@ -15,9 +18,23 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
+
+
+  # this is a get request that calls post controller with action fav_index to include in favorites route. 
+
+  get 'favorites' => 'posts#fav_index'
+
+  # this is a put request that calls post controller with action favorite to include in favorite route. 
+
+  put 'favorite' => 'posts#favorite'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'
+
+  
+
+  
 
   
 

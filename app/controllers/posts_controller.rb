@@ -6,6 +6,31 @@ class PostsController < ApplicationController
 
     end
 
+
+
+    # favorite a post method
+    def favorite
+      @post = Post.find(params[:post_id])
+
+      if current_user.favorites.include?(@post)
+        current_user.favorites.delete(@post)
+      else
+        current_user.favorites << @post
+      end
+
+      redirect_to :back   
+    end
+
+
+    # render favorite list on view
+    def fav_index
+      @posts = current_user.favorites
+      render 'favorites'
+    end
+
+
+
+
     def create
       	@post = Post.new(post_params)
         @post.user_id = current_user.id
@@ -69,6 +94,12 @@ class PostsController < ApplicationController
       end
     end
 
+
+    # def author
+    #     @post.user = current_user.first_name
+    # end    
+
+      
     private
       	def post_params
       		  params.require(:post).permit(:user_id, :title, :description, :category, :price)
