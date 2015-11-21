@@ -94,11 +94,6 @@ ActiveRecord::Schema.define(version: 20151119060345) do
     t.integer  "user_id"
   end
 
-  create_table "posts_users", id: false, force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
