@@ -152,6 +152,8 @@
 				                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
 				                <% end %>
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+                                <%= link_to"Favorite", favorite_path(:post_id => post.id), class: "post-option-button" %>
+
 				           </div>
 
 			          </div>

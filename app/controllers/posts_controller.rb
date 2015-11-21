@@ -12,8 +12,11 @@ class PostsController < ApplicationController
     def favorite
       @post = Post.find(params[:post_id])
 
+      # if post in favorite list then remove 
       if current_user.favorites.include?(@post)
         current_user.favorites.delete(@post)
+        
+      # add to fav list
       else
         current_user.favorites << @post
       end
@@ -27,7 +30,6 @@ class PostsController < ApplicationController
       @posts = current_user.favorites
       render 'favorites'
     end
-
 
 
 
