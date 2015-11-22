@@ -134,4 +134,26 @@ RSpec.describe PostsController, :type => :controller do
 		end
  	end
 
-end
+
+	describe "PUT #favorite" do
+		create_post
+		it 'favorites a post' do
+			put :favorite, post: FactoryGirl.attributes_for(:post, commit: 'favorite', id: @post.id)
+			response.should render_template 'index'
+		end
+	end
+
+	describe "GET #index" do
+		create_post
+
+		it 'shows all favorited posts' do
+			get :favorites, FactoryGirl.attributes_for(id: @post.id)
+			response.should render_template 'index'
+			Post.find(@post.id).title.should eq("Test Title")
+			Post.find(@post.id).description.should eq("Test description")
+			Post.find(@post.id).category.should eq("Technology")
+			Post.find(@post.id).price.should eq("$$")
+		end
+	end
+
+end 

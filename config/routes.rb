@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   delete 'post' => 'posts#destroy'
 
   # this is a put request that calls post controller with action favorite to include in 
-  # favorite route, adds it to favorites list 
+  # favorite route, posts#favorite adds it to favorites list 
 
   put 'favorite' => 'posts#favorite'
 
