@@ -26,7 +26,7 @@ RSpec.describe PostsController, :type => :controller do
 			response.should redirect_to posts_path
 		end
 
-		it 'renders the post_new page when missing post title' do
+		it 'renders the post_new page when missing Title' do
 			@post = FactoryGirl.attributes_for(:post, title: "  ")
 			expect{
 				post :create, post: @post, commit: "Create Post"
