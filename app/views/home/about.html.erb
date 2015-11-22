@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Newsfeed</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/posts">Oskimart</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href = "/about">About</a>
+                    </li>
+                    <li class = "dropdown">
+                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                            Categories <b class="caret"></b>
+                        </a>
+                          <ul class="dropdown-menu">
+                            <li><%=link_to "General", posts_path()%></li>
+                            <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
+                            <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
+                            <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
+                            <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
+                            <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                          </ul>
+                                                    
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <%if user_signed_in? %>
+                            <li>
+                                <%=link_to user_path(current_user.id) do%>
+                                    <%=User.find(current_user.id).first_name%>
+                                    <span class="glyphicon glyphicon-user"></span> 
+                                <%end%>
+                            </li>
+                            <li>
+                                
+                                <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                                    Logout
+                                    <span class="glyphicon glyphicon-log-out"></span> 
+                                <%end%>
+                                    
+                            </li>
+
+                        <% else %>
+                            <li>
+                                <%=link_to new_user_session_path do%>
+                                    Login
+                                    <span class="glyphicon glyphicon-log-in"></span> 
+                                <% end %>
+                            </li>
+                        <%end%>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class = "container top-buffer-50 text-center">
+        <h1>About Oskimart</h1>
+        <div class = "row">
+            <div class = "about-description"> Oskimart is a free platform for UC Berkeley Students to sell and purchase items and services from other students. No more sketchiness from Craigslist and no more disorganization from Facebook's Free and For Sale! Learn more about the team and check out some of our key features below!</div>
+        </div>
+    </div>
+
+    <div class = "container top-buffer-100 bottom-padding">
+        <div class = "row" style = "position: relative; left: -40px">
+            <div class = "col-md-3 col-xs-6 col-xs-offset-4 col-md-offset-1">
+
+                <div class = "row">
+                    <img class = "img-responsive" src = "../img/about-icons/post.png">
+                </div>
+                 <div class = "row text-center">
+                    <h1>Posts</h1>
+                </div>
+                <div class = "row">
+                    Post items that you want to sell. Other users will be able to view your posts and comments on your posts to make buying and selling easier!
+                </div>
+            </div>
+            <div class = "col-md-3 col-xs-6 col-xs-offset-4 col-md-offset-1">
+
+                <div class = "row">
+                    <img class = "img-responsive" src = "../img/about-icons/categories.png">
+                </div>
+                <div class = "row text-center">
+                    <h1>Categories</h1>
+                </div>
+                <div class = "row">
+                    Categorize items so that other users can easily find your post. Oskimart allows for category specific newsfeeds to make finding products easier and more modular.
+                </div>
+            </div>
+            <div class = "col-md-3 col-xs-6 col-xs-offset-4 col-md-offset-1">
+
+                <div class = "row">
+                    <img class = "img-responsive" src = "../img/about-icons/message.png">
+                </div>
+                <div class = "row text-center">
+                    <h1>Messaging</h1>
+                </div>
+                <div class = "row">
+                    Message other users privately about items that you are interested in purchasing. With comments for public discussion and messaging for private discussion, you'll never miss an item you want to purchase!
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

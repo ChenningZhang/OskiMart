@@ -1,7 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Viewing post</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../css/newsfeed/newsfeed.css" rel="stylesheet">
+    <link href="../../css/update/update.css" rel="stylesheet">
+    <link href="../../css/show/show.css" rel="stylesheet">
+    <link href="../../css/show_user/show-user.css" rel="stylesheet">
+    <script src="../../js/show/show.js"></script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <!-- jQuery -->
+    <script src="../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../js/bootstrap.min.js"></script>
+
+</head>
+    <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/posts">Oskimart</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    <li class = "dropdown">
+                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                          Categories <b class="caret"></b>
+                        </a>
+              <ul class="dropdown-menu">
+                <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
+                <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
+                <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
+                <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
+                <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+              </ul>
+                          
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <%if user_signed_in? %>
+                      <li>
+                        <%=link_to user_path(current_user.id) do%>
+                          <%=User.find(current_user.id).first_name%>
+                          <span class="glyphicon glyphicon-user"></span> 
+                        <%end%>
+                      </li>
+                      <li>
+                        
+                        <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                          Logout
+                          <span class="glyphicon glyphicon-log-out"></span> 
+                        <%end%>
+                          
+                      </li>
+
+                    <% else %>
+                      <li>
+                        <%=link_to new_user_session_path do%>
+                          Login
+                          <span class="glyphicon glyphicon-log-in"></span> 
+                        <% end %>
+                      </li>
+                    <%end%>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class = "overlay"></div>
 <% provide(:title, @user.first_name) %>
-<h1>
-	<%= gravatar_for @user %>
-	<%= @user.first_name %>
-    <%= @user.last_name %>
-	<%= @user.email %>
-</h1>
+<div class = "container top-buffer-25 text-center">
+  <div class = "row">
+      <div class="col-md-4 col-md-offset-4">
+        <img class = "img-responsive profile-image" src = "https://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg">
+      </div>
+  </div>
+  <div class="row top-buffer-15">
+       <h1><%= @user.first_name %> <%= @user.last_name %></h1>  
+  </div>
+  <div class = "row">
+
+	   <%= @user.email %>
+  </div>
+
+  <div class ="row top-buffer-25">
+    <div class = "col-md-6 col-md-offset-3">
+        Bacon ipsum dolor amet jowl turkey capicola meatloaf ground round ham hock kevin pig ball tip. Leberkas bresaola boudin hamburger, sirloin jerky jowl. Fatback doner pancetta tenderloin swine leberkas kevin jerky boudin. Short ribs shank pancetta ground round andouille hamburger jowl. Filet mignon jerky capicola, ribeye rump ball tip prosciutto. Kielbasa leberkas chuck ground round cupim strip steak filet mignon shankle ball tip shoulder short loin. T-bone pork chop ball tip sirloin pastrami doner pancetta filet mignon pork loin jowl sausage jerky.
+    </div>
+
+  
+  </div>
+</div>

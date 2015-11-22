@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, :type => :model do
 	it 'create valid post' do
-		FactoryGirl.build(:post).should be_valid
+		FactoryGirl.build(:post, user_id: 1).should be_valid
 	end
 
 	it 'rejects empty title' do

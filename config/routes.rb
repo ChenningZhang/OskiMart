@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'create_conversation' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
   resources :comments
   resources :favorite_post
+  
+  get '/about' => 'home#about'
 
   get 'post_new' => 'posts#new'
   
