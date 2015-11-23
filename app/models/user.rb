@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
   	validates :last_name, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@berkeley+\.edu+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX, message: "must be Berkeley email!" }, uniqueness: { case_sensitive: false }
-	validates :password, presence: true, length: {minimum: 8}
+	validates :password, presence: true, length: {minimum: 8}, on: :create
 
-	
 end
