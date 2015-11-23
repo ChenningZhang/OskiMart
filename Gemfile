@@ -49,6 +49,10 @@ gem 'will_paginate'
 gem 'capybara'
 gem 'faker'
 
+# venmo api
+gem "venmo-api"
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
