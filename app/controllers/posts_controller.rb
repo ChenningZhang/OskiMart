@@ -23,7 +23,6 @@ class PostsController < ApplicationController
       else
         current_user.favorites << @post
       end
-
       back
 
     end
@@ -39,7 +38,7 @@ class PostsController < ApplicationController
 
         if @post.save
           flash[:success] = "Your post has been posted!"
-          redirect_to :back
+          back
         else
           render 'new'
         end

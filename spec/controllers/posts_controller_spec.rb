@@ -23,7 +23,7 @@ RSpec.describe PostsController, :type => :controller do
 			# Post.find(@post.id).category.should eq("Technology")
 			# Post.find(@post.id).price.should eq("$$")
 
-			response.should redirect_to posts_path
+			response.should redirect_to root_path
 		end
 
 		it 'renders the post_new page when missing Title' do
