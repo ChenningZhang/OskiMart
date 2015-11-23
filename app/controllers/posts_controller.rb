@@ -7,6 +7,12 @@ class PostsController < ApplicationController
     end
 
 
+    def back
+      redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
+    end
+
 
     # favorite a post method
     def favorite
@@ -18,7 +24,8 @@ class PostsController < ApplicationController
         current_user.favorites << @post
       end
 
-      redirect_to :back   
+      back
+
     end
 
 

@@ -27,7 +27,6 @@ class Post < ActiveRecord::Base
 
   def self.favorites(user)
     user.favorites
-
   end
 
   def self.search(search)

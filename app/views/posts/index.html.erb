@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+    
     <html lang="en">
 
     <head>
@@ -169,7 +170,7 @@
 
                                 
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
-				                <%= link_to "Favorite", favorite_path(:post_id => post.id), method: :put, :id => "Favorite" %>
+				                <%= link_to "Favorite", favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
                            </div>
 
 			          </div>

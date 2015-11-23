@@ -25,17 +25,15 @@ RSpec.describe 'User creates posts to favorite and it ', :type => :feature do
 
 	end
 
-	# favorite post and check its there 
-
 	it 'lets user put a post in favorites list and checks its in favorites page', :js => true do
-		expect(page).to have_title "General Newsfeed"
+		expect(page).to have_content "General Newsfeed"
 		expect(page).to have_content 'Book Title'
 		expect(page).to have_content 'Book Description'
 		expect(page).to have_content 'Books'
 		expect(page).to have_content '$$'
 		click_on 'Favorite' 
 		click_on 'Favorites'
-		expect(page).to have_title  "Favorites"
+		expect(page).to have_content  "Favorites"
 		expect(page).to have_content 'Book Title'
 	end
 

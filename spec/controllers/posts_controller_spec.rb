@@ -138,8 +138,10 @@ RSpec.describe PostsController, :type => :controller do
 	describe "PUT #favorite" do
 		create_post
 		it 'favorites a post' do
-			put :favorite, post: FactoryGirl.attributes_for(:post, commit: 'favorite', id: @post.id)
-			response.should render_template 'index'
+			put :favorite, post_id: @post.id
+			response.should redirect_to root_path
+			put :favorite, post_id: @post.id
+			response.should redirect_to root_path
 		end
 	end
 
@@ -147,7 +149,7 @@ RSpec.describe PostsController, :type => :controller do
 		create_post
 
 		it 'shows all favorited posts' do
-			get :favorites, FactoryGirl.attributes_for(id: @post.id)
+			get :index, favorites: true 
 			response.should render_template 'index'
 			Post.find(@post.id).title.should eq("Test Title")
 			Post.find(@post.id).description.should eq("Test description")
