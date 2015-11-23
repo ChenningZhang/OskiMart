@@ -2,30 +2,25 @@ class VenmoController < ApplicationController
   before_action :authenticate_user!
 
   def callback
-    # now, do the dirty work
+    #make server side post request
     require 'net/http'
     require 'uri'
-    # get the url that we need to post to
     url = URI.parse('https://api.venmo.com/v1/oauth/access_token')
-    # build the params string
     post_args = { 'client_id' => 3195, 'client_secret' => 'bKRVaunyQhQQAH7UzRDMbf9Qc2bARdAQ', 'code' => params[:code]}
-    # send the request
     response = Net::HTTP.post_form(url, post_args)
     @parsed_body = JSON.parse(response.body)
     
     if @parsed_body["error"].nil?
       current_user.access_token = @parsed_body["access_token"] 
       current_user.venmo_id = @parsed_body["user"]["id"]
-      # @user = User.find(current_user.id)
-      # @user.access_token = @parsed_body["access_token"] 
-      # @user.venmo_id = @parsed_body["user"]["id"]
-      # @user.save
+      flash[:success] = 'Allowed Venmo Access!'
       current_user.save
       redirect_to user_path(current_user.id)
     else
-      flash[:notice] = "Denied Venmo Access!"
+      flash[:danger] = "Denied Venmo Access!"
       current_user.access_token = nil
       current_user.venmo_id = nil
+      current_user.save
       redirect_to user_path(current_user.id)
     end
 
@@ -35,7 +30,7 @@ class VenmoController < ApplicationController
       @venmo_receiver = User.find(params[:receiver])
       # @venmo_user = Venmo.authenticate params[:code]
       if @venmo_receiver.venmo_id.nil?
-        flash[:notice] = 'This person does not have Venmo!'
+        flash[:warning] = 'This person does not have Venmo!'
         redirect :back
       else
         render 'users/venmo_show'        
@@ -43,38 +38,28 @@ class VenmoController < ApplicationController
     end
 
   def final_payment
-    #MAKE SURE ERROR FLASHES WORK VERY IMPORTANT
-    if params[:amount].nil? or params[:amount].empty? or params[:description].nil? or params[:description].empty?
-      redirect_to user_path(params[:receiver]) 
-
+    if params[:amount].nil? or params[:amount].empty? or params[:amount] < 0.01 or params[:description].nil? or params[:description].empty?
+      flash[:warning] = "Amount/description were not filled in properly"
+      redirect_to :back
     else
       require 'net/http'
       require 'uri'
-      # get the url that we need to post to
       url = URI.parse('https://api.venmo.com/v1/payments')
-      # build the params string
       post_args = { 'access_token' => current_user.access_token, 'user_id' => User.find(params[:receiver]).venmo_id, 'note' => params[:description], 'amount' => params[:amount]}
-      # send the request
       response = Net::HTTP.post_form(url, post_args)
       @parsed_body = JSON.parse(response.body)
-      if @parsed_body[:error].nil?
-        flash[:notice] = "Payment successful!"
+      if @parsed_body["error"].nil?
+        flash[:success] = "Payment successful!"
         redirect_to user_path(params[:receiver])
       else
-        flash[:notice] = "Error with payment"
-        redirect_to :back
-
+        flash[:danger] = @parsed_body["error"]["message"]
+        redirect_to user_path(params[:receiver])
       end
-
     end
-    # @payment = current_user.make_payment ({ :note => 'A message to accompany the payment.', :amount => '0.10', :user_id => 145434160922624933 })
+  end
+    
+  def recent_payment
 
-    #     @payment2 = @user.get_payment 1513344862190043372
-    #     @payment2_client = Venmo.get_payment 1513344862190043372, @user.access_token
-
-    #     @recent_payments = @user.get_recent_payments
-    #     @recent_payments_client = Venmo.get_recent_payments @user.access_token
-    # Inputs are amount, message, id of paid_to (implicit)
   end
 
 

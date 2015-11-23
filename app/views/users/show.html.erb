@@ -91,6 +91,12 @@
             </div>
         </div>
     </nav>
+<div class="container">
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<%= yield %>
+</div>
 <div class = "overlay"></div>
 <% provide(:title, @user.first_name) %>
 <div class = "container top-buffer-25 text-center">
@@ -116,10 +122,10 @@
   </div>
   <h1>Payment</h1>
   <% if current_user.id == @user.id %>
-    <%= link_to "Venmo pay", "https://api.venmo.com/v1/oauth/authorize?client_id=3195&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code" %>
+    <%= link_to "Venmo Access Change", "https://api.venmo.com/v1/oauth/authorize?client_id=3195&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code" %>
   <% else %>
     <% if @user.venmo_id.nil? or current_user.venmo_id.nil? %>
-      Please message this person! 
+      Please message this person for payment! 
     <% else %>
       <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
     <% end %>

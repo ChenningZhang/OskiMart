@@ -1,12 +1,18 @@
 <h1>Venmo PAY</h1>
+<div class="container">
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<%= yield %>
+</div>
 
 <form action="venmo_final_payment" method = "GET">
   Amount:<br>
   <input type = "hidden" name = "receiver" value = '<%= params[:receiver]%>'>
-  <input type="text" name="amount" placeholder="0.0" required>
+  <input type="text" name="amount" placeholder="0.0">
   <br>
   Description:<br>
-  <input type="text" name="description" placeholder="Enter Description" required>
+  <input type="text" name="description" placeholder="Enter Description">
   <br><br>
   <input type="submit" value="Submit">
 </form>
