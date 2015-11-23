@@ -32,7 +32,7 @@ class VenmoController < ApplicationController
   end
 
   def initialize_payment
-      @venmo_receiver = User.find(:id => params[:receiver])
+      @venmo_receiver = User.find(params[:receiver])
       # @venmo_user = Venmo.authenticate params[:code]
       if @venmo_receiver.venmo_id.nil?
         flash[:notice] = 'This person does not have Venmo!'
@@ -43,6 +43,30 @@ class VenmoController < ApplicationController
     end
 
   def final_payment
+    #MAKE SURE ERROR FLASHES WORK VERY IMPORTANT
+    if params[:amount].nil? or params[:amount].empty? or params[:description].nil? or params[:description].empty?
+      redirect_to user_path(params[:receiver]) 
+
+    else
+      require 'net/http'
+      require 'uri'
+      # get the url that we need to post to
+      url = URI.parse('https://api.venmo.com/v1/payments')
+      # build the params string
+      post_args = { 'access_token' => current_user.access_token, 'user_id' => User.find(params[:receiver]).venmo_id, 'note' => params[:description], 'amount' => params[:amount]}
+      # send the request
+      response = Net::HTTP.post_form(url, post_args)
+      @parsed_body = JSON.parse(response.body)
+      if @parsed_body[:error].nil?
+        flash[:notice] = "Payment successful!"
+        redirect_to user_path(params[:receiver])
+      else
+        flash[:notice] = "Error with payment"
+        redirect_to :back
+
+      end
+
+    end
     # @payment = current_user.make_payment ({ :note => 'A message to accompany the payment.', :amount => '0.10', :user_id => 145434160922624933 })
 
     #     @payment2 = @user.get_payment 1513344862190043372

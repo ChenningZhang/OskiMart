@@ -121,7 +121,7 @@
     <% if @user.venmo_id.nil? or current_user.venmo_id.nil? %>
       Please message this person! 
     <% else %>
-      <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(:receiver => @user.id) %>
+      <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
     <% end %>
   <% end %>
 

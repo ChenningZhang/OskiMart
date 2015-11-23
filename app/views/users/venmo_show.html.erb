@@ -1,1 +1,16 @@
 <h1>Venmo PAY</h1>
+
+<form action="venmo_final_payment" method = "GET">
+  Amount:<br>
+  <input type = "hidden" name = "receiver" value = '<%= params[:receiver]%>'>
+  <input type="text" name="amount" placeholder="0.0" required>
+  <br>
+  Description:<br>
+  <input type="text" name="description" placeholder="Enter Description" required>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<%= link_to "Cancel", user_path(params[:receiver]) %>
+
+
