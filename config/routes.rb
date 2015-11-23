@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 
 
+  get '/about' => 'home#about'
 
   get 'post_new' => 'posts#new'
   

@@ -1,0 +1,137 @@
+/*!
+ * Start Bootstrap - 1 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+  padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  font-family: 'Raleway';
+
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+} 
+
+
+footer {
+    margin: 50px 0;
+}
+.top-buffer-15 {
+  margin-top: 15px;
+}
+.top-buffer-25 {
+  margin-top: 25px;
+}
+.top-buffer-35 {
+  margin-top: 35px;
+}
+
+.top-buffer-50 {
+  margin-top: 50px;
+}
+
+.top-buffer-75 {
+  margin-top: 75px;
+}
+.top-buffer-100 {
+  margin-top: 100px;
+}
+/*
+.navbar-color {
+  background-color: #5A37DB;
+
+}
+*/
+input.search-input {
+  width: 50%;
+  height: 40px;
+}
+.newsfeed-title {
+  position: relative;
+  top: -10px;
+  padding-left: 15px;
+  font-size: 48px;
+}
+.search-button{
+  width: 70px;
+  height: 40px;
+}
+
+.price-button {
+  background-color: #22E653;
+  color: white;
+  border-radius: 3px;
+  padding: 8px 20px 8px 20px;
+}
+.price-button:hover{
+  background-color: #34F765;
+}
+
+.create-button {
+  background-color: #5A37DB;
+  color: white;
+  border-radius: 5px;
+  padding: 15px 30px 15px 30px;
+}
+
+.create-button:hover {
+  background-color: #7D5FED
+}
+.shift-up-20 {
+  position:relative;
+  top: -20px;
+}
+.newsfeed-post {
+  background-color: #7ABEF5;
+  border-radius: 5px;
+  padding-left: 30px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  color:black;
+}
+.post-option-button {
+  background-color: #FCCF47;
+  border-radius: 3px;
+  padding: 10px 10px 10px 10px;
+  cursor:pointer;
+}
+h2.post-title {
+  margin-bottom: 30px;
+}
+
+div.post-description{
+  font-size: 24px;
+}
+.blue-color{
+  background-color: #5A37DB;
+}
+.background, .overlay {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: -50px;
+  width: 100%;
+  height: 100%;
+
+  margin: 0px 0px 0px 0px;
+  background-size:cover;
+}
+.background2 {
+  position: absolute;
+  z-index: -500;
+  left: 0;
+  top: 0;
+
+}
+.background {
+  z-index: -1000;
+  opacity: 0.3;
+}
+.overlay {
+  z-index: -800;
+  opacity: 1;
+  background-color: #F7F7F7;
+}
