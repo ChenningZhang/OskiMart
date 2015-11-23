@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :favorite_post
-
-
-
-
+  
+  get '/about' => 'home#about'
+  
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'

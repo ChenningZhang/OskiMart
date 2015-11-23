@@ -1,0 +1,23 @@
+.comments-container{
+  background-color: #5F58ED;
+  color: white;
+  border-radius: 5px;
+  display: none;
+
+}
+
+.new-comment-button{
+  background-color: #536BF5;
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+  width: 100px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.new-comment-button:hover{
+  background-color: #6379F2;
+  color: black;
+}
