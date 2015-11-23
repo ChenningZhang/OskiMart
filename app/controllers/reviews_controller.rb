@@ -1,4 +1,4 @@
-class ReviewController < ApplicationController
+class ReviewsController < ApplicationController
 	before_action :authenticate_user!
 
 	def new
@@ -8,11 +8,11 @@ class ReviewController < ApplicationController
 	def create
 		@review = Review.new(review_params)
 		@user = User.find(params[:user_id])
-		@review.user_id = params[:user_id]
+		@review.user_id = @user.id
 		@user.reviews << @review
 
 		if @review.save
-			redirect_to @user
+			redirect_to user_path(@user)
 		else
 			render 'new'
 		end
@@ -36,6 +36,6 @@ class ReviewController < ApplicationController
 
 	private
 		def review_params
-			params.require(:post).permit(:user_id, :score, :feedback)
+			params.require(:review).permit(:user_id, :score, :feedback)
 		end
 end

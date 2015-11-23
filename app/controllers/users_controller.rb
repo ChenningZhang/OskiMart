@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     @posts = @user.posts
     @comments = @user.comments
+    @reviews = @user.reviews
 
   end
   

@@ -5,3 +5,14 @@
     <%= @user.last_name %>
 	<%= @user.email %>
 </h1>
+
+<%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
+<p>
+	<b>Reviews:</b>
+	<table>
+		<%= Review.all.where(:user_id => @user.id).each do |review| %>
+		<td><%= review.score %></td>
+		<td><%= review.feedback %></td>
+		<% end %>
+	</table>
+</p>
