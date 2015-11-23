@@ -107,7 +107,7 @@
     <div class = "container top-buffer-35">
 
     		<div class = "row">
-            <h1 class = "newsfeed-title"><%= @title %></h1> 
+            <h1 class = "newsfeed-title"><%= @favbutton %></h1> 
     		</div>
     	  <div class = "row top-buffer-25">
       		<div class = "col-md-offset-1  col-xs-offset-1">
@@ -158,7 +158,7 @@
 
 				                <div class = "col-md-3 col-md-offset-1"> Price: <%= post.price %> </div>
 				                <div class = "col-md-3 col-md-offset-1"> Posted By: <%=link_to User.find(post.user_id).first_name, user_path(post.user_id)%>
-                        </div>
+                        </div>s
 			          		</div>
 				         	<div class = "row top-buffer-25">
 				                <%= link_to "Show", post_path(post), class: "post-option-button" %>
@@ -167,10 +167,11 @@
 				                    <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
 				                <% end %>
 
-                                
+                        
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
-				                <%= link_to "Favorite", favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
+				                <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
                            </div>
+
 
 			          </div>
 			                

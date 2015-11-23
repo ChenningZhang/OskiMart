@@ -7,13 +7,17 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :favorite_post
-  
+  resources :reviews, only: [:index, :new, :create, :show, :destroy]
+
+
+
   get '/about' => 'home#about'
 
   get '/send_message' => 'home#send_message'
 
   get '/inbox' => 'home#inbox'
   
+
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'

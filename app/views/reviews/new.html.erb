@@ -1,0 +1,10 @@
+<h1>Adding a review</h1>
+
+<%= form_for(:review, :method => :post, url: reviews_path(:user_id => params[:user_id])) do |f| %>
+	<%= render 'shared/review_errors' %>
+	<%= f.label :score %>
+	<%= f.text_field :score, class: 'form-control' %>
+	<%= f.label :feedback %>
+	<%= f.text_field :feedback, class: 'form-control' %>
+	<%= f.submit "Submit", class: 'btn btn-primary' %>
+<% end %>

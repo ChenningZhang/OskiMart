@@ -17,9 +17,10 @@ class PostsController < ApplicationController
     # favorite a post method
     def favorite
       @post = Post.find(params[:post_id])
-
+      # if post in favorite list then remove 
       if current_user.favorites.include?(@post)
         current_user.favorites.delete(@post)
+      # add to fav list
       else
         current_user.favorites << @post
       end
@@ -29,7 +30,6 @@ class PostsController < ApplicationController
 
 
     # render favorite list on vie
-
 
     def create
       	@post = Post.new(post_params)
@@ -74,6 +74,13 @@ class PostsController < ApplicationController
           #render "posts/index", :locals=> {:search_err => 'No search results returned'}
 
       end
+
+        if params[:favorites]
+          @posts = Post.favorites(current_user).order('created_at DESC').paginate(page: params[:page], per_page: 5)
+          @title = "Favorites"
+        end
+
+
 
     end
 
