@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   put 'favorite' => 'posts#favorite'
 
+  get 'venmo_call' => 'venmo#payment'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'
