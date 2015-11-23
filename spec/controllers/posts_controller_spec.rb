@@ -65,32 +65,21 @@ RSpec.describe PostsController, :type => :controller do
 		create_posts
 		it 'shows all posts' do
 			get :index
-			# expect(response.body).to include("Test Title")
-			# expect(response.body).to include("Book Title")
-			# expect(response.body).to include("This is a furniture")
-			# expect(response.body).to include("169 test service")
-			# expect(response.body).to include("Capybara")
 			response.should render_template 'index'
 		end
 
 		it 'shows posts based on search keyword' do
 			get :index, keywords: "169", commit: "Search"
-			# expect(response.body).to include("169 test service")
-			# expect(response.body).to include("Capybara")
 			response.should render_template 'index'
 		end
 
 		it 'shows posts based on price filter' do
 			get :index, price: "$$"
-			# expect(response.body).to include("Test Title")
-			# expect(response.body).to include("Book Title")
-			# expect(response.body).to include("This is a furniture")
 			response.should render_template 'index'
 		end
 
 		it 'shows posts based on category' do
 			get :index, category_id: "Other"
-			# expect(response.body).to include("Capybara")
 			response.should render_template 'index'
 		end
 	end
