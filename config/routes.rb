@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :favorite_post
   
   get '/about' => 'home#about'
+
+  get '/send_message' => 'home#send_message'
+
+  get '/inbox' => 'home#inbox'
   
   get 'post_new' => 'posts#new'
   
