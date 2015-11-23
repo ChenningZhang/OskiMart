@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :favorite_post
+  resources :reviews, only: [:index, :new, :create, :show, :destroy]
 
 
 
