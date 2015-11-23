@@ -8,6 +8,8 @@ gem 'mailboxer'
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+
+gem 'byebug'
 #database
 gem 'pg'
 
@@ -16,6 +18,10 @@ gem 'spring'
 
 #authentication
 gem 'devise'
+# venmo api
+gem 'omniauth'
+gem 'omniauth-venmo'
+gem "venmo-api"
 
 #authorization
 gem 'pundit'
@@ -49,8 +55,7 @@ gem 'will_paginate'
 gem 'capybara'
 gem 'faker'
 
-# venmo api
-gem "venmo-api"
+
 
 
 # Use Unicorn as the app server

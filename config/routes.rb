@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
   resources :favorite_post
+  resources :venmo
   
   get '/about' => 'home#about'
   
@@ -28,17 +29,13 @@ Rails.application.routes.draw do
 
   put 'favorite' => 'posts#favorite'
 
-  get 'venmo_call' => 'venmo#payment'
+  # get '/auth/venmo/callback' => 'users/omniauth_callbacks#venmo'
+  get 'venmo_authorize' => 'venmo#callback'
+
 
   get 'users/new'
   get 'home/login'
   get 'home/signup'
-
-  
-
-  
-
-  
 
 
   # The priority is based upon order of creation: first created -> highest priority.

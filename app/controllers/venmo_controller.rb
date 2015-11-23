@@ -1,7 +1,34 @@
 class VenmoController < ApplicationController
   before_action :authenticate_user!
 
-  def index
+  def callback
+    # now, do the dirty work
+    require 'net/http'
+    require 'uri'
+    # get the url that we need to post to
+    url = URI.parse('https://api.venmo.com/v1/oauth/access_token')
+    # build the params string
+    post_args = { 'client_id' => 3195, 'client_secret' => 'bKRVaunyQhQQAH7UzRDMbf9Qc2bARdAQ', 'code' => params[:code]}
+    # send the request
+    response = Net::HTTP.post_form(url, post_args)
+    @parsed_body = JSON.parse(response.body)
+    byebug
+
+    if @parsed_body["error"].nil?
+      current_user.access_token = @parsed_body["access_token"] 
+      current_user.venmo_id = @parsed_body["user"]["id"]
+      render 'users/venmo_show'
+    else
+      flash[:notice] = "Denied Venmo Access!"
+      current_user.access_token = nil
+      current_user.venmo_id = nil
+      redirect_to user_path(current_user.id)
+    end
+    current_user.save
+
+  end
+
+  def payment
       @user = Venmo.authenticate params[:code]
       if @user
         @info = @user.get_info

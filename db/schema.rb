@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119060345) do
+ActiveRecord::Schema.define(version: 20151123074859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,11 @@ ActiveRecord::Schema.define(version: 20151119060345) do
     t.integer  "user_id"
   end
 
+  create_table "posts_users", id: false, force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -109,6 +114,8 @@ ActiveRecord::Schema.define(version: 20151119060345) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "access_token"
+    t.integer  "venmo_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
