@@ -12,7 +12,6 @@ class ConversationsController < ApplicationController
   def create
     recipients = User.where(id: params['recipients'])
     conversation = current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
-    flash[:success] = "Message has been sent!"
     redirect_to conversation_path(conversation)
   end
 
@@ -24,16 +23,11 @@ class ConversationsController < ApplicationController
     else
       @conversations = @mailbox.trash
     end
-
     @conversations = @conversations.paginate(page: params[:page], per_page: 10)
   end
 
   def show
-  end
-
-  def mark_as_read
     @conversation.mark_as_read(current_user)
-    redirect_to conversations_path
   end
 
   def reply
@@ -41,6 +35,9 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(@conversation)
   end
 
+  # 3 methods below: request/response usage unclear. We possibly want to refactor these to respond to ajax calls
+  # also note: these methods are purely experimental at this moment. No tests have been written for them
+  # USE AT YOUR OWN RISK!
   def destroy
     @conversation.move_to_trash(current_user)
     redirect_to conversations_path

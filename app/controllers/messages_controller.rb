@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   #This class manages all the threads you have with the people you've sent and received messages to.
+  #DEPRECATED
   before_action :authenticate_user!
 
   def new

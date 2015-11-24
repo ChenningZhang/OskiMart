@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       delete :empty_trash
     end
   end
-  post 'create_conversation' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
+  post 'conversations/create' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
   resources :comments
   resources :favorite_post
   
