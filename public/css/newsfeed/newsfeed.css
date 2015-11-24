@@ -32,7 +32,9 @@ footer {
 .top-buffer-50 {
   margin-top: 50px;
 }
-
+.top-buffer-65 {
+  margin-top: 65px;
+}
 .top-buffer-75 {
   margin-top: 75px;
 }
@@ -79,6 +81,10 @@ input.search-input {
 
 .create-button:hover {
   background-color: #7D5FED
+}
+.shift-up-10 {
+  position: relative;
+  top: -10px;
 }
 .shift-up-20 {
   position:relative;
