@@ -125,7 +125,6 @@
 
                 </div>
               <div class = "row top-buffer-25">
-                    <%= link_to "Show", post_path(post), class: "post-option-button" %>
                     <% if current_user.id == post.user_id %>
                         <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
                         <%= link_to "Remove", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
