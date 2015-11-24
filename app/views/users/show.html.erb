@@ -102,7 +102,7 @@
 
 <div class = "container top-buffer-25 text-center">
   <div class = "col-md-4">
-    <% if @user.id == current_user.id %>
+    
         <div class = "row col-sm-offset-1">
             <%= image_tag @user.image_url(:thumb), class:"img-responsive"%>
         </div>
@@ -113,23 +113,24 @@
         <div class = "row shift-up-10">
            <%= @user.email %>
         </div>
-        <div class = "row top-buffer-25">
-            <%= form_for @user do |f| %>
-              <div class = "row">
-                <div class = "col-md-offset-4 col-xs-offset-4">
-                  <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
-                </div>
-                <div class = "col-md-8 col-md-offset-2">
-                  <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
-                </div>
-              </div>
-              <div><%= f.submit "Update Image", class:"top-buffer-25 update-button" %></div>
-              <div class="top-buffer-25">
-                <%= link_to "Message", conversations_create_path%>
-              </div>
-            <%end%>
-        </div>
-    <% end %>
+        <% if @user.id == current_user.id %>
+            <div class = "row top-buffer-25">
+                <%= form_for @user do |f| %>
+                  <div class = "row">
+                    <div class = "col-md-offset-4 col-xs-offset-4">
+                      <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+                    </div>
+                    <div class = "col-md-8 col-md-offset-2">
+                      <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
+                    </div>
+                  </div>
+                  <div><%= f.submit "Update Image", class:"top-buffer-25 update-button" %></div>
+                  <div class="top-buffer-25">
+                    <%= link_to "Message", conversations_create_path%>
+                  </div>
+                <%end%>
+            </div>
+      <%end%>
   </div>
   <div class = "col-md-7 col-md-offset-1 top-buffer-75">
         <div class = "row top-buffer-75">
@@ -146,9 +147,11 @@
             <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
           <% end %>
         <% end %>
-        <div class = "row text-center top-buffer-50">
-          <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
-        </div>
+        <% if current_user.id != @user.id %>
+          <div class = "row text-center top-buffer-50">
+            <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
+          </div>
+        <% end %>
         <h2 class = "top-buffer-25">Reviews:</h2>
           <% Review.all.where(:user_id => @user.id).each do |review| %>
               <div class = "row review top-buffer-25">
