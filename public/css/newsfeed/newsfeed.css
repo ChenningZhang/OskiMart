@@ -41,6 +41,10 @@ footer {
 .top-buffer-100 {
   margin-top: 100px;
 }
+
+.bottom-buffer-50 {
+  margin-bottom: 50px;
+}
 /*
 .navbar-color {
   background-color: #5A37DB;
