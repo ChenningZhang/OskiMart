@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :closed_posts
   resources :conversations, only: [:index, :show, :destroy, :new, :create] do
     member do
       post :reply

@@ -102,6 +102,8 @@ class PostsController < ApplicationController
       if current_user.id != @post.user_id
           redirect_to '/'
       else
+          @closed_post = ClosedPost.create(:user_id => current_user.id, :title => @post.title, :description => @post.description, :category => @post.category, :price => @post.price, :image => @post.image)
+          current_user.closed_posts << @closed_post
           Post.destroy(params[:id])
           redirect_to posts_path
       end
