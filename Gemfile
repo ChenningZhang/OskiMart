@@ -24,7 +24,6 @@ gem 'spring'
 
 #misc stuff that can't hurt
 gem 'gravatar_image_tag'
-gem 'thin'
 gem 'bootstrap-sass'
 gem 'bootstrap-will_paginate'
 
