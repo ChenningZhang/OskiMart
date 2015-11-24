@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
         if @post.save
           flash[:success] = "Your post has been posted!"
-          back
+          redirect_to posts_path
         else
           render 'new'
         end

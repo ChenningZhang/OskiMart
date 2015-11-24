@@ -105,10 +105,12 @@ input.search-input {
 }
 h2.post-title {
   margin-bottom: 30px;
+  word-wrap: break-word;
 }
 
 div.post-description{
   font-size: 24px;
+  word-wrap: break-word;
 }
 .blue-color{
   background-color: #5A37DB;
