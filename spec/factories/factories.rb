@@ -22,7 +22,7 @@ FactoryGirl.define do
 		password "genericpassword"
 	end
 
-	factory :user3, class: User do
+	factory :user4, class: User do
 		first_name "Girl"
 		last_name "O'HerShe"
 		email "girlshe@berkeley.edu"
