@@ -5,13 +5,6 @@ class PostsController < ApplicationController
         @post = Post.new
     end
 
-    # def back
-    #   redirect_to :back
-    # rescue ActionController::RedirectBackError
-    #   redirect_to root_path
-    # end
-
-    # favorite a post method
     def favorite
       @post = Post.find(params[:post_id])
       # if post in favorite list then remove 
@@ -109,12 +102,6 @@ class PostsController < ApplicationController
       end
     end
 
-
-    # def author
-    #     @post.user = current_user.first_name
-    # end    
-
-      
     private
       	def post_params
       		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image)

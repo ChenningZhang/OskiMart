@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
+  get 'restore_post' => 'closed_posts#restore'
+
   # this is a get request that calls post controller with action fav_index to include in favorites route. 
 
   get 'favorites' => 'posts#fav_index'
