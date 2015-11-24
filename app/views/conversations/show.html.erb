@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<% provide(:title, 'Conversations') %>
+
     <html lang="en">
 
     <head>
@@ -62,6 +64,8 @@
                 </ul>
                             
                       </li>
+                      <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
 
@@ -129,6 +133,8 @@
               <%= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true %>
             </div>
             <%= submit_tag "Send Message", class: 'btn btn-primary' %>
+            <%= link_to "Back", conversations_path, class: 'btn btn-primary'  %>
+
           <% end %>
       </div>
   </body>

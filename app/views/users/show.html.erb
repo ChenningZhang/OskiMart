@@ -61,6 +61,7 @@
                     </li>
 
                     <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -133,7 +134,7 @@
             </div>
       <%end%>
       <div class="top-buffer-25">
-        <%= link_to "Message", conversations_create_path%>
+        <%= link_to "Message", conversations_path%>
       </div>
       <div class="top-buffer-25">
         <%= link_to "Closed posts", closed_posts_path%>
