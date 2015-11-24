@@ -308,6 +308,10 @@
 			  											<%= f.select :price, ['$', '$$','$$$'], class: 'form-control' %>
 			  										</div>
 
+			  										<div>
+			  											<%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+			  										</div>
+
 		                   							<div class="col-lg-offset-2">
 		  												<%= f.submit "Create Post!", class: "btn btn-primary" %>
 		  											</div>
