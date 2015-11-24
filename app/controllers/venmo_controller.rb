@@ -62,7 +62,6 @@ class VenmoController < ApplicationController
         flash[:danger] = @parsed_body["error"]["message"]
         redirect_to :back
       end
-    byebug
     end
   end
 end

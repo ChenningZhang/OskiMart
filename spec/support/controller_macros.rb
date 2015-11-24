@@ -35,6 +35,7 @@ module ControllerMacros
 			@user = FactoryGirl.create(:user)
 			sign_in @user
 			@post = FactoryGirl.create(:post, :user_id => @user.id)
+			request.env["HTTP_REFERER"] = "http://test.host/posts"
 		end
 	end
 

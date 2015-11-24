@@ -46,7 +46,7 @@ footer {
 }
 */
 input.search-input {
-  width: 50%;
+  width: 75%;
   height: 40px;
 }
 .newsfeed-title {
@@ -84,6 +84,11 @@ input.search-input {
   position:relative;
   top: -20px;
 }
+
+.shift-up-60 {
+  position: relative;
+  top: -60px;
+}
 .newsfeed-post {
   background-color: #7ABEF5;
   border-radius: 5px;
@@ -100,10 +105,12 @@ input.search-input {
 }
 h2.post-title {
   margin-bottom: 30px;
+  word-wrap: break-word;
 }
 
 div.post-description{
   font-size: 24px;
+  word-wrap: break-word;
 }
 .blue-color{
   background-color: #5A37DB;
