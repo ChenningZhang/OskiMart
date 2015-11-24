@@ -127,7 +127,9 @@
     </div>
 
 
-      <div class = "new-comment-button">+ New Comment </div>
+      <div class = "text-center top-buffer-25">
+        <%= link_to '+ New Comment', comments_path(:post_id => @post.id), class:"new-comment-button"%> 
+      </div>
       <div class="text-center top-buffer-25">
         <%= link_to 'Back', posts_path, class: "back-button"%>
       </div>
