@@ -1,8 +1,5 @@
-
-
-
-
 <!DOCTYPE html>
+<% provide(:title, 'Updating Comment') %>
 <html lang="en">
 
 <head>
@@ -111,8 +108,10 @@
 				<div class = "row top-buffer-25">
 					<div class="col-md-offset-3 col-md-3">
 							<%= f.submit "Update", class: "btn btn-primary" %>
-							
 					</div>
+          <div class="col-md-3">
+          <%= link_to 'Back', posts_path, class: "back-button"%>
+        </div>
 				</div>	
 			<% end %>
 		</div>
