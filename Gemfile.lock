@@ -48,12 +48,20 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (6.0.3)
+    autoprefixer-rails (6.0.3)
+      execjs
+      json
     bcrypt (3.1.9)
     bcrypt (3.1.9-x86-mingw32)
     bcrypt-ruby (3.1.2)
     bcrypt-ruby (3.1.2-x86-mingw32)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.5.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.3.0)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     builder (3.2.2)
     byebug (6.0.2)
     capybara (2.5.0)
@@ -101,6 +109,7 @@ GEM
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gravatar_image_tag (1.2.0)
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -310,6 +319,8 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (= 3.1.9)
   bcrypt-ruby (= 3.1.2)
+  bootstrap-sass
+  bootstrap-will_paginate
   byebug
   capybara
   carrierwave!
@@ -318,6 +329,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  gravatar_image_tag
   guard-minitest
   jbuilder (~> 2.0)
   jquery-rails

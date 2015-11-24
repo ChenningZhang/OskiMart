@@ -78,9 +78,6 @@ class PostsController < ApplicationController
           @posts = Post.favorites(current_user).order('created_at DESC').paginate(page: params[:page], per_page: 5)
           @title = "Favorites"
         end
-
-
-
     end
 
     def edit

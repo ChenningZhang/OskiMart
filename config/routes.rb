@@ -5,6 +5,17 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+  resources :conversations, only: [:index, :show, :destroy, :new, :create] do
+    member do
+      post :reply
+      post :restore
+      post :mark_as_read
+    end
+    collection do
+      delete :empty_trash
+    end
+  end
+  post 'conversations/create' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
   resources :comments
   resources :favorite_post
   resources :venmo
@@ -17,7 +28,6 @@ Rails.application.routes.draw do
 
   get '/inbox' => 'home#inbox'
   
-
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'

@@ -8,13 +8,26 @@ FactoryGirl.define do
 		password "12345678"
 	end
 
-	factory :user3, class:User do
-		first_name "Anusha"
-		last_name "Jain"
-		email "aj@berkeley.edu"
-		password "1234567a"
+	factory :user2, class: User do
+		first_name "John"
+		last_name "Cena"
+		email "johncena@berkeley.edu"
+		password "wwesuperslam"
 	end
 
+	factory :user3, class: User do
+		first_name "Dude"
+		last_name "McHeGuy"
+		email "dudeguy@berkeley.edu"
+		password "genericpassword"
+	end
+
+	factory :user4, class: User do
+		first_name "Girl"
+		last_name "O'HerShe"
+		email "girlshe@berkeley.edu"
+		password "genericpassword"
+	end
 
 	factory :post do
 		title "Test Title"

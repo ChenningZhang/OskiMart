@@ -72,8 +72,10 @@ class PostsControllerTest < ActionController::TestCase
 	# setting up devise 
 	include Devise::TestHelpers
 
+	self.use_instantiated_fixtures = true
+
 	def setup
-		# more devise bullshit
+		# double devise bullshit
     @request.env["devise.mapping"] = Devise.mappings[:user]
 
 		# make a dummy user
@@ -91,9 +93,6 @@ class PostsControllerTest < ActionController::TestCase
 		# make a dummy post
 		@post = Post.new(title: 'Test', description: 'Post Controller', category: '2', price: '1')
    	@post.save
-
-		self.use_instantiated_fixtures = true
-
 
   end
 

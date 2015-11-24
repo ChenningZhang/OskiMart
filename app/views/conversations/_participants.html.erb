@@ -1,0 +1,5 @@
+<% conversation.participants.each do |participant| %>
+  <% unless participant == current_user %>
+    <%= participant.full_name %>
+  <% end %>
+<% end %>
