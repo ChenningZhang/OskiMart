@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 	# favorite projects implementation 
 	has_many :favorite_posts
 	has_many :favorites, through: :favorite_posts, source: :post
+	mount_uploader :image, ProfilepicUploader
 
 	#Valid sign up fields presence as well as email format.
 	before_save { self.email = email.downcase }
@@ -20,6 +21,6 @@ class User < ActiveRecord::Base
   	validates :last_name, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@berkeley+\.edu+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX, message: "must be Berkeley email!" }, uniqueness: { case_sensitive: false }
-	validates :password, presence: true, length: {minimum: 8}
+	validates :password, presence: true, length: {minimum: 8}, on: :create
 
 end

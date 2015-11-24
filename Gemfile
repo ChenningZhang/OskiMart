@@ -49,6 +49,10 @@ gem 'will_paginate'
 gem 'capybara'
 gem 'faker'
 
+# carrierwave for image uploading
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'rmagick'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
