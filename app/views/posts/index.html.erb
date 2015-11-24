@@ -109,29 +109,31 @@
     		<div class = "row">
             <h1 class = "newsfeed-title"><%= @title %></h1> 
     		</div>
-    	  <div class = "row top-buffer-25">
-      		<div class = "col-md-offset-1  col-xs-offset-1">
-    		    <form class="navbar-form">
-    		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-      		        <%= text_field_tag :keywords, params[:search], placeholder: "Search posts by title or description", :class=>"search-input" %>
-                  <%= hidden_field_tag :category_id , params[:category_id] %>
-      		        <%= submit_tag "Search", :class=>"search-button"%>
-    		        <% end %>
-    		    </form>
-    		  </div>
-    	  </div>
+        <% if not params[:favorites] %>
+        	  <div class = "row top-buffer-25">
+          		<div class = "col-md-offset-1  col-xs-offset-1">
+        		    <form class="navbar-form">
+        		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+          		        <%= text_field_tag :keywords, params[:search], placeholder: "Search posts by title or description", :class=>"search-input" %>
+                      <%= hidden_field_tag :category_id , params[:category_id] %>
+          		        <%= submit_tag "Search", :class=>"search-button"%>
+        		        <% end %>
+        		    </form>
+        		  </div>
+        	  </div>
 
-      	<div class = "row top-buffer-25">
-      		<div class = "col-md-6 col-md-offset-1 col-xs-8 col-xs-offset-1">
-      			<h5>Filter by price:</h5>
-    	  		<%= link_to "$", posts_path(price: '$', category_id: params[:category_id]), class: "price-button" %>
-    	  		<%= link_to "$$", posts_path(price: '$$', category_id: params[:category_id]), class: "price-button" %>
-    	  		<%= link_to "$$$", posts_path(price: '$$$', category_id: params[:category_id]), class: "price-button" %>
-    	  	</div>
-      		<div class = "col-md-4 col-md-offset-5 col-xs-6 col-xs-offset-7 shift-up-20">
-      			<%= link_to "Create Post!", post_new_path, class: "create-button" %>
-      		</div>
-      	</div>
+          	<div class = "row top-buffer-25">
+          		<div class = "col-md-6 col-md-offset-1 col-xs-8 col-xs-offset-1">
+          			<h5>Filter by price:</h5>
+        	  		<%= link_to "$", posts_path(price: '$', category_id: params[:category_id]), class: "price-button" %>
+        	  		<%= link_to "$$", posts_path(price: '$$', category_id: params[:category_id]), class: "price-button" %>
+        	  		<%= link_to "$$$", posts_path(price: '$$$', category_id: params[:category_id]), class: "price-button" %>
+        	  	</div>
+          		<div class = "col-md-4 col-md-offset-5 col-xs-6 col-xs-offset-7 shift-up-20">
+          			<%= link_to "Create Post!", post_new_path, class: "create-button" %>
+          		</div>
+          	</div>
+        <% end %>
 
 
     </div>

@@ -66,8 +66,8 @@ class PostsController < ApplicationController
       end 
 
       if params[:keywords] #if search
-        puts params[:keywords] 
-        puts params[:category_id]
+        #puts params[:keywords] 
+        #puts params[:category_id]
         @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
         #if @posts.empty?
