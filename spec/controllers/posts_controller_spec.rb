@@ -26,7 +26,7 @@ RSpec.describe PostsController, :type => :controller do
 			response.should redirect_to posts_path
 		end
 
-		it 'renders the post_new page when missing post title' do
+		it 'renders the post_new page when missing Title' do
 			@post = FactoryGirl.attributes_for(:post, title: "  ")
 			expect{
 				post :create, post: @post, commit: "Create Post"
@@ -134,4 +134,26 @@ RSpec.describe PostsController, :type => :controller do
 		end
  	end
 
-end
+
+	describe "PUT #favorite" do
+		create_post
+		it 'favorites a post' do
+			put :favorite, post_id: @post.id
+			response.should redirect_to :back
+		end
+	end
+
+	describe "GET #index" do
+		create_post
+
+		it 'shows all favorited posts' do
+			get :index, favorites: true 
+			response.should render_template 'index'
+			Post.find(@post.id).title.should eq("Test Title")
+			Post.find(@post.id).description.should eq("Test description")
+			Post.find(@post.id).category.should eq("Technology")
+			Post.find(@post.id).price.should eq("$$")
+		end
+	end
+
+end 

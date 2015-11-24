@@ -9,8 +9,15 @@ Rails.application.routes.draw do
   resources :favorite_post
   resources :venmo
   
+  resources :reviews, only: [:index, :new, :create, :show, :destroy]
+
   get '/about' => 'home#about'
+
+  get '/send_message' => 'home#send_message'
+
+  get '/inbox' => 'home#inbox'
   
+
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
@@ -23,7 +30,8 @@ Rails.application.routes.draw do
 
   get 'favorites' => 'posts#fav_index'
 
-  # this is a put request that calls post controller with action favorite to include in favorite route. 
+  # this is a put request that calls post controller with action favorite to include in 
+  # favorite route, posts#favorite adds it to favorites list 
 
   put 'favorite' => 'posts#favorite'
 
