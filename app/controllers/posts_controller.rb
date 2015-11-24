@@ -3,10 +3,7 @@ class PostsController < ApplicationController
 
     def new
         @post = Post.new
-
     end
-
-
 
     # favorite a post method
     def favorite
@@ -21,15 +18,11 @@ class PostsController < ApplicationController
       redirect_to :back   
     end
 
-
     # render favorite list on view
     def fav_index
       @posts = current_user.favorites
       render 'favorites'
     end
-
-
-
 
     def create
       	@post = Post.new(post_params)

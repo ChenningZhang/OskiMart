@@ -76,6 +76,7 @@ RSpec.describe CommentsController, :type => :controller do
 			}.to change(Comment, :count).by(-1)
 			response.should redirect_to comments_path(:post_id => @post.id)
 		end
+
 	end
 
 end

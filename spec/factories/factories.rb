@@ -8,7 +8,7 @@ FactoryGirl.define do
 		password "12345678"
 	end
 
-	factory :user2 do
+	factory :user3, class:User do
 		first_name "Anusha"
 		last_name "Jain"
 		email "aj@berkeley.edu"
