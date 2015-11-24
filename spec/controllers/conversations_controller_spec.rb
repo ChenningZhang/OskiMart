@@ -36,15 +36,19 @@ RSpec.describe ConversationsController, :type => :controller do
 	describe "GET #show" do
 		send_message_from_1_to_2_and_3
 		login_second_user
-		it 'shows a message if it exists and the user is one of the members and marks it as read only for the user' do
-			get :show, id: @user2.mailbox.inbox.first.id
+		it 'shows a message if it exists and the user is one of the members' do
+			get :show, id: @conversation.id
 			expect(response).to render_template("show")
-			expect(@user2.mailbox.inbox.first.is_unread?(@user3)).to be true
-			expect(@user2.mailbox.inbox.first.is_unread?(@user2)).to be false
 		end
-		# it 'marks a message as read' do
-		# 	expect
-		# end
+
+		it 'marks a message as read for only the user who opened it and no one else' do
+			expect(@conversation.is_unread?(@user3)).to be true
+			expect(@conversation.is_unread?(@user2)).to be true
+			get :show, id: @conversation.id
+			expect(@conversation.is_unread?(@user3)).to be true
+			expect(@conversation.is_unread?(@user2)).to be false
+		end
+
 	end
 
 	describe "GET #index" do
@@ -56,10 +60,59 @@ RSpec.describe ConversationsController, :type => :controller do
 	end
 
 	describe "POST #reply" do
-
-		# it 'increases the number of receipts in a conversation by 1' do
-			
-		# end
+		send_message_from_1_to_2_and_3
+		login_second_user
+		it 'increases the number of receipts in a conversation by 1' do
+			expect{
+				post :reply, id: @conversation.id, body: "Test reply", commit: "Send Message"
+			}.to change(@conversation.receipts_for(@user2), :count).by(1)
+		end
 	end
 
+	describe "DELETE #destroy" do
+		send_message_from_1_to_2_and_3
+		login_second_user
+		it 'ensures that the message will be gone from the user\'s inbox and into the trash' do
+			expect(@user2.mailbox.trash.size).to eq(0)
+			expect(@user2.mailbox.inbox.size).to eq(1)
+			expect{
+				delete :destroy, id: @conversation.id
+			}.to change(@user2.mailbox.inbox, :count).by(-1)
+			expect(@user2.mailbox.inbox.size).to eq(0)
+			expect(@user2.mailbox.trash.size).to eq(1)
+		end
+	end
+
+	describe "POST #restore" do
+		send_message_from_1_to_2_and_3
+		delete_conversation_for_2
+		login_second_user
+		it 'should take a deleted convo out from the deleted box and into the inbox' do
+			expect(@user2.mailbox.trash.size).to eq(1)
+			expect(@user2.mailbox.inbox.size).to eq(0)
+			expect{
+				post :restore, id: @conversation.id
+			}.to change(@user2.mailbox.inbox, :count).by(1)
+			expect(@user2.mailbox.trash.size).to eq(0)
+			expect(@user2.mailbox.inbox.size).to eq(1)
+		end
+	end
+
+	describe "DELETE #empty_trash" do
+		send_message_from_1_to_2_and_3
+		send_message_from_2_to_1
+		delete_conversation_for_2
+		login_second_user
+		it 'should remove all messages from the trash. No other boxes should be affected' do
+			expect(@user2.mailbox.trash.size).to eq(1)
+			expect(@user2.mailbox.inbox.size).to eq(0)
+			expect(@user2.mailbox.sentbox.size).to eq(1)
+			expect{
+				delete :empty_trash
+			}.to change(@user2.mailbox.trash, :count).by(-1)
+			expect(@user2.mailbox.trash.size).to eq(0)
+			expect(@user2.mailbox.inbox.size).to eq(0)
+			expect(@user2.mailbox.sentbox.size).to eq(1)
+		end
+	end
 end
