@@ -149,7 +149,7 @@
       <%= yield %>
     </div>
     <!-- Container for posts -->
-    <div class = "container top-buffer-50">
+    <div class = "container top-buffer-50 bottom-buffer-50">
         <% @posts.each do |post| %>
 
             <div class = "row top-buffer-35 newsfeed-post">
@@ -172,7 +172,7 @@
 
 			          		</div>
 				         	<div class = "row top-buffer-25">
-				                <%= link_to "Show", post_path(post), class: "post-option-button" %>
+
 				                <% if current_user.id == post.user_id %>
 				                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
 				                    <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
@@ -186,7 +186,6 @@
                           <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put%>
                         <% end %>
                            </div>
-
 
 			          </div>
 			                

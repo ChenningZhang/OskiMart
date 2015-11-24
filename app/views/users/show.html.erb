@@ -50,15 +50,19 @@
                         <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
                           Categories <b class="caret"></b>
                         </a>
-              <ul class="dropdown-menu">
-                <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-                <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-                <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-                <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-                <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
-              </ul>
+                        <ul class="dropdown-menu">
+                          <li><%=link_to "General", posts_path()%></li>
+                          <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
+                          <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
+                          <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
+                          <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
+                          <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                        </ul>
                           
                     </li>
+
+                    <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                  
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
@@ -156,10 +160,11 @@
             <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
           </div>
         <% end %>
-        <h2 class = "top-buffer-25">Reviews:</h2>
-          <% if Review.all.count == 0 %>
-            <h4>No reviews to show</h4>
+        
+          <% if Review.all.where(:user_id => @user.id).count == 0 %>
+            <h2>No reviews to show</h2>
           <% else %>
+          <h2 class = "top-buffer-25">Reviews:</h2>
           <% Review.all.where(:user_id => @user.id).each do |review| %>
               <div class = "row review top-buffer-25">
                   <div class = "row">
