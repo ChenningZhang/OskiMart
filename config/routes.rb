@@ -27,12 +27,12 @@ Rails.application.routes.draw do
 
   put 'favorite' => 'posts#favorite'
 
-  # get '/auth/venmo/callback' => 'users/omniauth_callbacks#venmo'
   get 'venmo_authorize' => 'venmo#callback'
 
   get 'venmo_initialize_payment' => 'venmo#initialize_payment'
 
   get 'venmo_final_payment' => 'venmo#final_payment'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'

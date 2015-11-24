@@ -1,0 +1,50 @@
+<head>
+	<link href="css/bootstrap.min.css" rel = "stylesheet">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+
+</head>
+<style>
+	body {
+		font-family: Raleway;
+	}
+	.top-buffer-50 {
+		margin-top: 50px;
+	}
+	.top-buffer-25 {
+		margin-top: 25px;
+	}
+</style>
+<h1 class = "text-center">Venmo Payment</h1>
+<div class="container">
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<%= yield %>
+</div>
+<div class = "container text-center">
+	<form action="venmo_final_payment" method = "GET">
+		<input type = "hidden" name = "receiver" value = '<%= params[:receiver]%>'>
+	  <div class = "row">
+	  	<div class = "col-md-8 col-md-offset-2">
+		  	<h4>Amount</h4>
+		  	<input class ="form-control" type="text" name="amount" placeholder="0.0">
+		 </div>
+	  </div>
+	  <div class = "row top-buffer-25">
+	  	<div class = "col-md-8 col-md-offset-2">
+		  	<h4>Description:</h4>
+		  	<input class = "form-control" type="text" name="description" placeholder="Enter Description">
+		 </div>
+	  	
+	  </div>
+	  
+	  <br><br>
+	  <input type="submit" name="pay" value="Pay">
+	  <input type="submit" name="charge" value="Request">
+	</form>
+</div>
+<div class = "text-center top-buffer-25">
+	<%= link_to "Cancel", user_path(params[:receiver])%>
+</div>
+
+

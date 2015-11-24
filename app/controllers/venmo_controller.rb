@@ -33,34 +33,36 @@ class VenmoController < ApplicationController
         flash[:warning] = 'This person does not have Venmo!'
         redirect :back
       else
-        render 'users/venmo_show'        
+        render 'venmo/show'        
       end
     end
 
   def final_payment
-    if params[:amount].nil? or params[:amount].empty? or params[:amount] < 0.01 or params[:description].nil? or params[:description].empty?
-      flash[:warning] = "Amount/description were not filled in properly"
+    if params[:amount].nil? or params[:amount].empty? or params[:description].nil? or params[:description].empty? or params[:amount].to_f < 0
+      flash[:danger] = "Amount/description were not filled in properly"
       redirect_to :back
     else
+      if not params[:charge].nil?
+        amount = '-' + params[:amount]
+      end
       require 'net/http'
       require 'uri'
       url = URI.parse('https://api.venmo.com/v1/payments')
-      post_args = { 'access_token' => current_user.access_token, 'user_id' => User.find(params[:receiver]).venmo_id, 'note' => params[:description], 'amount' => params[:amount]}
+      post_args = { 'access_token' => current_user.access_token, 'user_id' => User.find(params[:receiver]).venmo_id, 'note' => params[:description], 'amount' => amount}
       response = Net::HTTP.post_form(url, post_args)
       @parsed_body = JSON.parse(response.body)
       if @parsed_body["error"].nil?
-        flash[:success] = "Payment successful!"
+        if not params[:charge].nil?
+          flash[:success] = "Charge successful!"
+        else
+          flash[:success] = "Payment successful!"
+        end
         redirect_to user_path(params[:receiver])
       else
         flash[:danger] = @parsed_body["error"]["message"]
-        redirect_to user_path(params[:receiver])
+        redirect_to :back
       end
+    byebug
     end
   end
-    
-  def recent_payment
-
-  end
-
-
 end
