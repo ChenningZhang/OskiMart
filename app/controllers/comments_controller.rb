@@ -22,11 +22,15 @@ class CommentsController < ApplicationController
 	end
 
 	def show
-        @comment = Comment.find(params[:id])
-    end
+      @comment = Comment.find(params[:id])
+  end
 
     def index
-    	@comments = Comment.all.where(:post_id => params[:post_id])
+      if Post.where(:id => params[:post_id]).empty?
+          redirect_to posts_path
+      else
+          @comments = Comment.all.where(:post_id => params[:post_id])
+      end
     end
 
     def edit

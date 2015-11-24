@@ -7,6 +7,8 @@ gem 'rails', '4.2.4'
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+
+gem 'byebug'
 #database
 gem 'pg'
 
@@ -15,6 +17,10 @@ gem 'mailboxer'
 
 #authentication
 gem 'devise'
+# venmo api
+gem 'omniauth'
+gem 'omniauth-venmo'
+gem "venmo-api"
 
 #authorization
 gem 'pundit'
@@ -55,6 +61,10 @@ gem 'will_paginate'
 # capybara for testing
 gem 'capybara'
 gem 'faker'
+
+# carrierwave for image uploading
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'rmagick'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

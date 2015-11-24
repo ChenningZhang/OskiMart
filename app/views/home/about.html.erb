@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<% provide(:title, 'About Oskimart') %>
 <html lang="en">
 
 <head>
@@ -13,7 +14,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
@@ -61,6 +61,8 @@
                           </ul>
                                                     
                     </li>
+                    <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
@@ -101,7 +103,7 @@
         </div>
     </div>
 
-    <div class = "container top-buffer-100 bottom-padding">
+    <div class = "container top-buffer-100 bottom-padding bottom-buffer-50">
         <div class = "row" style = "position: relative; left: -40px">
             <div class = "col-md-3 col-xs-6 col-xs-offset-4 col-md-offset-1">
 
@@ -136,7 +138,7 @@
                     <h1>Messaging</h1>
                 </div>
                 <div class = "row">
-                    Message other users privately about items that you are interested in purchasing. With comments for public discussion and messaging for private discussion, you'll never miss an item you want to purchase!
+                    Message other users privately about items that you are interested in purchasing. With messaging, you'll never miss an item you want to purchase!
                 </div>
             </div>
 

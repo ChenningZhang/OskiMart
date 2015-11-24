@@ -17,13 +17,13 @@ Run the app in the following way:
 	a) If this is your first time on the app, click on Sign Up (directly on the text). 
 	b) If you already have an account, click on Log In (Directly on the text)
 3. Input your user information and login/create account
-4. You will be directed to index.html, which is the Newsfeed page (Most of the frontend is static right now, but will be dyanimc in the future)
+4. You will be directed to index.html, which is the Newsfeed Page (Most of the frontend is static right now, but will be dyanimc in the future)
 5. You can see your exisitng posts
 6. Click on Create Post to buy or sell something.
 7. You will be directed to new.html. Input details for your post and click on Create post.
 8. You will be taken back to index.html
 9. You can filter by price by clicking on any of the buttons '$', '$$', '$$$'
-10. You can select posts by a category (dropdown at the bottom of the newsfeed page). This dropdown will eventually be moved to the left sidebar.
+10. You can select posts by a category (dropdown at the bottom of the Newsfeed Page). This dropdown will eventually be moved to the left sidebar.
 11. You can see a post by clicking on the Show button next to each post
 12. You can edit a post by clicking on the Update button next to each post
 13. You can remove a post by clicking on the Remove button next to each post

@@ -9,6 +9,11 @@ class HomeController < ApplicationController
   end
 
   def about
-    
+  end
+
+  def send_message
+  end
+
+  def inbox
   end
 end

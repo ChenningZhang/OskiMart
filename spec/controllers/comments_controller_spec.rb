@@ -30,31 +30,53 @@ RSpec.describe CommentsController, :type => :controller do
 
 			response.should render_template 'new'
 		end
-
-	
-
-
 	end
 
-	# describe "GET #show" do
-	# 	create_post
-	# 	it 'renders the post page for the selected post' do
-	# 		get :show, id: @post.id
-	# 		response.should render_template 'show'
-	# 	end
-	# end
+	describe "GET #index" do
+		create_post
+		it 'shows all comments for that post' do
+			get :index, post_id: @post.id
+			response.should render_template 'index'
+		end
 
-	# describe "GET #index" do
-	# 	login_user
-	# 	it 'shows all posts' do
-	# 	end
-	# end
+		it 'does not show comments as invalid post id' do
+			get :index, post_id: ''
+			response.should redirect_to posts_path
+		end
+	end
 
-	# describe "DELETE #destroy" do
-	# 	# TODO: add more test cases after we have the association
-	# 	login_user
-	# 	it 'deletes the selected post' do
-	# 	end
-	# end
+	describe "GET #edit" do
+		create_comment
+		it 'redirects to the update the selected comments' do
+			get :edit, id: @comment.id
+			response.should render_template 'edit'
+		end
+	end
+
+	describe "PUT #update" do
+		create_comment
+		it 'updates the comment with valid data' do
+			put :update, comment: FactoryGirl.attributes_for(:comment, text: "New Text"), commit: 'update', id: @comment.id
+			response.should redirect_to comments_path(:post_id => @post.id)
+			Comment.find(@comment.id).text.should eq("New Text")
+		end
+
+		it 'does not update the comment with empty fields, and renders edit' do
+			put :update, comment: FactoryGirl.attributes_for(:comment, text: " "), commit: 'update', id: @comment.id
+			response.should render_template 'edit'
+			Comment.find(@comment.id).text.should eq("Test comment")
+		end
+	end
+
+	describe "DELETE #destroy" do
+		create_comment
+		it 'deletes the selected comment' do
+			expect{
+				delete :destroy, id: @comment.id
+			}.to change(Comment, :count).by(-1)
+			response.should redirect_to comments_path(:post_id => @post.id)
+		end
+
+	end
 
 end

@@ -1,5 +1,8 @@
-<li class="list-group-item clearfix">
-  <%= link_to conversation.subject, conversation_path(conversation) %>
+
+
+
+<li class="list-group-item clearfix top-buffer-50">
+  <h1>Subject: <%= link_to conversation.subject, conversation_path(conversation) %></h1>
 
   <div class="btn-group-vertical pull-right">
     <% if conversation.is_trashed?(current_user) %>
@@ -15,9 +18,22 @@
     <% end %>
   </div>
 
-  <p><%= render 'conversations/participants', conversation: conversation %></p>
+  <p style = "padding-left:15px">Participants: <%= render 'conversations/participants', conversation: conversation %>
+  </p>
+  <div class = "row left-buffer-30 top-buffer-25" style = "border-top: solid #E3E3E3 1px; padding-top: 10px">
+    <h4>Last Message:</h4>
+    <div class = "last-message" style = "padding-left:20px">
+      <div class = "last-message">
+        <%= conversation.last_message.sender.full_name %>: <%= conversation.last_message.body %>
 
-  <p><%= conversation.last_message.body %>
-    <small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></span>)</small></p>
+      </div>
+      <small>
+        (<span class="text-muted"><%= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></span>)
+      </small>
+    </div>
+
+  </div> 
+  <p>
+</p>
 </li>
 
