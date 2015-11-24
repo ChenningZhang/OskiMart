@@ -180,7 +180,11 @@
 
                         
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
-				                <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
+                        <% if current_user.favorites.include?(post) %>
+				                  <%= link_to "Unfavorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put%>
+                        <% else %>
+                          <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put%>
+                        <% end %>
                            </div>
 
 
