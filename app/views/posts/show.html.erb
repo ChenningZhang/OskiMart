@@ -92,7 +92,6 @@
     </nav>
 
     
-
     <div class = "container">
         <h1>View Post</h1>
             <div class = "row top-buffer-35 newsfeed-post">
@@ -119,6 +118,9 @@
                             <%= link_to "Remove", @post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
                         <% end %>
                         <a class = "post-option-button show-comments">Show Comments</a>
+                  </div>
+                  <div>
+                    <%= image_tag @post.image_url(:thumb) %>
                   </div>
                 </div>
             </div>

@@ -117,6 +117,10 @@
 					<%= f.label :price%>
 					<%= f.select :price, ['$', '$$','$$$'], class: 'form-control' %>
 				</div>
+
+				<div class = "control-label post_buttons">
+					<%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+				</div>
 			</div>
 
 			<div class = "row top-buffer-25">

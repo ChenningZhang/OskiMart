@@ -62,9 +62,24 @@ RSpec.describe PostsController, :type => :controller do
 	end
 
 	describe "GET #index" do
-		login_user
+		create_posts
 		it 'shows all posts' do
 			get :index
+			response.should render_template 'index'
+		end
+
+		it 'shows posts based on search keyword' do
+			get :index, keywords: "169", commit: "Search"
+			response.should render_template 'index'
+		end
+
+		it 'shows posts based on price filter' do
+			get :index, price: "$$"
+			response.should render_template 'index'
+		end
+
+		it 'shows posts based on category' do
+			get :index, category_id: "Other"
 			response.should render_template 'index'
 		end
 	end

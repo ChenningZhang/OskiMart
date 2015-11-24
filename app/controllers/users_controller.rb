@@ -8,5 +8,21 @@ class UsersController < ApplicationController
     @comments = @user.comments
     @reviews = @user.reviews
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+  	@user = User.find(params[:id])
+  	if @user.update_attributes(user_params)
+  		redirect_to @user
+  	end
+  end
+
+  private
+	def user_params
+		params.require(:user).permit(:first_name, :last_name, :email, :encrypted_password, :image, :remote_image_url)
+	end
   
 end

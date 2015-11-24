@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	# favorite projects implementation 
 	has_many :favorite_posts
 	has_many :favorites, through: :favorite_posts, source: :post
+	mount_uploader :image, ProfilepicUploader
 
 	#Valid sign up fields presence as well as email format.
 	before_save { self.email = email.downcase }

@@ -25,7 +25,6 @@ class PostsController < ApplicationController
       redirect_to :back  
     end
 
-    # render favorite list on view
     def fav_index
       @posts = current_user.favorites
       render 'favorites'
@@ -119,6 +118,6 @@ class PostsController < ApplicationController
       
     private
       	def post_params
-      		  params.require(:post).permit(:user_id, :title, :description, :category, :price)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image)
       	end
 end
