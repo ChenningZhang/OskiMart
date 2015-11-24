@@ -101,60 +101,73 @@
 <% provide(:title, @user.first_name) %>
 
 <div class = "container top-buffer-25 text-center">
-  <div class = "row">
-      <div class="col-md-4 col-md-offset-4">
-        <!-- <img class = "img-responsive profile-image" src = "https://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg"> -->
-        <%= image_tag @user.image_url(:thumb) %>
-      </div>
-  </div>
-  <%= form_for @user do |f| %>
-    <p>
-      <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
-    </p>
-    <p>
-      <%= f.label :remote_image_url, "or image URL" %><br />
-      <%= f.text_field :remote_image_url %>
-    </p>
-    <p><%= f.submit %></p>
-  <%end%>
-  <div class="row top-buffer-15">
-       <h1><%= @user.first_name %> <%= @user.last_name %></h1>  
-  </div>
-  <div class = "row">
+  <div class = "col-md-4">
+    <% if @user.id == current_user.id %>
+        <div class = "row">
+            <%= image_tag @user.image_url(:thumb), class:"img-responsive"%>
+        </div>
 
-	   <%= @user.email %>
-  </div>
-
-  <div class ="row top-buffer-25">
-    <div class = "col-md-6 col-md-offset-3">
-        Bacon ipsum dolor amet jowl turkey capicola meatloaf ground round ham hock kevin pig ball tip. Leberkas bresaola boudin hamburger, sirloin jerky jowl. Fatback doner pancetta tenderloin swine leberkas kevin jerky boudin. Short ribs shank pancetta ground round andouille hamburger jowl. Filet mignon jerky capicola, ribeye rump ball tip prosciutto. Kielbasa leberkas chuck ground round cupim strip steak filet mignon shankle ball tip shoulder short loin. T-bone pork chop ball tip sirloin pastrami doner pancetta filet mignon pork loin jowl sausage jerky.
-    </div>
-
-  
-  </div>
-  <h1>Payment</h1>
-  <% if current_user.id == @user.id %>
-    <%= link_to "Venmo Access Change", "https://api.venmo.com/v1/oauth/authorize?client_id=3195&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code" %>
-
-  <% else %>
-    <% if @user.venmo_id.nil? or current_user.venmo_id.nil? %>
-      Please message this person for payment! 
-    <% else %>
-      <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
+        <div class="row shift-up-20">
+             <h2>Hi, I'm <%= @user.first_name %></h2>  
+        </div>
+        <div class = "row shift-up-20">
+           <%= @user.email %>
+        </div>
+        <div class = "row top-buffer-25">
+            <%= form_for @user do |f| %>
+              <div class = "row">
+                <div class = "col-md-offset-4">
+                  <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+                </div>
+                <div class = "col-md-8 col-md-offset-2">
+                  <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
+                </div>
+              </div>
+              <div><%= f.submit "Update Image", class:"top-buffer-25 update-button" %></div>
+            <%end%>
+        </div>
     <% end %>
-  <% end %>
+  </div>
+  <div class = "col-md-7 col-md-offset-1 top-buffer-75">
+        <div class = "row top-buffer-75">
+          <h2>Payment</h2>
+        </div>
+
+        <% if current_user.id == @user.id %>
+          <%= link_to "Venmo Access Change", "https://api.venmo.com/v1/oauth/authorize?client_id=3195&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code" %>
+
+        <% else %>
+          <% if @user.venmo_id.nil? or current_user.venmo_id.nil? %>
+            Please message this person for payment! 
+          <% else %>
+            <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
+          <% end %>
+        <% end %>
+        <h2 class = "top-buffer-65">Reviews:</h2>
+          <% Review.all.where(:user_id => @user.id).each do |review| %>
+              <div class = "row review top-buffer-25">
+                  <div class = "row">
+                    <h3>Score: <%= review.score %> </h3>
+                  </div>
+                  <div class = "row">
+                    <h5>Feedback: <%= review.feedback %></h5>
+                  </div>
+              </div>
+          <% end %>
+
+        <div class = "row text-center top-buffer-50">
+          <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
+        </div>
+    
+
+  </div>
 
 
 </div>
 
 
-<%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
-<p>
-  <b>Reviews:</b>
-  <table>
-    <%= Review.all.where(:user_id => @user.id).each do |review| %>
-    <td><%= review.score %></td>
-    <td><%= review.feedback %></td>
-    <% end %>
-  </table>
-</p>
+
+  <div class = "container text-center top-buffer-25">
+
+  </div>
+
