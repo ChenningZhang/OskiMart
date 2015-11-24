@@ -132,10 +132,12 @@
           		<div class = "col-md-4 col-md-offset-5 col-xs-6 col-xs-offset-7 shift-up-20">
           			<%= link_to "Create Post!", post_new_path, class: "create-button" %>
           		</div>
-          	</div>
         <% end %>
 
-
+              <div class = "col-md-4 col-md-offset-9 col-xs-6 col-xs-offset-7 shift-up-60">
+                <%= will_paginate @posts, :class=>"pagination" %>
+              </div>
+          	</div>
     </div>
 
     <!-- Container for posts -->
@@ -182,7 +184,9 @@
 
         <% end %>
       </div>
+      <div class = "text-center">
         <%= will_paginate @posts, :class=>"pagination" %>
+      </div>
     </div>
 
 

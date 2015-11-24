@@ -84,6 +84,11 @@ input.search-input {
   position:relative;
   top: -20px;
 }
+
+.shift-up-60 {
+  position: relative;
+  top: -60px;
+}
 .newsfeed-post {
   background-color: #7ABEF5;
   border-radius: 5px;
