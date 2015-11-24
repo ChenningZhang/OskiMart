@@ -94,11 +94,6 @@ ActiveRecord::Schema.define(version: 20151123054643) do
     t.integer  "user_id"
   end
 
-  create_table "posts_users", id: false, force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer  "score"
     t.string   "feedback"
