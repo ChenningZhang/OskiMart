@@ -1,23 +1,206 @@
-<p><%= link_to 'Start conversation', new_conversation_path, class: 'btn btn-lg btn-primary' %></p>
+<!DOCTYPE html>
+    <html lang="en">
 
-<div class="row">
-  <div class="col-sm-3">
-    <ul class="nav nav-pills nav-stacked">
-      <%= mailbox_section 'inbox', @box %>
-      <%= mailbox_section 'sent', @box %>
-      <%= mailbox_section 'trash', @box %>
-    </ul>
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Inbox</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/newsfeed/newsfeed.css" rel="stylesheet"> <!-- Lucas's css file -->
+        <link href="css/messaging/inbox.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+            <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+        <script src="js/newsfeed/newsfeed.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+      <nav class="navbar-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/posts">Oskimart</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li>
+                          <a href="/about">About</a>
+                      </li>
+                      <li class = "dropdown">
+                          <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                            Categories <b class="caret"></b>
+                          </a>
+                <ul class="dropdown-menu">
+                  <li><%=link_to "General", posts_path()%></li>
+                  <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
+                  <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
+                  <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
+                  <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
+                  <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                </ul>
+                            
+                      </li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+
+                      <%if user_signed_in? %>
+                        <li>
+                          <%=link_to user_path(current_user.id) do%>
+                            <%=User.find(current_user.id).first_name%>
+                            <span class="glyphicon glyphicon-user"></span> 
+                          <%end%>
+                        </li>
+                        <li>
+                          
+                          <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                            Logout
+                            <span class="glyphicon glyphicon-log-out"></span> 
+                          <%end%>
+                            
+                        </li>
+
+                      <% else %>
+                        <li>
+                          <%=link_to new_user_session_path do%>
+                            Login
+                            <span class="glyphicon glyphicon-log-in"></span> 
+                          <% end %>
+                        </li>
+                      <%end%>
+
+                  </ul>
+              </div>
+          </div>
+      </nav>
+
+
+  <div class = "container">
+    <div class = "page-header">
+      <h1>Your Conversations</h1>
+
+    </div>
+    <div class = "col-md-3 top-buffer-15">
+      <ul class="nav nav-pills nav-stacked">
+        <%= mailbox_section 'inbox', @box %>
+        <%= mailbox_section 'sent', @box %>
+        <%= mailbox_section 'trash', @box %>
+      </ul>
+
+      <ul class = "top-buffer-200 shift-left-40">
+        <div>
+          <%= link_to 'Start conversation', new_conversation_path, class: 'btn btn-lg btn-primary' %>
+        </div>
+
+        <% if @box == 'trash' %>
+          <div class="top-buffer-25">
+            <%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
+                           data: {confirm: 'Are you sure?'} %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class = "col-md-8 col-md-offset-1">
+      <ul class="list-group">
+        <%= render partial: 'conversations/conversation', collection: @conversations %>
+      </ul>
+
+    <%= will_paginate @conversations %>
+    <!--
+        <div class = "row conversation-row top-buffer-15">
+            <div class = "row left-buffer-30">
+                <div class = "conversation-subject">Dummy Subject</div>
+            </div>
+
+            <div class = "row left-buffer-30">
+
+              <div class = "posted-to">Sent To: Eric Zhou</div>
+            </div>
+            <div class = "row left-buffer-30 top-buffer-25">
+              <div class = "last-message">
+                <div class = "last-message">
+                  Last message of this conversation Last message of this conversation
+                </div>
+              </div>
+
+            </div> 
+        </div>
+        <div class = "row conversation-row">
+            <div class = "row left-buffer-30">
+                <div class = "conversation-subject">Dummy Subject</div>
+            </div>
+
+            <div class = "row left-buffer-30">
+
+              <div class = "posted-to">Sent: Eric Zhou</div>
+            </div>
+            <div class = "row left-buffer-30 top-buffer-25">
+              <div class = "last-message">
+                <div class = "last-message">
+                  Last message of this conversation Last message of this conversation
+                </div>
+              </div>
+
+            </div> 
+        </div>
+
+          <div class = "row conversation-row">
+            <div class = "row left-buffer-30">
+                <div class = "conversation-subject">Dummy Subject</div>
+            </div>
+
+            <div class = "row left-buffer-30">
+
+              <div class = "posted-to">Sent To: Eric Zhou</div>
+            </div>
+            <div class = "row left-buffer-30 top-buffer-25">
+              <div class = "last-message">
+                <div class = "last-message">
+                  Last message of this conversation Last message of this conversation
+                </div>
+              </div>
+
+            </div> 
+        -->
+        </div>
+      
+        
+    </div>
+
+
   </div>
 
-  <div class="col-sm-9">
-    <% if @box == 'trash' %>
-      <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
-                     data: {confirm: 'Are you sure?'} %></p>
-    <% end %>
-    <ul class="list-group">
-      <%= render partial: 'conversations/conversation', collection: @conversations %>
-    </ul>
 
-    <%= will_paginate %>
+  </body>
+</html>
+
+
+
+
+  <div class="col-sm-9">
+
+
   </div>
 </div>

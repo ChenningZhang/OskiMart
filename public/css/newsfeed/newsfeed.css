@@ -41,9 +41,17 @@ footer {
 .top-buffer-100 {
   margin-top: 100px;
 }
+.top-buffer-200 {
+  margin-top: 200px;
+}
 
 .bottom-buffer-50 {
   margin-bottom: 50px;
+}
+
+.shift-left-40 {
+  position: relative;
+  left: -40px;
 }
 /*
 .navbar-color {
