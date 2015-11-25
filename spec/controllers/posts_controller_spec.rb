@@ -84,6 +84,7 @@ RSpec.describe PostsController, :type => :controller do
 		end
 	end
 
+
 	describe "DELETE #destroy" do
 		# TODO: add more test cases after we have the association
 		create_post
@@ -184,13 +185,19 @@ RSpec.describe PostsController, :type => :controller do
 		create_post
 		it 'favorites a post' do
 			put :favorite, post_id: @post.id
+
 			response.should redirect_to :back
 		end
+
+		it 'favorites a post' do
+			put :favorite, post_id: @post.id
+			response.should redirect_to :back
+		end
+
 	end
 
 	describe "GET #index" do
 		create_post
-
 		it 'shows all favorited posts' do
 			get :index, favorites: true 
 			response.should render_template 'index'

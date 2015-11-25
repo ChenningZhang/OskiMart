@@ -18,11 +18,6 @@ class PostsController < ApplicationController
       redirect_to :back  
     end
 
-    def fav_index
-      @posts = current_user.favorites
-      render 'favorites'
-    end
-
     def create
       	@post = Post.new(post_params)
         @post.user_id = current_user.id
