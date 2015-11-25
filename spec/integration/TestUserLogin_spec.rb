@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'User login', :type => :feature do
 	# Memo: Need to test with and without remember_me
@@ -8,7 +7,7 @@ RSpec.describe 'User login', :type => :feature do
 		FactoryGirl.create(:user)
 	end
 
-	it 'lets user to log in with correct credentials(without remember_me)', :js => true do
+	it 'lets user to log in with correct credentials(without remember_me)' do
 		visit @homepage_url
 		click_on 'Log in'
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
@@ -17,7 +16,7 @@ RSpec.describe 'User login', :type => :feature do
 		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'does not let user to log in with incorrect credentials', :js => true do
+	it 'does not let user to log in with incorrect credentials' do
 		visit @homepage_url
 		click_on 'Log in'
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'

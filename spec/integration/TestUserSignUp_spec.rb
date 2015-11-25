@@ -1,8 +1,7 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'User sign up', :type => :feature do
-	it 'lets user to sign up with valid inputs', :js => true do
+	it 'lets user to sign up with valid inputs' do
 		visit @homepage_url
 		click_on 'Sign up'
 		fill_in 'First name', :with => 'Chenning'
@@ -14,7 +13,7 @@ RSpec.describe 'User sign up', :type => :feature do
 		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'rejects user with non-Berkeley email', :js => true do
+	it 'rejects user with non-Berkeley email' do
 		visit @homepage_url
 		click_on 'Sign up'
 		fill_in 'First name', :with => 'Chenning'
@@ -28,7 +27,7 @@ RSpec.describe 'User sign up', :type => :feature do
 		expect(page).to have_title "Sign up"
 	end
 
-	it 'rejects user with empty signup fields', :js => true do
+	it 'rejects user with empty signup fields' do
 		visit @homepage_url
 		click_on 'Sign up'
 		fill_in 'First name', :with => '  '
@@ -44,7 +43,7 @@ RSpec.describe 'User sign up', :type => :feature do
 		expect(page).to have_title "Sign up"
 	end
 
-	it 'rejects user when the password entered is too short', :js => true do
+	it 'rejects user when the password entered is too short' do
 		visit @homepage_url
 		click_on 'Sign up'
 		fill_in 'First name', :with => 'Chenning'
@@ -58,7 +57,7 @@ RSpec.describe 'User sign up', :type => :feature do
 		expect(page).to have_title "Sign up"
 	end
 
-	it 'rejects user when password and password_confirmation do not match', :js => true do
+	it 'rejects user when password and password_confirmation do not match' do
 		visit @homepage_url
 		click_on 'Sign up'
 		fill_in 'First name', :with => 'Chenning'

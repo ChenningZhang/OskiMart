@@ -37,7 +37,7 @@ FactoryGirl.define do
 		association :user, factory: :user, strategy: :build
 	end
 
-	factory :post2 do 
+	factory :post2, class: Post do 
 		title "post 2 Title"
 		description "post 2 description"
 		category "Furniture"
@@ -45,10 +45,15 @@ FactoryGirl.define do
 		association :user, factory: :user, strategy: :build
 	end
 
-
 	factory :comment do
 		text "Test comment"
 		association :user, factory: :user
 		association :post, factory: :post
+	end
+
+	factory :review do
+		score "5"
+		feedback "You are awesome"
+		association :user, factory: :user, strategy: :build
 	end
 end

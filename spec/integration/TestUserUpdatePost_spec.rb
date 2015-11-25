@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'User update post', :type => :feature do
 	before(:each) do
@@ -20,7 +19,7 @@ RSpec.describe 'User update post', :type => :feature do
 
 	# Can not find "Update Post" button
 
-	it 'lets user update the post with valid inputs', :js => true do
+	it 'lets user update the post with valid inputs' do
 		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
@@ -39,7 +38,7 @@ RSpec.describe 'User update post', :type => :feature do
 		expect(page).to have_content "$$$"
 	end
 
-	it 'lets user update the post with valid inpust(with image)', :js => true do
+	it 'lets user update the post with valid inpust(with image)' do
 		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
@@ -56,7 +55,7 @@ RSpec.describe 'User update post', :type => :feature do
 		expect(page).to have_content "$$"
 	end
 
-	it 'does not let user update the post with invalid inputs and renders errors', :js => true do
+	it 'does not let user update the post with invalid inputs and renders errors' do
 		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"

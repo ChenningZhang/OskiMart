@@ -5,13 +5,6 @@ class PostsController < ApplicationController
         @post = Post.new
     end
 
-    # def back
-    #   redirect_to :back
-    # rescue ActionController::RedirectBackError
-    #   redirect_to root_path
-    # end
-
-    # favorite a post method
     def favorite
       @post = Post.find(params[:post_id])
       # if post in favorite list then remove 
@@ -52,11 +45,9 @@ class PostsController < ApplicationController
       if not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title =  params[:category_id]
-        #puts "first if"
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title = "General"
-        puts "else"
       end
 
       if params[:price] #if filter
@@ -65,8 +56,6 @@ class PostsController < ApplicationController
       end 
 
       if params[:keywords] #if search
-        #puts params[:keywords] 
-        #puts params[:category_id]
         @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
         #if @posts.empty?
@@ -91,7 +80,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          redirect_to(@post)
+          redirect_to comments_path(:post_id => @post.id)
         else
           render 'edit'
         end
@@ -109,14 +98,8 @@ class PostsController < ApplicationController
       end
     end
 
-
-    # def author
-    #     @post.user = current_user.first_name
-    # end    
-
-      
     private
       	def post_params
-      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image, :remote_image_url)
       	end
 end
