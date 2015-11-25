@@ -95,6 +95,14 @@ RSpec.describe PostsController, :type => :controller do
 			expect{Post.find(@post.id)}.to raise_error(ActiveRecord::RecordNotFound)
 		end
 
+		it 'deletes the selected post, adds to ClosedPost database' do
+			expect{
+				delete :destroy, id: @post.id
+			}.to change(ClosedPost, :count).from(ClosedPost.count).to(ClosedPost.count + 1)
+			response.should redirect_to posts_path
+			expect{Post.find(@post.id)}.to raise_error(ActiveRecord::RecordNotFound)
+		end
+
 		it 'does not delete post when an invalid id is given' do
 			expect{
 				delete :destroy, id: -1
@@ -114,7 +122,7 @@ RSpec.describe PostsController, :type => :controller do
 		create_post
 		it 'updates the post with valid data' do
 			put :update, post: FactoryGirl.attributes_for(:post, title: "New Title", description: "New Description", price: "$"), commit: 'update', id: @post.id
-			response.should redirect_to @post
+			response.should redirect_to comments_path(:post_id => @post.id)
 			Post.find(@post.id).title.should eq("New Title")
 			Post.find(@post.id).description.should eq("New Description")
 			Post.find(@post.id).category.should eq("Technology")
