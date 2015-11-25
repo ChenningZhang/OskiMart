@@ -10,6 +10,7 @@ RSpec.describe 'User closes post', :type => :feature do
 		fill_in 'Password', :with => '12345678'
 		click_on 'Sign In'
 		expect(page).to have_title "Newsfeed"
+
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Test Title'
 		fill_in 'Description', :with => 'Test Description'
@@ -33,6 +34,25 @@ RSpec.describe 'User closes post', :type => :feature do
 		click_on 'Closed posts'
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
+
+		click_on 'Restore'
+		expect(page).to_not have_content "Test Title"
+		expect(page).to_not have_content "Test Description"
+		visit '/posts'
+		expect(page).to have_content "Test Title"
+		expect(page).to have_content "Test Description"
+
+		click_on 'Close'
+		accept_alert('Are you sure?')
+		click_on 'profile'
+		click_on 'Closed posts'
+		click_on 'Delete'
+		accept_alert('Are you sure you want to delete this post forever?')
+		expect(page).to_not have_content "Test Title"
+		expect(page).to_not have_content "Test Description"
+		visit '/posts'
+		expect(page).to_not have_content "Test Title"
+		expect(page).to_not have_content "Test Description"
 	end
 
 end

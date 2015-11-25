@@ -134,8 +134,8 @@
                         <div class = "row top-buffer-50">
 
                                 <% if current_user.id == post.user_id %>
-                                    <%= link_to "Restore", restore_post_path(:post_id => post.id), class: "post-option-button"%>
-                                    <%= link_to "Delete", post, method: :delete, data: { confirm: "Are you sure you want to delete this post forever?" }, class: "post-option-button" %>
+                                    <%= link_to "Restore", restore_post_path(:post_id => post.id), class: "post-option-button", id: "Restore" %>
+                                    <%= link_to "Delete", post, method: :delete, data: { confirm: "Are you sure you want to delete this post forever?" }, class: "post-option-button", id: "Delete"%>
                                 <% end %>
                             </div>
 
