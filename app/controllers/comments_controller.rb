@@ -21,10 +21,6 @@ class CommentsController < ApplicationController
     end
 	end
 
-	def show
-      @comment = Comment.find(params[:id])
-  end
-
     def index
       if Post.where(:id => params[:post_id]).empty?
           redirect_to posts_path

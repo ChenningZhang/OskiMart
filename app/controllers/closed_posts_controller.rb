@@ -1,19 +1,12 @@
 class ClosedPostsController < ApplicationController
 	before_action :authenticate_user!
 
-    def new
-        @post = ClosedPost.new
-    end
-
     def create
       	@closed_post = ClosedPost.new(closed_post_params)
         @closed_post.user_id = current_user.id
         current_user.closed_posts << @closed_post
         @closed_post.save
-    end
-
-    def show
-        @closed_post = ClosedPost.find(params[:id])
+        redirect_to :back
     end
 
     def index

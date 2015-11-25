@@ -110,11 +110,33 @@ RSpec.describe PostsController, :type => :controller do
 		end
 	end
 
+	describe "DELETE #destroy" do
+		create_post
+		create_second_user
+		login_second_user
+		it 'does not delete the selected post' do
+			expect{
+				delete :destroy, id: @post.id
+			}.to_not change(Post, :count)
+			response.should redirect_to posts_path
+		end
+	end
+
 	describe "GET #edit" do
 		create_post
 		it 'redirects to the update the selected post page' do
 			get :edit, id: @post.id
 			response.should render_template 'edit'
+		end
+	end
+
+	describe "GET #edit" do
+		create_post
+		create_second_user
+		login_second_user
+		it 'does not let user to edit post' do
+			get :edit, id: @post.id
+			response.should redirect_to posts_path
 		end
 	end
 

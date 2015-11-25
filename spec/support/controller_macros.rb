@@ -4,6 +4,8 @@ module ControllerMacros
 			@request.env["devise.mapping"] = Devise.mappings[:user]
 			@user = FactoryGirl.create(:user)
 			sign_in @user
+			request.env["HTTP_REFERER"] = "http://test.host/posts"
+
 		end
 	end
 
@@ -62,6 +64,16 @@ module ControllerMacros
 			sign_in @user
 			@post = FactoryGirl.create(:post, :user_id => @user.id)
 			request.env["HTTP_REFERER"] = "http://test.host/posts"
+		end
+	end
+
+	def create_closed_post
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			@user = FactoryGirl.create(:user)
+			sign_in @user
+			@closed_post = FactoryGirl.create(:closed_post, :user_id => @user.id)
+			request.env["HTTP_REFERER"] = "http://test.host/closed_posts"
 		end
 	end
 
