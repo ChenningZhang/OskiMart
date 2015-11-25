@@ -5,7 +5,6 @@ RSpec.describe 'User creates posts to favorite and it ', :type => :feature do
 
 	before(:each) do
 		FactoryGirl.create(:user)
-
 		visit @homepage_url
 		click_on 'Log in'
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
@@ -18,24 +17,27 @@ RSpec.describe 'User creates posts to favorite and it ', :type => :feature do
 		page.select 'Books', :from => 'post_category'
 		page.select '$$', :from => 'post_price'
 		click_on 'Create Post!'
-
-		
-
-		
-
 	end
 
-	it 'lets user put a post in favorites list and checks its in favorites page', :js => true do
-		expect(page).to have_content "General Newsfeed"
-		expect(page).to have_content 'Book Title'
-		expect(page).to have_content 'Book Description'
-		expect(page).to have_content 'Books'
-		expect(page).to have_content '$$'
-		click_on 'Favorite' 
-		click_on 'Favorites'
-		expect(page).to have_content  "Favorites"
-		expect(page).to have_content 'Book Title'
+	it 'lets user favorite and Unfavorite a post', :js => true do
+		expect(page).to have_title 'Newsfeed'
+		# Click favorite, post is still there. Favorite button changed
+		click_on 'Favorite'
+		expect(page).to have_title 'Newsfeed'
+		expect(page).to have_content "Book Title"
+		expect(page).to have_content "Book Description"
+		# Go to favorite list, post is there. Check Header.
+		visit '/posts?favorites=true'
+		expect(page).to have_css("h1", text: "Favorites")
+		expect(page).to have_content "Book Title"
+		expect(page).to have_content "Book Description"
+		# Click Unfavorite. Post disappear. Check header.
+		click_on 'Unfavorite'
+		expect(page).to_not have_content "Book Title"
+		expect(page).to_not have_content "Book Description"
+		expect(page).to have_css("h1", text: "Favorites")
+		# Post still in newsfeed. Check header and buttons.
+		visit '/posts'
+		expect(page).to have_css("h1", "General")
 	end
-
-		
 end
