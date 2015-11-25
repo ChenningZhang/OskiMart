@@ -45,11 +45,9 @@ class PostsController < ApplicationController
       if not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title =  params[:category_id]
-        #puts "first if"
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title = "General"
-        puts "else"
       end
 
       if params[:price] #if filter
@@ -58,8 +56,6 @@ class PostsController < ApplicationController
       end 
 
       if params[:keywords] #if search
-        #puts params[:keywords] 
-        #puts params[:category_id]
         @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
         #if @posts.empty?
@@ -104,6 +100,6 @@ class PostsController < ApplicationController
 
     private
       	def post_params
-      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image, :remote_image_url)
       	end
 end

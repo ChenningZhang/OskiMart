@@ -9,7 +9,7 @@ RSpec.describe 'User update post', :type => :feature do
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
 		fill_in 'Password', :with => '12345678'
 		click_on 'Sign In'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Test Title'
 		fill_in 'Description', :with => 'Test Description'

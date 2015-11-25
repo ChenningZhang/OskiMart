@@ -122,11 +122,14 @@
 				<div class = "control-label post_buttons">
 					<%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
 				</div>
+        <div class = "col-md-8">
+          <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
+        </div>
 			</div>
 
 			<div class = "row top-buffer-25">
 				<div class="col-md-offset-3 col-md-3">
-						<%= f.submit "Create Post!", class: "update-button" %>
+						<%= f.submit "Create Post!", class: "update-button", id: "Create Post!" %>
 						<% end %>
 				</div>
 				<div class="col-md-3">

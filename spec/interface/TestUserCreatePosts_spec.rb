@@ -9,17 +9,31 @@ RSpec.describe 'User create post', :type => :feature do
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
 		fill_in 'Password', :with => '12345678'
 		click_on 'Sign In'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'lets user create a post with valid inputs', :js => true do
+	it 'lets user create a post with valid inputs(without image)', :js => true do
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Test Title'
 		fill_in 'Description', :with => 'Test Description'
 		page.select 'Books', :from => 'post_category'
 		page.select '$$', :from => 'post_price'
 		click_on 'Create Post!'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
+		expect(page).to have_content "Test Title"
+		expect(page).to have_content "Test Description"
+		expect(page).to have_content "Books"
+		expect(page).to have_content "$$"
+	end
+
+	it 'lets user create a post with valid inputs(with an image)', :js => true do
+		click_on 'Create Post!'
+		fill_in 'Title', :with => 'Test Title'
+		fill_in 'Description', :with => 'Test Description'
+		page.select 'Books', :from => 'post_category'
+		page.select '$$', :from => 'post_price'
+		click_on 'Create Post!'
+		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
 		expect(page).to have_content "Books"
