@@ -67,8 +67,8 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <%if user_signed_in? %>
-                      <li>
-                        <%=link_to user_path(current_user.id) do%>
+                      <li id= 'profile'>
+                        <%=link_to user_path(current_user.id), :id => 'profile' do%>
                           <%=User.find(current_user.id).first_name%>
                           <span class="glyphicon glyphicon-user"></span> 
                         <%end%>
@@ -137,7 +137,7 @@
         <%= link_to "Message", conversations_path%>
       </div>
       <div class="top-buffer-25">
-        <%= link_to "Closed posts", closed_posts_path(:user_id => @user.id)%>
+        <%= link_to "Closed posts", closed_posts_path(:user_id => @user.id), id: 'Closed posts' %>
       </div>
   </div>
   <div class = "col-md-7 col-md-offset-1 top-buffer-75">
