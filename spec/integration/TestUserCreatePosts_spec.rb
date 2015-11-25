@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'User create post', :type => :feature do
 	before(:each) do
@@ -12,7 +11,7 @@ RSpec.describe 'User create post', :type => :feature do
 		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'lets user create a post with valid inputs(without image)', :js => true do
+	it 'lets user create a post with valid inputs(without image)' do
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Test Title'
 		fill_in 'Description', :with => 'Test Description'
@@ -26,7 +25,7 @@ RSpec.describe 'User create post', :type => :feature do
 		expect(page).to have_content "$$"
 	end
 
-	it 'lets user create a post with valid inputs(with an image)', :js => true do
+	it 'lets user create a post with valid inputs(with an image)' do
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Test Title'
 		fill_in 'Description', :with => 'Test Description'
@@ -41,7 +40,7 @@ RSpec.describe 'User create post', :type => :feature do
 		expect(page).to have_content "$$"
 	end
 
-	it 'does not let user create a post with empty fields, and renders errors', :js => true do
+	it 'does not let user create a post with empty fields, and renders errors' do
 		click_on 'Create Post!'
 		fill_in 'Title', :with => '   '
 		fill_in 'Description', :with => '   '

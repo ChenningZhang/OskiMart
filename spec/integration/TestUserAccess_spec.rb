@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 # only post owner have update and close access on each post
 # only comment owner gets to delete and update comment
@@ -21,14 +20,14 @@ RSpec.describe 'User Access', :type => :feature do
 		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'does not allow non-post-owner to update and close post', :js => true do
+	it 'does not allow non-post-owner to update and close post' do
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test description"
 		expect(page).to_not have_selector "Update"
 		expect(page).to_not have_selector "Close"
 	end
 
-	it 'only allows comment owner to update and delete comment', :js => true do
+	it 'only allows comment owner to update and delete comment' do
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test description"
 
@@ -54,14 +53,14 @@ RSpec.describe 'User Access', :type => :feature do
 		expect(page).to_not have_selector('#Remove_comment', visible: true)
 	end
 
-	it 'only shows update image fields on the user own profile page', :js => true do
+	it 'only shows update image fields on the user own profile page' do
 		click_on 'profile'
 		expect(page).to have_selector('#edit_user_'+@user1.id.to_s, visible: true)
 		visit '/users/' + @user2.id.to_s
 		expect(page).to_not have_selector('#edit_user_'+@user1.id.to_s, visible: true)
 	end
 
-	it 'only shows Add Review button on other user profile page', :js => true do
+	it 'only shows Add Review button on other user profile page' do
 		click_on 'profile'
 		expect(page).to_not have_selector "Add Review"
 		visit '/users/' + @user2.id.to_s

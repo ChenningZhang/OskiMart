@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<% provide(:title, 'Comments for '+ Post.find(params[:post_id]).title) %>
+<% provide(:title, Post.find(params[:post_id]).title) %>
     <html lang="en">
 
     <head>
@@ -46,16 +46,16 @@
                             <a href="/about">About</a>
                         </li>
                         <li class = "dropdown">
-                            <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                            <a class = "dropdown-toggle" id="Categories" data-toggle="dropdown" role="button">
                               Categories <b class="caret"></b>
                             </a>
                           <ul class="dropdown-menu">
-                            <li><%=link_to "General", posts_path()%></li>
-                            <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-                            <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-                            <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-                            <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-                            <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                            <li><%=link_to "General", posts_path(), :id => "General" %></li>
+                            <li><%=link_to "Books", posts_path(category_id: 'Books'), :id => "Books" %></li>
+                            <li><%=link_to "Technology", posts_path(category_id: 'Technology'), :id => "Technology" %></li>
+                            <li><%=link_to "Furniture", posts_path(category_id: 'Furniture'), :id => "Furniture" %></li>
+                            <li><%=link_to "Service", posts_path(category_id: 'Service'), :id => "Service" %></li>
+                            <li><%=link_to "Other", posts_path(category_id: 'Other'), :id => "Other" %></li>
 
 
                           </ul>
@@ -72,15 +72,15 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <%if user_signed_in? %>
-                          <li>
-                            <%=link_to user_path(current_user.id) do%>
+                          <li id= 'profile'>
+                            <%=link_to user_path(current_user.id), :id => 'profile' do%>
                               <%=User.find(current_user.id).first_name%>
                               <span class="glyphicon glyphicon-user"></span> 
                             <%end%>
                           </li>
                           <li>
                             
-                            <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                            <%=link_to destroy_user_session_path, :method=>'delete', :id => 'Logout' do%>
                               Logout
                               <span class="glyphicon glyphicon-log-out"></span> 
                             <%end%>
@@ -129,12 +129,12 @@
                 </div>
               <div class = "row top-buffer-25">
                     <% if current_user.id == post.user_id %>
-                        <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
-                        <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
+                        <%= link_to "Update", edit_post_path(post), class: "post-option-button", :id => "Update" %>
+                        <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", :id => "Close" %>
                     <% end %>
 
                     
-                    <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+                    <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button", :id => "Comments" %>
                     <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
                 </div>
 
@@ -143,10 +143,10 @@
         </div>
         <div class = "row top-buffer-25">
             <div class="col-md-offset-4 col-md-3">
-                <%= link_to "Add Comment", new_comment_path(:post_id => params[:post_id]), class: "btn btn-lg btn-primary" %>
+                <%= link_to "Add Comment", new_comment_path(:post_id => params[:post_id]), class: "btn btn-lg btn-primary", id: "Add Comment" %>
             </div>
             <div class="col-md-3">
-              <%= link_to 'Back', posts_path, class: "btn btn-lg btn-primary"%>
+              <%= link_to 'Back', posts_path, class: "btn btn-lg btn-primary", id: "Back" %>
             </div>
           </div>
         </div>
@@ -167,8 +167,8 @@
                         </div>
                         <div class = "col-md-6">
                           <% if current_user.id == comment.user_id %>
-                            <%= link_to "Update", edit_comment_path(comment), class: "post-option-button"%>
-                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %></td>
+                            <%= link_to "Update", edit_comment_path(comment), class: "post-option-button", id: "Update_comment" %>
+                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", id: "Remove_comment" %></td>
                           <% end %>
                         </div>
                     </div>

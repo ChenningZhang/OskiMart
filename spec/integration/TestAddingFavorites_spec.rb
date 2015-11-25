@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'Favorite Post', :type => :feature do
 
@@ -19,7 +18,7 @@ RSpec.describe 'Favorite Post', :type => :feature do
 		click_on 'Create Post!'
 	end
 
-	it 'lets user favorite and Unfavorite a post', :js => true do
+	it 'lets user favorite and Unfavorite a post' do
 		expect(page).to have_title 'Newsfeed'
 		# Click favorite, post is still there. Favorite button changed
 		click_on 'Favorite'

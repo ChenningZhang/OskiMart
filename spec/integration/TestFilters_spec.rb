@@ -1,7 +1,6 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
-RSpec.describe 'User search posts by keyword', :type => :feature do
+RSpec.describe 'User filters posts', :type => :feature do
 	before(:each) do
 		FactoryGirl.create(:user)
 		visit @homepage_url
@@ -47,24 +46,42 @@ RSpec.describe 'User search posts by keyword', :type => :feature do
 		click_on 'Create Post!'
 	end
 
-	it 'lets user to find posts that contain the keyword', :js => true do
+	it 'filters posts by price' do
 		expect(page).to have_title "Newsfeed"
-		fill_in 'keywords', :with => '169'
-		click_on 'Search'
-		expect(page).to have_content '169 test service'
-		expect(page).to have_content 'I can write tests for your project!'
+
+		click_on '$'
 		expect(page).to have_content 'Capybara'
-		expect(page).to have_content 'This is not a real capybara, but a 169 capybara.'
+
+		click_on '$$'
+		expect(page).to have_content 'Book Title'
+		expect(page).to have_content 'This is a furniture'
+
+		click_on '$$$'
+		expect(page).to have_content 'This is another furniture'
+		expect(page).to have_content '169 test service'
 	end
 
-	it 'does not show any post when no post matches the keyword', :js => true do
+	it 'filters posts by category' do
 		expect(page).to have_title "Newsfeed"
-		fill_in 'keywords', :with => 'weird keyword'
-		click_on 'Search'
+
+		visit '/posts?category_id=Books'
+		expect(page).to have_content 'Book Title'
+
+		visit '/posts?category_id=Furniture'
+		expect(page).to have_content 'This is a furniture'
+		expect(page).to have_content 'This is another furniture'
+
+		visit '/posts?category_id=Service'
+		expect(page).to have_content '169 test service'
+
+		visit '/posts?category_id=Other'
+		expect(page).to have_content 'Capybara'
+
+		visit '/posts?category_id=Technology'
+		expect(page).to_not have_content 'Capybara'
 		expect(page).to_not have_content 'Book Title'
 		expect(page).to_not have_content 'This is a furniture'
 		expect(page).to_not have_content 'This is another furniture'
 		expect(page).to_not have_content '169 test service'
-		expect(page).to_not have_content 'Capybara'
 	end
 end

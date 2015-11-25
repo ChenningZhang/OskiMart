@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'User search posts by keyword', :type => :feature do
 	before(:each) do
@@ -47,7 +46,7 @@ RSpec.describe 'User search posts by keyword', :type => :feature do
 		click_on 'Create Post!'
 	end
 
-	it 'lets user to find posts that contain the keyword', :js => true do
+	it 'lets user to find posts that contain the keyword' do
 		expect(page).to have_title "Newsfeed"
 		fill_in 'keywords', :with => '169'
 		click_on 'Search'
@@ -57,7 +56,7 @@ RSpec.describe 'User search posts by keyword', :type => :feature do
 		expect(page).to have_content 'This is not a real capybara, but a 169 capybara.'
 	end
 
-	it 'does not show any post when no post matches the keyword', :js => true do
+	it 'does not show any post when no post matches the keyword' do
 		expect(page).to have_title "Newsfeed"
 		fill_in 'keywords', :with => 'weird keyword'
 		click_on 'Search'

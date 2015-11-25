@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'Review Users', :type => :feature do
 	before(:each) do
@@ -12,7 +11,7 @@ RSpec.describe 'Review Users', :type => :feature do
 		click_on 'Sign In'
 	end
 
-	it 'lets a user to review another user with valid inputs', :js => true do
+	it 'lets a user to review another user with valid inputs' do
 		visit '/users/'+@user2.id.to_s
 		expect(page).to have_content 'No reviews to show'
 		click_on 'Add Review'
@@ -25,7 +24,7 @@ RSpec.describe 'Review Users', :type => :feature do
 		expect(page).to have_content 'Feedback: This person is chill'
 	end
 
-	it 'rejects reviews with blank feedback', :js => true do
+	it 'rejects reviews with blank feedback' do
 		visit '/users/'+@user2.id.to_s
 		expect(page).to have_content 'No reviews to show'
 		click_on 'Add Review'
