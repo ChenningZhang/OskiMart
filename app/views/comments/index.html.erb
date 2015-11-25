@@ -129,12 +129,12 @@
                 </div>
               <div class = "row top-buffer-25">
                     <% if current_user.id == post.user_id %>
-                        <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
-                        <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
+                        <%= link_to "Update", edit_post_path(post), class: "post-option-button", :id => "Update" %>
+                        <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", :id => "Close" %>
                     <% end %>
 
                     
-                    <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+                    <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button", :id => "Comments" %>
                     <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, :id => "Favorite" %>
                 </div>
 
@@ -143,10 +143,10 @@
         </div>
         <div class = "row top-buffer-25">
             <div class="col-md-offset-4 col-md-3">
-                <%= link_to "Add Comment", new_comment_path(:post_id => params[:post_id]), class: "btn btn-lg btn-primary" %>
+                <%= link_to "Add Comment", new_comment_path(:post_id => params[:post_id]), class: "btn btn-lg btn-primary", id: "Add Comment" %>
             </div>
             <div class="col-md-3">
-              <%= link_to 'Back', posts_path, class: "btn btn-lg btn-primary"%>
+              <%= link_to 'Back', posts_path, class: "btn btn-lg btn-primary", id: "Back" %>
             </div>
           </div>
         </div>
@@ -167,8 +167,8 @@
                         </div>
                         <div class = "col-md-6">
                           <% if current_user.id == comment.user_id %>
-                            <%= link_to "Update", edit_comment_path(comment), class: "post-option-button"%>
-                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %></td>
+                            <%= link_to "Update", edit_comment_path(comment), class: "post-option-button", id: "Update_comment" %>
+                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", id: "Remove" %></td>
                           <% end %>
                         </div>
                     </div>
