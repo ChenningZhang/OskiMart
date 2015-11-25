@@ -80,7 +80,7 @@
                           </li>
                           <li>
                             
-                            <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                            <%=link_to destroy_user_session_path, :method=>'delete', :id => 'Logout' do%>
                               Logout
                               <span class="glyphicon glyphicon-log-out"></span> 
                             <%end%>
@@ -168,7 +168,7 @@
                         <div class = "col-md-6">
                           <% if current_user.id == comment.user_id %>
                             <%= link_to "Update", edit_comment_path(comment), class: "post-option-button", id: "Update_comment" %>
-                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", id: "Remove" %></td>
+                            <%= link_to "Remove", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", id: "Remove_comment" %></td>
                           <% end %>
                         </div>
                     </div>
