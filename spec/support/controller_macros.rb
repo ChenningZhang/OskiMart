@@ -120,4 +120,14 @@ module ControllerMacros
 			sign_out @user
 		end
 	end
+
+	def create_review
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			@user = FactoryGirl.create(:user)
+			@user2 = FactoryGirl.create(:user2)
+			sign_in @user
+			FactoryGirl.create(:review, :user_id => @user.id)
+		end
+	end
 end

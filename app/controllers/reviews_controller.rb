@@ -17,23 +17,7 @@ class ReviewsController < ApplicationController
 			render 'new'
 		end
 	end
-
-	def index
-		@reviews = Review.all.where(:user_id => params[:user_id])
-	end
-
-	def show
-		@review = Review.find(params[:id])
-	end
-
-	def destroy
-		@review = Review.find(params[:id])
-		if @review.user_id == current_user.id
-			Review.destroy(params[:id])
-			redirect_to posts_path
-		end
-	end
-
+	
 	private
 		def review_params
 			params.require(:review).permit(:user_id, :score, :feedback)
