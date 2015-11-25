@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'selenium-webdriver'
 
 RSpec.describe 'Comments', :type => :feature do
 
@@ -19,7 +18,7 @@ RSpec.describe 'Comments', :type => :feature do
 		click_on 'Create Post!'
 	end
 
-	it 'lets user to comment post if the comment is not empty', :js => true do
+	it 'lets user to comment post if the comment is not empty' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -36,7 +35,7 @@ RSpec.describe 'Comments', :type => :feature do
 		expect(page).to have_title "Newsfeed"
 	end
 
-	it 'lets user go back to post view on the add comment page', :js => true do
+	it 'lets user go back to post view on the add comment page' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -50,7 +49,7 @@ RSpec.describe 'Comments', :type => :feature do
 		expect(page).to have_title "Test Title"
 	end
 
-	it 'rejects the comment when it is empty', :js => true do
+	it 'rejects the comment when it is empty' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -66,7 +65,7 @@ RSpec.describe 'Comments', :type => :feature do
 		expect(page).to have_title "Add comments for Test Title"
 	end
 
-	it 'lets user to updates his comment', :js => true do
+	it 'lets user to updates his comment' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -88,7 +87,7 @@ RSpec.describe 'Comments', :type => :feature do
 		expect(page).to_not have_content "Comment: You are awesome"
 	end
 
-	it 'lets user go back to post view on update comment page', :js => true do
+	it 'lets user go back to post view on update comment page' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -108,7 +107,7 @@ RSpec.describe 'Comments', :type => :feature do
 		expect(page).to have_content "Comment: You are awesome"
 	end
 
-	it 'lets user delete comment', :js => true do
+	it 'lets user delete comment' do
 		expect(page).to have_title "Newsfeed"
 		click_on "Comments"
 		expect(page).to have_title "Test Title"
@@ -122,7 +121,6 @@ RSpec.describe 'Comments', :type => :feature do
 		click_on 'Comment'
 		expect(page).to have_content "Comment: You are awesome"
 		click_on 'Remove_comment'
-		accept_alert("Are you sure?")
 		expect(page).to have_title 'Test Title'
 		expect(page).to_not have_content "Comment: You are awesome"
 	end
