@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<% provide(:title, 'Comments for '+ Post.find(params[:post_id]).title) %>
+<% provide(:title, Post.find(params[:post_id]).title) %>
     <html lang="en">
 
     <head>

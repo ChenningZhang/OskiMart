@@ -178,16 +178,16 @@
 				         	<div class = "row top-buffer-25">
 
 				                <% if current_user.id == post.user_id %>
-				                    <%= link_to "Update", edit_post_path(post), class: "post-option-button"%>
-				                    <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button" %>
+				                    <%= link_to "Update", edit_post_path(post), class: "post-option-button", id: "Update" %>
+				                    <%= link_to "Close", post, method: :delete, data: { confirm: "Are you sure?" }, class: "post-option-button", id: "Close"%>
 				                <% end %>
 
                         
-				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button" %>
+				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button", id: "Comments" %>
                         <% if current_user.favorites.include?(post) %>
-				                  <%= link_to "Unfavorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put%>
+				                  <%= link_to "Unfavorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Unfavorite" %>
                         <% else %>
-                          <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put%>
+                          <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Favorite" %>
                         <% end %>
                            </div>
 

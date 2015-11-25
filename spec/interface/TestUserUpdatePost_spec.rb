@@ -21,12 +21,12 @@ RSpec.describe 'User update post', :type => :feature do
 	# Can not find "Update Post" button
 
 	it 'lets user update the post with valid inputs', :js => true do
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
 		expect(page).to have_content "Books"
 		expect(page).to have_content "$$"
-		click_on 'Update Post'
+		click_on 'Update'
 		fill_in 'Title', :with => 'New Title'
 		fill_in 'Description', :with => 'New Description'
 		page.select 'Furniture', :from => 'post_category'
@@ -39,13 +39,30 @@ RSpec.describe 'User update post', :type => :feature do
 		expect(page).to have_content "$$$"
 	end
 
-	it 'does not let user update the post with invalid inputs and renders errors', :js => true do
-		expect(page).to have_title "Newsfeed Page"
+	it 'lets user update the post with valid inpust(with image)', :js => true do
+		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
 		expect(page).to have_content "Books"
 		expect(page).to have_content "$$"
-		click_on 'Update Post'
+		click_on 'Update'
+		fill_in 'post_remote_image_url', :with => 'http://www.sdpk.eu/wp-content/uploads/2014/07/number-2-u-s-president-barack-obama-second-most-admired-person-planet.jpg'
+		click_on 'Update'
+
+		expect(page).to have_title "Test Title"
+		expect(page).to have_content "Test Title"
+		expect(page).to have_content "Test Description"
+		expect(page).to have_content "Books"
+		expect(page).to have_content "$$"
+	end
+
+	it 'does not let user update the post with invalid inputs and renders errors', :js => true do
+		expect(page).to have_title "Newsfeed"
+		expect(page).to have_content "Test Title"
+		expect(page).to have_content "Test Description"
+		expect(page).to have_content "Books"
+		expect(page).to have_content "$$"
+		click_on 'Update'
 		fill_in 'Title', :with => '   '
 		fill_in 'Description', :with => '   '
 		page.select 'Furniture', :from => 'post_category'
@@ -55,7 +72,7 @@ RSpec.describe 'User update post', :type => :feature do
 		expect(page).to have_content "Title can't be blank"
 		expect(page).to have_content "Description can't be blank"
 		click_on 'Back'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
 		expect(page).to have_content "Test Description"
 		expect(page).to have_content "Books"

@@ -32,6 +32,7 @@ RSpec.describe 'User create post', :type => :feature do
 		fill_in 'Description', :with => 'Test Description'
 		page.select 'Books', :from => 'post_category'
 		page.select '$$', :from => 'post_price'
+		fill_in 'post_remote_image_url', :with => 'http://www.sdpk.eu/wp-content/uploads/2014/07/number-2-u-s-president-barack-obama-second-most-admired-person-planet.jpg'
 		click_on 'Create Post!'
 		expect(page).to have_title "Newsfeed"
 		expect(page).to have_content "Test Title"
