@@ -116,8 +116,28 @@ module ControllerMacros
 			@user2 = FactoryGirl.create(:user2)
 			@user3 = FactoryGirl.create(:user3)
 			sign_in @user
-			@message = @user.send_message([@user2, @user3], "This is the body of the message", "This is a subject").conversation
+			@conversation = @user.send_message([@user2, @user3], "This is the body of the message", "This is a subject").conversation
 			sign_out @user
 		end
 	end
+
+	def send_message_from_2_to_1
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			sign_in @user2
+			@conversation2 = @user2.send_message([@user], "This is another body", "Hey 1, it's 2").conversation
+			sign_out @user2
+		end
+	end
+
+	def delete_conversation_for_2
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			sign_in @user2
+			@conversation.move_to_trash(@user2)
+			sign_out @user2
+		end
+	end
+
+
 end
