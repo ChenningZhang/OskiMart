@@ -9,5 +9,16 @@ class UsersController < ApplicationController
     @reviews = @user.reviews
 
   end
+
+
+  def update
+        @user = User.find(params[:id])
+        if @user.update_attributes(user_params)
+          flash[:success] = "Your profile has been updated!"
+          redirect_to(@user)
+        else
+          render 'update'
+        end
+    end
   
 end
