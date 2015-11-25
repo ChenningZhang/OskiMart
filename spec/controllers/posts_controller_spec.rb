@@ -84,6 +84,7 @@ RSpec.describe PostsController, :type => :controller do
 		end
 	end
 
+
 	describe "DELETE #destroy" do
 		# TODO: add more test cases after we have the association
 		create_post
@@ -95,10 +96,30 @@ RSpec.describe PostsController, :type => :controller do
 			expect{Post.find(@post.id)}.to raise_error(ActiveRecord::RecordNotFound)
 		end
 
+		it 'deletes the selected post, adds to ClosedPost database' do
+			expect{
+				delete :destroy, id: @post.id
+			}.to change(ClosedPost, :count).from(ClosedPost.count).to(ClosedPost.count + 1)
+			response.should redirect_to posts_path
+			expect{Post.find(@post.id)}.to raise_error(ActiveRecord::RecordNotFound)
+		end
+
 		it 'does not delete post when an invalid id is given' do
 			expect{
 				delete :destroy, id: -1
 			}.to raise_error(ActiveRecord::RecordNotFound)
+		end
+	end
+
+	describe "DELETE #destroy" do
+		create_post
+		create_second_user
+		login_second_user
+		it 'does not delete the selected post' do
+			expect{
+				delete :destroy, id: @post.id
+			}.to_not change(Post, :count)
+			response.should redirect_to posts_path
 		end
 	end
 
@@ -110,11 +131,21 @@ RSpec.describe PostsController, :type => :controller do
 		end
 	end
 
+	describe "GET #edit" do
+		create_post
+		create_second_user
+		login_second_user
+		it 'does not let user to edit post' do
+			get :edit, id: @post.id
+			response.should redirect_to posts_path
+		end
+	end
+
 	describe "PUT #update" do
 		create_post
 		it 'updates the post with valid data' do
 			put :update, post: FactoryGirl.attributes_for(:post, title: "New Title", description: "New Description", price: "$"), commit: 'update', id: @post.id
-			response.should redirect_to @post
+			response.should redirect_to comments_path(:post_id => @post.id)
 			Post.find(@post.id).title.should eq("New Title")
 			Post.find(@post.id).description.should eq("New Description")
 			Post.find(@post.id).category.should eq("Technology")
@@ -154,13 +185,19 @@ RSpec.describe PostsController, :type => :controller do
 		create_post
 		it 'favorites a post' do
 			put :favorite, post_id: @post.id
+
 			response.should redirect_to :back
 		end
+
+		it 'favorites a post' do
+			put :favorite, post_id: @post.id
+			response.should redirect_to :back
+		end
+
 	end
 
 	describe "GET #index" do
 		create_post
-
 		it 'shows all favorited posts' do
 			get :index, favorites: true 
 			response.should render_template 'index'

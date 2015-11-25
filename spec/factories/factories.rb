@@ -37,6 +37,15 @@ FactoryGirl.define do
 		association :user, factory: :user, strategy: :build
 	end
 
+	factory :closed_post, class: ClosedPost do
+		title "Test Title"
+		description "Test description"
+		category "Technology"
+		price "$$"
+		image "nil"
+		association :user, factory: :user, strategy: :build
+	end
+
 	factory :post2, class: Post do 
 		title "post 2 Title"
 		description "post 2 description"
