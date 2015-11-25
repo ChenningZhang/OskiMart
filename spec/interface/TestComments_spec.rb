@@ -107,4 +107,23 @@ RSpec.describe 'User Access', :type => :feature do
 		expect(page).to have_title "Test Title"
 		expect(page).to have_content "Comment: You are awesome"
 	end
+
+	it 'lets user delete comment', :js => true do
+		expect(page).to have_title "Newsfeed"
+		click_on "Comments"
+		expect(page).to have_title "Test Title"
+		expect(page).to have_content "Test Title"
+		expect(page).to have_content "Test Description"
+		expect(page).to_not have_content "Comment:"
+
+		click_on "Add Comment"
+		expect(page).to have_title "Add comments for Test Title"
+		fill_in 'comment_text', :with => 'You are awesome'
+		click_on 'Comment'
+		expect(page).to have_content "Comment: You are awesome"
+		click_on 'Remove_comment'
+		accept_alert("Are you sure?")
+		expect(page).to have_title 'Test Title'
+		expect(page).to_not have_content "Comment: You are awesome"
+	end
 end
