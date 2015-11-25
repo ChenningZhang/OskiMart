@@ -84,7 +84,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          redirect_to(@post)
+          redirect_to comments_path(:post_id => @post.id)
         else
           render 'edit'
         end

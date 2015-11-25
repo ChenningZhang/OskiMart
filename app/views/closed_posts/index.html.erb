@@ -115,7 +115,7 @@
             <div class = "row top-buffer-35 newsfeed-post">
             		<h2 class = "post-title">Title: <%= post.title%></h2>
 		            <div class = "col-md-4">
-		            		<img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt="">
+		            		<%= image_tag post.image_url(:thumb) %>
 		            </div>
 			          <div class = "col-md-7 col-md-offset-1">
 			            	<div class = "row post-description top-buffer-25">
