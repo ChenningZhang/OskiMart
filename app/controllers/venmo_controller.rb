@@ -44,6 +44,8 @@ class VenmoController < ApplicationController
     else
       if not params[:charge].nil?
         amount = '-' + params[:amount]
+      else
+        amount = params[:amount]
       end
       require 'net/http'
       require 'uri'
@@ -60,7 +62,7 @@ class VenmoController < ApplicationController
         redirect_to user_path(params[:receiver])
       else
         flash[:danger] = @parsed_body["error"]["message"]
-        redirect_to :back
+        redirect_to user_path(params[:receiver])
       end
     end
   end
