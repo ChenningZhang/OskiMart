@@ -46,16 +46,16 @@
                         <a href="/about">About</a>
                     </li>
                     <li class = "dropdown">
-                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                        <a class = "dropdown-toggle" id="Categories" data-toggle="dropdown" role="button">
                           Categories <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                          <li><%=link_to "General", posts_path()%></li>
-                          <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-                          <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-                          <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-                          <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-                          <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                          <li><%=link_to "General", posts_path(), :id => "General" %></li>
+                          <li><%=link_to "Books", posts_path(category_id: 'Books'), :id => "Books" %></li>
+                          <li><%=link_to "Technology", posts_path(category_id: 'Technology'), :id => "Technology" %></li>
+                          <li><%=link_to "Furniture", posts_path(category_id: 'Furniture'), :id => "Furniture" %></li>
+                          <li><%=link_to "Service", posts_path(category_id: 'Service'), :id => "Service" %></li>
+                          <li><%=link_to "Other", posts_path(category_id: 'Other'), :id => "Other" %></li>
                         </ul>
                           
                     </li>
@@ -129,9 +129,10 @@
                     </div>
                   </div>
                   <div><%= f.submit "Update Image", class:"top-buffer-25 update-button" %></div>
-                  
                 <%end%>
+
             </div>
+
       <%end%>
       <div class="top-buffer-25">
         <%= link_to "Message", conversations_path%>
