@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<% provide(:title, 'Conversations') %>
+<% provide(:title, 'Current Conversation') %>
 
     <html lang="en">
 
@@ -133,7 +133,7 @@
               <%= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true %>
             </div>
             <%= submit_tag "Send Message", class: 'btn btn-primary' %>
-            <%= link_to "Back", conversations_path, class: 'btn btn-primary'  %>
+            <%= link_to "Back", conversations_path, class: 'btn btn-primary', id: 'Back' %>
 
           <% end %>
       </div>

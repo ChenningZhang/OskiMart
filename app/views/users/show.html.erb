@@ -135,7 +135,7 @@
 
       <%end%>
       <div class="top-buffer-25">
-        <%= link_to "Message", conversations_path%>
+        <%= link_to "Message", conversations_path, id: 'Message' %>
       </div>
       <div class="top-buffer-25">
         <%= link_to "Closed posts", closed_posts_path(:user_id => @user.id), id: 'Closed posts' %>
