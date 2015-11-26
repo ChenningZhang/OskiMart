@@ -31,7 +31,7 @@ class VenmoController < ApplicationController
       # @venmo_user = Venmo.authenticate params[:code]
       if @venmo_receiver.venmo_id.nil?
         flash[:warning] = 'This person does not have Venmo!'
-        redirect :back
+        redirect_to :back
       else
         render 'venmo/show'        
       end
