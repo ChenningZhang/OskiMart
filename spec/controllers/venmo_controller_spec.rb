@@ -7,7 +7,6 @@ require 'rails_helper'
 	#GET #final_payment
 
 RSpec.describe VenmoController, :type => :controller do
-	
 
 	describe "GET #callback" do
 		login_user
@@ -39,19 +38,16 @@ RSpec.describe VenmoController, :type => :controller do
 		it 'directs to venmo payment form' do
 			get :final_payment, amount: '', description: ''
 			response.should redirect_to :back
-
 		end	
 
 		it 'directs to venmo payment form' do
 			get :final_payment, amount: '0.01', description: 'for books', receiver: @venmo_user.id
 			response.should redirect_to user_path(@venmo_user.id)
-
 		end	
 
 		it 'directs to venmo payment form' do
 			get :final_payment, amount: '0.01', description: 'for books', receiver: @venmo_user.id, charge: 'true'
 			response.should redirect_to user_path(@venmo_user.id)
-
 		end		
 	end
 
