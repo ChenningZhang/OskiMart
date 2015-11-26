@@ -14,7 +14,6 @@ class PostsController < ApplicationController
       else
         current_user.favorites << @post
       end
-
       redirect_to :back  
     end
 
