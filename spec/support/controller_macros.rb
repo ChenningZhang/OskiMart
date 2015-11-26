@@ -9,6 +9,15 @@ module ControllerMacros
 		end
 	end
 
+	def login_venmo_user
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:venmo_user]
+			@venmo_user = FactoryGirl.create(:venmo_user)
+			sign_in @venmo_user
+			request.env["HTTP_REFERER"] = "http://test.host/posts"
+		end
+	end
+
 	def create_second_user
 		before(:each) do
 			@request.env["devise.mapping"] = Devise.mappings[:user]
@@ -160,5 +169,6 @@ module ControllerMacros
 			sign_out @user2
 		end
 	end
+
 
 end
