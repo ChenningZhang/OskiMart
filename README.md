@@ -18,3 +18,4 @@ Our app is also deployed on Heroku: oskimart.herokuapp.com
 	* Messager
 	* Review a user
 	* Close a post
+	* Payment via Venmo
