@@ -133,6 +133,16 @@ module ControllerMacros
 		end
 	end
 
+	def create_review
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			@user = FactoryGirl.create(:user)
+			@user2 = FactoryGirl.create(:user2)
+			sign_in @user
+			FactoryGirl.create(:review, :user_id => @user.id)
+		end
+	end
+
 	def send_message_from_2_to_1
 		before(:each) do
 			@request.env["devise.mapping"] = Devise.mappings[:user]
@@ -150,6 +160,5 @@ module ControllerMacros
 			sign_out @user2
 		end
 	end
-
 
 end
