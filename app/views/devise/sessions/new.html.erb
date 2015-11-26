@@ -33,11 +33,11 @@
                 <%= f.password_field :password, class: 'form-control' %>
 
                 <label class="checkbox">
+                  
                   <% if devise_mapping.rememberable? -%>
                         <%= f.check_box :remember_me %>
                         <%= f.label :remember_me %>
                   <% end -%>
-                  <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
                 </label>
                 <%= f.submit "Sign In", class: "btn btn-primary", value: "Sign In" %>
             <% end %>
