@@ -9,8 +9,10 @@ body {
   font-family: 'Raleway';
 
 }
-
-a:hover {
+a:hover{
+  text-decoration: none;
+}
+a.post-option-button:hover {
     color: white;
     text-decoration: none;
 } 
