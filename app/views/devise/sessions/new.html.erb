@@ -18,12 +18,12 @@
   <link href="/css/style-responsive.css" rel="stylesheet" />
 </head>
 <body class="login-img3-body">
-<div class="container">
+<div class="container" style="margin-top:75px">
   <div class='row'>
     <div class='col-md-6 col-md-offset-3'>
       <div class="login-form">
         <div class="login-wrap">
-          <p class="login-img"><i>Welcome!</i></p>
+          <p class="login-img"><i>Login</i></p>
           <div class="input-group">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <%= f.label :email %>
