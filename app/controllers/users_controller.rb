@@ -13,6 +13,9 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	if @user.update_attributes(user_params)
   		redirect_to @user
+    else
+      flash[:danger] = "Not a valid image link/file"
+      redirect_to @user
   	end
   end
 
