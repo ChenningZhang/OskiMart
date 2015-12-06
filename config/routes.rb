@@ -3,13 +3,25 @@ Rails.application.routes.draw do
 
   root to: 'home#home'
 
-  resources :users, only: [:show]
+  resources :users
   resources :posts
+  resources :closed_posts
+  resources :conversations, only: [:index, :show, :destroy, :new, :create] do
+    member do
+      post :reply
+      post :restore
+      post :mark_as_read
+    end
+    collection do
+      delete :empty_trash
+    end
+  end
+  post 'conversations/create' => 'conversations#create' #ask aaron if there's a cleaner way to do this...
   resources :comments
   resources :favorite_post
-  resources :reviews, only: [:index, :new, :create, :show, :destroy]
-
-
+  resources :venmo
+  
+  resources :reviews, only: [:new, :create]
 
   get '/about' => 'home#about'
 
@@ -17,7 +29,6 @@ Rails.application.routes.draw do
 
   get '/inbox' => 'home#inbox'
   
-
   get 'post_new' => 'posts#new'
   
   get 'posts' => 'posts#index'
@@ -26,20 +37,26 @@ Rails.application.routes.draw do
     
   delete 'post' => 'posts#destroy'
 
+  get 'restore_post' => 'closed_posts#restore'
+
+  # this is a get request that calls post controller with action fav_index to include in favorites route. 
+
+  get 'favorites' => 'posts#fav_index'
+
   # this is a put request that calls post controller with action favorite to include in 
   # favorite route, posts#favorite adds it to favorites list 
 
   put 'favorite' => 'posts#favorite'
 
+  get 'venmo_authorize' => 'venmo#callback'
+
+  get 'venmo_initialize_payment' => 'venmo#initialize_payment'
+
+  get 'venmo_final_payment' => 'venmo#final_payment'
+
   get 'users/new'
   get 'home/login'
   get 'home/signup'
-
-  
-
-  
-
-  
 
 
   # The priority is based upon order of creation: first created -> highest priority.

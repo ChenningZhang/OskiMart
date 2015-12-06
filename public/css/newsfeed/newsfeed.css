@@ -32,12 +32,26 @@ footer {
 .top-buffer-50 {
   margin-top: 50px;
 }
-
+.top-buffer-65 {
+  margin-top: 65px;
+}
 .top-buffer-75 {
   margin-top: 75px;
 }
 .top-buffer-100 {
   margin-top: 100px;
+}
+.top-buffer-200 {
+  margin-top: 200px;
+}
+
+.bottom-buffer-50 {
+  margin-bottom: 50px;
+}
+
+.shift-left-40 {
+  position: relative;
+  left: -40px;
 }
 /*
 .navbar-color {
@@ -80,9 +94,18 @@ input.search-input {
 .create-button:hover {
   background-color: #7D5FED
 }
+.shift-up-10 {
+  position: relative;
+  top: -10px;
+}
 .shift-up-20 {
   position:relative;
   top: -20px;
+}
+
+.shift-up-60 {
+  position: relative;
+  top: -60px;
 }
 .newsfeed-post {
   background-color: #7ABEF5;
@@ -100,10 +123,12 @@ input.search-input {
 }
 h2.post-title {
   margin-bottom: 30px;
+  word-wrap: break-word;
 }
 
 div.post-description{
   font-size: 24px;
+  word-wrap: break-word;
 }
 .blue-color{
   background-color: #5A37DB;

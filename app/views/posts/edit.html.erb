@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<% provide(:title, 'Update Post ' + @post.title) %>
 <html lang="en">
 
 <head>
@@ -13,7 +14,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../../css/newsfeed/newsfeed.css" rel="stylesheet">
@@ -44,31 +44,33 @@
                       <a href="/about">About</a>
                   </li>
                   <li class = "dropdown">
-                      <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                      <a class = "dropdown-toggle" id="Categories" data-toggle="dropdown" role="button">
                       	Categories <b class="caret"></b>
                       </a>
 					  <ul class="dropdown-menu">
-					    <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-					    <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-					   	<li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-					    <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-					    <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+					    <li><%=link_to "Books", posts_path(category_id: 'Books'), :id => "Books" %></li>
+					    <li><%=link_to "Technology", posts_path(category_id: 'Technology'), :id => "Technology" %></li>
+					   	<li><%=link_to "Furniture", posts_path(category_id: 'Furniture'), :id => "Furniture" %></li>
+					    <li><%=link_to "Service", posts_path(category_id: 'Service'), :id => "Service" %></li>
+					    <li><%=link_to "Other", posts_path(category_id: 'Other'), :id => "Other" %></li>
 					  </ul>
 												
                   </li>
+                  <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
 
                   <%if user_signed_in? %>
-              			<li>
-            					<%=link_to user_path(current_user.id) do%>
+              			<li id= 'profile'>
+            					<%=link_to user_path(current_user.id), :id => 'profile' do%>
             						<%=User.find(current_user.id).first_name%>
             						<span class="glyphicon glyphicon-user"></span> 
             					<%end%>
               			</li>
               			<li>
               				
-              				<%=link_to destroy_user_session_path, :method=>'delete' do%>
+              				<%=link_to destroy_user_session_path, :method=>'delete', :id => 'Logout' do%>
               					Logout
               					<span class="glyphicon glyphicon-log-out"></span> 
               				<%end%>
@@ -115,15 +117,25 @@
 					<%= f.label :price%>
 					<%= f.select :price, ['$', '$$','$$$'], class: 'form-control' %>
 				</div>
+        <div class = "control-label post_buttons">
+          <%= f.label :image %>
+          <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+        </div>
+        <div class = "col-md-8">
+          <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
+        </div>
+        <div class = "col-md-4">
+          <%= image_tag @post.image_url(:thumb) %>
+        </div>
 			</div>
 
 			<div class = "row top-buffer-25">
 				<div class="col-md-offset-3 col-md-3">
-						<%= f.submit "Update", class: "update-button" %>
-						<% end %>
-				</div>
+						<%= f.submit "Update", class: "update-button", id: "Update" %>
+				<% end %>
+		    </div>
 				<div class="col-md-3">
-					<%= link_to 'Back', posts_path, class: "back-button"%>
+					<%= link_to 'Back', posts_path, class: "back-button", id: "Back" %>
 				</div>
 			</div>
 

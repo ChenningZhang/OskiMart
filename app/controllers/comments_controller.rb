@@ -6,14 +6,14 @@ class CommentsController < ApplicationController
     end
 
 	def create
-	   @comment = Comment.new(comment_params)
-     @post = Post.find(params[:post_id])
-	   @comment.user_id = current_user.id
-	   @comment.post_id = @post.id
-	   current_user.comments << @comment
-	   @post.comments << @comment
+	  @comment = Comment.new(comment_params)
+    @post = Post.find(params[:post_id])
+	  @comment.user_id = current_user.id
+	  @comment.post_id = @post.id
+	  current_user.comments << @comment
+	  @post.comments << @comment
 
-     if @comment.save
+    if @comment.save
   	  flash[:success] = "Your comment has been posted!"
   	  redirect_to comments_path(:post_id => @post.id)
     else
@@ -21,12 +21,12 @@ class CommentsController < ApplicationController
     end
 	end
 
-	def show
-        @comment = Comment.find(params[:id])
-    end
-
     def index
-    	@comments = Comment.all.where(:post_id => params[:post_id])
+      if Post.where(:id => params[:post_id]).empty?
+          redirect_to posts_path
+      else
+          @comments = Comment.all.where(:post_id => params[:post_id])
+      end
     end
 
     def edit

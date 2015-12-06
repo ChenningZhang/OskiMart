@@ -5,13 +5,9 @@ class Post < ActiveRecord::Base
   # favorited by useres 
   has_many :favorite_posts
   has_many :favorited_by, through: :favorite_posts, source: :user # users that favorite a project
-
-
   has_many :comments, dependent: :destroy
+  mount_uploader :image, PostspicsUploader
 
-
-
-	
   validates :user_id, presence: true, numericality: true
 	validates :title, presence: true
 	validates :description, presence: true

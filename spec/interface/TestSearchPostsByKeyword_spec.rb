@@ -9,7 +9,7 @@ RSpec.describe 'User search posts by keyword', :type => :feature do
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
 		fill_in 'Password', :with => '12345678'
 		click_on 'Sign In'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Book Title'
@@ -48,21 +48,17 @@ RSpec.describe 'User search posts by keyword', :type => :feature do
 	end
 
 	it 'lets user to find posts that contain the keyword', :js => true do
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 		fill_in 'keywords', :with => '169'
 		click_on 'Search'
 		expect(page).to have_content '169 test service'
 		expect(page).to have_content 'I can write tests for your project!'
-		expect(page).to have_content 'Service'
-		expect(page).to have_content '$$$'
 		expect(page).to have_content 'Capybara'
 		expect(page).to have_content 'This is not a real capybara, but a 169 capybara.'
-		expect(page).to have_content 'Other'
-		expect(page).to have_content '$'
 	end
 
 	it 'does not show any post when no post matches the keyword', :js => true do
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 		fill_in 'keywords', :with => 'weird keyword'
 		click_on 'Search'
 		expect(page).to_not have_content 'Book Title'

@@ -3,18 +3,8 @@ class PostsController < ApplicationController
 
     def new
         @post = Post.new
-
     end
 
-
-    def back
-      redirect_to :back
-    rescue ActionController::RedirectBackError
-      redirect_to root_path
-    end
-
-
-    # favorite a post method
     def favorite
       @post = Post.find(params[:post_id])
       # if post in favorite list then remove 
@@ -24,12 +14,8 @@ class PostsController < ApplicationController
       else
         current_user.favorites << @post
       end
-      back
-
+      redirect_to :back  
     end
-
-
-    # render favorite list on vie
 
     def create
       	@post = Post.new(post_params)
@@ -38,7 +24,7 @@ class PostsController < ApplicationController
 
         if @post.save
           flash[:success] = "Your post has been posted!"
-          back
+          redirect_to posts_path
         else
           render 'new'
         end
@@ -53,11 +39,9 @@ class PostsController < ApplicationController
       if not params[:category_id].nil? and not params[:category_id].empty? 
         @posts = Post.where(:category => params[:category_id]).order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title =  params[:category_id]
-        puts "first if"
       else
         @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
         @title = "General"
-        puts "else"
       end
 
       if params[:price] #if filter
@@ -66,8 +50,6 @@ class PostsController < ApplicationController
       end 
 
       if params[:keywords] #if search
-        puts params[:keywords] 
-        puts params[:category_id]
         @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
         #if @posts.empty?
@@ -79,9 +61,6 @@ class PostsController < ApplicationController
           @posts = Post.favorites(current_user).order('created_at DESC').paginate(page: params[:page], per_page: 5)
           @title = "Favorites"
         end
-
-
-
     end
 
     def edit
@@ -95,7 +74,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         if @post.update_attributes(post_params)
           flash[:success] = "Your post has been updated!"
-          redirect_to(@post)
+          redirect_to comments_path(:post_id => @post.id)
         else
           render 'edit'
         end
@@ -104,21 +83,17 @@ class PostsController < ApplicationController
     def destroy
       @post = Post.find(params[:id])
       if current_user.id != @post.user_id
-          redirect_to '/'
+          redirect_to posts_path
       else
+          @closed_post = ClosedPost.create(:user_id => current_user.id, :title => @post.title, :description => @post.description, :category => @post.category, :price => @post.price, :image => @post.image)
+          current_user.closed_posts << @closed_post
           Post.destroy(params[:id])
           redirect_to posts_path
       end
     end
 
-
-    # def author
-    #     @post.user = current_user.first_name
-    # end    
-
-      
     private
       	def post_params
-      		  params.require(:post).permit(:user_id, :title, :description, :category, :price)
+      		  params.require(:post).permit(:user_id, :title, :description, :category, :price, :image, :remote_image_url)
       	end
 end

@@ -11,7 +11,7 @@ RSpec.describe 'User sign up', :type => :feature do
 		fill_in 'Password', :with => '12345678'
 		fill_in 'Confirm Password', :with => '12345678'
 		click_on 'Create Account'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 	end
 
 	it 'rejects user with non-Berkeley email', :js => true do

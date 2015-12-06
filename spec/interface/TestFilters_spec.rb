@@ -9,7 +9,7 @@ RSpec.describe 'User filters posts', :type => :feature do
 		fill_in 'Email', :with => 'czhang1306@berkeley.edu'
 		fill_in 'Password', :with => '12345678'
 		click_on 'Sign In'
-		expect(page).to have_title "Newsfeed Page"
+		expect(page).to have_title "Newsfeed"
 
 		click_on 'Create Post!'
 		fill_in 'Title', :with => 'Book Title'
@@ -48,36 +48,37 @@ RSpec.describe 'User filters posts', :type => :feature do
 	end
 
 	it 'filters posts by price', :js => true do
-		expect(page).to have_title "Newsfeed Page"
-		# Cannot find buttons, but inspect-element shows
-		# click_on 'cheap'
-		# expect(page).to_not have_content 'Capybara'
+		expect(page).to have_title "Newsfeed"
 
-		# click_on 'expensive'
-		# expect(page).to_not have_content 'Book Title'
-		# expect(page).to_not have_content 'This is a furniture'
+		click_on '$'
+		expect(page).to have_content 'Capybara'
 
-		# click_on 'very expensive'
-		# expect(page).to_not have_content 'This is another furniture'
-		# expect(page).to_not have_content '169 test service'
+		click_on '$$'
+		expect(page).to have_content 'Book Title'
+		expect(page).to have_content 'This is a furniture'
+
+		click_on '$$$'
+		expect(page).to have_content 'This is another furniture'
+		expect(page).to have_content '169 test service'
 	end
 
 	it 'filters posts by category', :js => true do
-		expect(page).to have_title "Newsfeed Page"
-		page.select 'Books', :from => 'category_id'
+		expect(page).to have_title "Newsfeed"
+
+		visit '/posts?category_id=Books'
 		expect(page).to have_content 'Book Title'
 
-		page.select 'Furniture', :from => 'category_id'
+		visit '/posts?category_id=Furniture'
 		expect(page).to have_content 'This is a furniture'
 		expect(page).to have_content 'This is another furniture'
 
-		page.select 'Service', :from => 'category_id'
+		visit '/posts?category_id=Service'
 		expect(page).to have_content '169 test service'
 
-		page.select 'Other', :from => 'category_id'
+		visit '/posts?category_id=Other'
 		expect(page).to have_content 'Capybara'
 
-		page.select 'Technology', :from => 'category_id'
+		visit '/posts?category_id=Technology'
 		expect(page).to_not have_content 'Capybara'
 		expect(page).to_not have_content 'Book Title'
 		expect(page).to_not have_content 'This is a furniture'

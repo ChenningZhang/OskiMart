@@ -13,7 +13,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../../css/newsfeed/newsfeed.css" rel="stylesheet">
@@ -47,31 +46,36 @@
                         <a href="/about">About</a>
                     </li>
                     <li class = "dropdown">
-                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                        <a class = "dropdown-toggle" id="Categories" data-toggle="dropdown" role="button">
                           Categories <b class="caret"></b>
                         </a>
-              <ul class="dropdown-menu">
-                <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-                <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-                <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-                <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-                <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
-              </ul>
+                        <ul class="dropdown-menu">
+                          <li><%=link_to "General", posts_path(), :id => "General" %></li>
+                          <li><%=link_to "Books", posts_path(category_id: 'Books'), :id => "Books" %></li>
+                          <li><%=link_to "Technology", posts_path(category_id: 'Technology'), :id => "Technology" %></li>
+                          <li><%=link_to "Furniture", posts_path(category_id: 'Furniture'), :id => "Furniture" %></li>
+                          <li><%=link_to "Service", posts_path(category_id: 'Service'), :id => "Service" %></li>
+                          <li><%=link_to "Other", posts_path(category_id: 'Other'), :id => "Other" %></li>
+                        </ul>
                           
                     </li>
+
+                    <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
+                  
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
                     <%if user_signed_in? %>
-                      <li>
-                        <%=link_to user_path(current_user.id) do%>
+                      <li id= 'profile'>
+                        <%=link_to user_path(current_user.id), :id => 'profile' do%>
                           <%=User.find(current_user.id).first_name%>
                           <span class="glyphicon glyphicon-user"></span> 
                         <%end%>
                       </li>
                       <li>
                         
-                        <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                        <%=link_to destroy_user_session_path, :method=>'delete', :id => 'Logout' do%>
                           Logout
                           <span class="glyphicon glyphicon-log-out"></span> 
                         <%end%>
@@ -91,32 +95,98 @@
             </div>
         </div>
     </nav>
+<div class="container">
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<%= yield %>
+</div>
 <div class = "overlay"></div>
 <% provide(:title, @user.first_name) %>
 
 <div class = "container top-buffer-25 text-center">
-  <div class = "row">
-      <div class="col-md-4 col-md-offset-4">
-        <img class = "img-responsive profile-image" src = "https://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg">
+  <div class = "col-md-4">
+    
+        <div class = "row col-sm-offset-1">
+            <%= image_tag @user.image_url(:thumb), class:"img-responsive"%>
+        </div>
+
+        <div class="row">
+             <h2>Hi, I'm <%= @user.first_name %></h2>  
+        </div>
+        <div class = "row shift-up-10">
+           <%= @user.email %>
+        </div>
+        <% if @user.id == current_user.id %>
+            <div class = "row top-buffer-25">
+                <%= form_for @user do |f| %>
+                  <div class = "row">
+                    <div class = "col-md-offset-4 col-xs-offset-4">
+                      <%= f.file_field :image, accept: 'image/png,image/gif,image/jpeg' %>
+                    </div>
+                    <div class = "col-md-8 col-md-offset-2">
+                      <%= f.text_field :remote_image_url, placeholder:"Or enter image url", class:"form-control top-buffer-15" %>
+                    </div>
+                  </div>
+                  <div><%= f.submit "Update Image", class:"top-buffer-25 update-button" %></div>
+                <%end%>
+
+            </div>
+
+      <%end%>
+      <div class="top-buffer-25">
+        <%= link_to "Message", conversations_path, id: 'Message' %>
+      </div>
+      <div class="top-buffer-25">
+        <%= link_to "Closed posts", closed_posts_path(:user_id => @user.id), id: 'Closed posts' %>
       </div>
   </div>
-  <div class="row top-buffer-15">
-       <h1><%= @user.first_name %> <%= @user.last_name %></h1>  
-  </div>
-  <div class = "row">
+  <div class = "col-md-7 col-md-offset-1 top-buffer-75">
+        <div class = "row top-buffer-75">
+          <h2>Payment</h2>
+        </div>
 
-	   <%= @user.email %>
+        <% if current_user.id == @user.id %>
+          <%= link_to "Venmo Access Change", "https://api.venmo.com/v1/oauth/authorize?client_id=3195&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code" %>
+
+        <% else %>
+          <% if @user.venmo_id.nil? or current_user.venmo_id.nil? %>
+            Please message this person for payment! 
+          <% else %>
+            <%= link_to "Make a payment via venmo", venmo_initialize_payment_path(receiver: @user.id) %>
+          <% end %>
+        <% end %>
+        <% if current_user.id != @user.id %>
+          <div class = "row text-center top-buffer-50">
+            <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary", id: "Add Review" %>
+          </div>
+        <% end %>
+        
+          <% if Review.all.where(:user_id => @user.id).count == 0 %>
+            <h2>No reviews to show</h2>
+          <% else %>
+          <h2 class = "top-buffer-25">Reviews:</h2>
+          <% Review.all.where(:user_id => @user.id).each do |review| %>
+              <div class = "row review top-buffer-25">
+                  <div class = "row">
+                    <h3>Score: <%= review.score %> </h3>
+                  </div>
+                  <div class = "row">
+                    <h5>Feedback: <%= review.feedback %></h5>
+                  </div>
+              </div>
+            <% end %>
+          <% end %>
+
+
+    
+
   </div>
 
-  <div class ="row top-buffer-25">
-    <div class = "col-md-6 col-md-offset-3">
-        Bacon ipsum dolor amet jowl turkey capicola meatloaf ground round ham hock kevin pig ball tip. Leberkas bresaola boudin hamburger, sirloin jerky jowl. Fatback doner pancetta tenderloin swine leberkas kevin jerky boudin. Short ribs shank pancetta ground round andouille hamburger jowl. Filet mignon jerky capicola, ribeye rump ball tip prosciutto. Kielbasa leberkas chuck ground round cupim strip steak filet mignon shankle ball tip shoulder short loin. T-bone pork chop ball tip sirloin pastrami doner pancetta filet mignon pork loin jowl sausage jerky.
-    </div>
 
-  
-  </div>
 </div>
 
+<!-- <<<<<<< HEAD--> 
 <%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
 <%= link_to "Update Profile", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
 
@@ -129,3 +199,15 @@
     <% end %>
   </table>
 </p>
+<!-- ======= -->
+
+
+  <div class = "container text-center top-buffer-25">
+
+  </div>
+
+<!-- >>>>>>> 369bddd527d0c49be15869ea96648ee4986e8dbe
+ -->
+
+
+</html>

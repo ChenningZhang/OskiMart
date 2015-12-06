@@ -2,23 +2,36 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-#mailboxer
-gem 'mailboxer'
+
 #bcrypt
 gem 'bcrypt', '3.1.9'
 gem 'bcrypt-ruby', '3.1.2', :require => 'bcrypt'
 
+
+gem 'byebug'
 #database
 gem 'pg'
+
+#messaging system
+gem 'mailboxer'
+
+#authentication
+gem 'devise'
+# venmo api
+gem 'omniauth'
+gem 'omniauth-venmo'
+gem "venmo-api"
+
+#authorization
+gem 'pundit'
 
 gem 'web-console'
 gem 'spring'
 
-#authentication
-gem 'devise'
-
-#authorization
-gem 'pundit'
+#misc stuff that can't hurt
+gem 'gravatar_image_tag'
+gem 'bootstrap-sass'
+gem 'bootstrap-will_paginate'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -48,6 +61,10 @@ gem 'will_paginate'
 # capybara for testing
 gem 'capybara'
 gem 'faker'
+
+# carrierwave for image uploading
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'rmagick'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

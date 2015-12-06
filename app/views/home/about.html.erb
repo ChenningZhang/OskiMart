@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<% provide(:title, 'About Oskimart') %>
 <html lang="en">
 
 <head>
@@ -13,7 +14,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/newsfeed/newsfeed.css" rel="stylesheet">
@@ -48,32 +48,34 @@
                         <a href = "/about">About</a>
                     </li>
                     <li class = "dropdown">
-                        <a class = "dropdown-toggle" data-toggle="dropdown" role="button">
+                        <a class = "dropdown-toggle" id="Categories" data-toggle="dropdown" role="button">
                             Categories <b class="caret"></b>
                         </a>
                           <ul class="dropdown-menu">
-                            <li><%=link_to "General", posts_path()%></li>
-                            <li><%=link_to "Books", posts_path(category_id: 'Books')%></li>
-                            <li><%=link_to "Technology", posts_path(category_id: 'Technology')%></li>
-                            <li><%=link_to "Furniture", posts_path(category_id: 'Furniture')%></li>
-                            <li><%=link_to "Service", posts_path(category_id: 'Service')%></li>
-                            <li><%=link_to "Other", posts_path(category_id: 'Other')%></li>
+                            <li><%=link_to "General", posts_path(), :id => "General" %></li>
+                            <li><%=link_to "Books", posts_path(category_id: 'Books'), :id => "Books" %></li>
+                            <li><%=link_to "Technology", posts_path(category_id: 'Technology'), :id => "Technology" %></li>
+                            <li><%=link_to "Furniture", posts_path(category_id: 'Furniture'), :id => "Furniture" %></li>
+                            <li><%=link_to "Service", posts_path(category_id: 'Service'), :id => "Service" %></li>
+                            <li><%=link_to "Other", posts_path(category_id: 'Other'), :id => "Other" %></li>
                           </ul>
                                                     
                     </li>
+                    <li><%=link_to "Favorites", posts_path(favorites: true)%></li> 
+                    <li><%=link_to "Conversations", conversations_path%></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 
                     <%if user_signed_in? %>
-                            <li>
-                                <%=link_to user_path(current_user.id) do%>
+                            <li id= 'profile'>
+                                <%=link_to user_path(current_user.id), :id => 'profile' do%>
                                     <%=User.find(current_user.id).first_name%>
                                     <span class="glyphicon glyphicon-user"></span> 
                                 <%end%>
                             </li>
                             <li>
                                 
-                                <%=link_to destroy_user_session_path, :method=>'delete' do%>
+                                <%=link_to destroy_user_session_path, :method=>'delete', :id => 'Logout' do%>
                                     Logout
                                     <span class="glyphicon glyphicon-log-out"></span> 
                                 <%end%>
@@ -101,7 +103,7 @@
         </div>
     </div>
 
-    <div class = "container top-buffer-100 bottom-padding">
+    <div class = "container top-buffer-100 bottom-padding bottom-buffer-50">
         <div class = "row" style = "position: relative; left: -40px">
             <div class = "col-md-3 col-xs-6 col-xs-offset-4 col-md-offset-1">
 
@@ -136,7 +138,7 @@
                     <h1>Messaging</h1>
                 </div>
                 <div class = "row">
-                    Message other users privately about items that you are interested in purchasing. With comments for public discussion and messaging for private discussion, you'll never miss an item you want to purchase!
+                    Message other users privately about items that you are interested in purchasing. With messaging, you'll never miss an item you want to purchase!
                 </div>
             </div>
 
