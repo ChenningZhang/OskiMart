@@ -29,13 +29,20 @@ class Post < ActiveRecord::Base
     user.favorites
   end
 
-  def self.search(keywords, category_id)
+  def self.search(keywords, category_id, price)
     keyword_regex = "%#{keywords}%"
     if category_id.nil? or category_id.empty?
-      where("title ILIKE ? or description ILIKE ?", keyword_regex, keyword_regex)
-      
+      if price.nil? or price.empty?
+        where("title ILIKE ? or description ILIKE ?", keyword_regex, keyword_regex)
+      else
+        where("(title ILIKE ? or description ILIKE ?) and price = ?", keyword_regex, keyword_regex, price)
+      end 
     else
-      where("(title ILIKE ? or description ILIKE ?) and category = ?", keyword_regex, keyword_regex, category_id)
+      if price.nil? or price.empty?
+          where("(title ILIKE ? or description ILIKE ?) and category = ?", keyword_regex, keyword_regex, category_id)
+      else
+          where("(title ILIKE ? or description ILIKE ?) and category = ? and price = ?", keyword_regex, keyword_regex, category_id, price)
+      end 
     end
 
   end

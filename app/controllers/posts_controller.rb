@@ -45,16 +45,17 @@ class PostsController < ApplicationController
       end
 
       if params[:price] #if filter
-        @posts = Post.filter(params[:price], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-        @title += ", Price = " + params[:price] 
+        if params[:keywords]
+          @posts = Post.search(params[:keywords], params[:category_id], params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        else
+          @posts = Post.filter(params[:price], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        end
+        @title += ", Price = " + params[:price]
       end 
 
       if params[:keywords] #if search
-        @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        @posts = Post.search(params[:keywords], params[:category_id], params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
-        #if @posts.empty?
-          #render "posts/index", :locals=> {:search_err => 'No search results returned'}
-
       end
 
         if params[:favorites]
