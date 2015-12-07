@@ -3,6 +3,8 @@ default: &default
   pool: 5
   timeout: 5000
   database: oskimart_development
+  username: Zheryu
+  password: password
 
 development:
   <<: *default

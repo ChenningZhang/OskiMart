@@ -6,13 +6,21 @@ class ConversationsController < ApplicationController
   before_action :get_box, only: [:index]
 
   def new
-    @chosen_recipient = User.find_by(id: params[:to].to_i) if params[:to]
+    @chosen_recipient = User.find_by(id: params[:to].to_i).where.not(id: current_user.id) if params[:to]
   end
 
   def create
     recipients = User.where(id: params['recipients'])
-    conversation = current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
-    redirect_to conversation_path(conversation)
+    if recipients.empty?
+      flash[:warning] = "There's no one to message to!"
+      redirect_to new_conversation_path
+    elsif recipients.include?(current_user)
+      flash[:warning] = "Go outside. Make some friends. Talking to yourself isn't the answer."
+      redirect_to new_conversation_path
+    else
+      conversation = current_user.send_message(recipients, params[:message][:body], params[:message][:subject]).conversation
+      redirect_to conversation_path(conversation)
+    end
   end
 
   def index
@@ -31,7 +39,15 @@ class ConversationsController < ApplicationController
   end
 
   def reply
+    puts "a dirty bitch"
+    
+    puts "a dirty bitch"
     current_user.reply_to_conversation(@conversation, params[:body])
+    @conversation.recipients do |recipient|
+      puts "a dirty bitch"
+      puts recipient
+      @conversation.untrash(recipient)
+    end
     redirect_to conversation_path(@conversation)
   end
 
@@ -50,7 +66,7 @@ class ConversationsController < ApplicationController
 
   def empty_trash
     @mailbox.trash.each do |conversation|
-      conversation.receipts_for(current_user).update_all(deleted: true)
+      conversation.mark_as_deleted(current_user)
     end
     redirect_to conversations_path
   end
