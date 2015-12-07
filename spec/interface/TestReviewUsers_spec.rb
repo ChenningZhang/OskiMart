@@ -22,7 +22,7 @@ RSpec.describe 'Review Users', :type => :feature do
 		click_on 'Submit Review'
 		expect(page).to have_title 'test'
 		expect(page).to have_content 'Score: 5'
-		expect(page).to have_content 'Feedback: This person is chill'
+		expect(page).to have_content 'This person is chill'
 	end
 
 	it 'rejects reviews with blank feedback', :js => true do
