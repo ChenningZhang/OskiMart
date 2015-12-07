@@ -105,12 +105,12 @@ input.search-input {
   top: -20px;
 }
 
-.shift-up-60 {
+.shift-up-80 {
   position: relative;
-  top: -60px;
+  top: -80px;
 }
 .newsfeed-post {
-  background-color: #7ABEF5;
+  background-color: #F7F7F7;
   border-radius: 5px;
   padding-left: 30px;
   padding-right: 20px;
@@ -142,7 +142,6 @@ div.post-description{
   right: -50px;
   width: 100%;
   height: 100%;
-
   margin: 0px 0px 0px 0px;
   background-size:cover;
 }
@@ -160,5 +159,5 @@ div.post-description{
 .overlay {
   z-index: -800;
   opacity: 1;
-  background-color: #F7F7F7;
+  background-color: #dbebf4
 }
