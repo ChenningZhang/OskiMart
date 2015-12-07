@@ -9,14 +9,13 @@ class UsersController < ApplicationController
     @reviews = @user.reviews
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update
   	@user = User.find(params[:id])
   	if @user.update_attributes(user_params)
   		redirect_to @user
+    else
+      flash[:danger] = "Not a valid image link/file"
+      redirect_to @user
   	end
   end
 

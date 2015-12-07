@@ -14,16 +14,11 @@ class CommentsController < ApplicationController
 	  @post.comments << @comment
 
     if @comment.save
-  	  flash[:success] = "Your comment has been posted!"
   	  redirect_to comments_path(:post_id => @post.id)
     else
       render 'new'
     end
 	end
-
-	def show
-      @comment = Comment.find(params[:id])
-  end
 
     def index
       if Post.where(:id => params[:post_id]).empty?
@@ -44,7 +39,6 @@ class CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
         @post = Post.find(@comment.post_id)
         if @comment.update_attributes(comment_params)
-          flash[:success] = "Your comment has been updated!"
           redirect_to comments_path(:post_id => @post.id)
         else
           render 'edit'

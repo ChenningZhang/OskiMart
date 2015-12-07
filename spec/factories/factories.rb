@@ -8,6 +8,14 @@ FactoryGirl.define do
 		password "12345678"
 	end
 
+	factory :venmo_user, class: User do
+		first_name "Chenning"
+		last_name "Zhang"
+		email "czhang1306@berkeley.edu"
+		password "12345678"
+		venmo_id "123"
+	end
+
 	factory :user2, class: User do
 		first_name "John"
 		last_name "Cena"
@@ -34,6 +42,15 @@ FactoryGirl.define do
 		description "Test description"
 		category "Technology"
 		price "$$"
+		association :user, factory: :user, strategy: :build
+	end
+
+	factory :closed_post, class: ClosedPost do
+		title "Test Title"
+		description "Test description"
+		category "Technology"
+		price "$$"
+		image "nil"
 		association :user, factory: :user, strategy: :build
 	end
 

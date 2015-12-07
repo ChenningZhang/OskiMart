@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :favorite_post
   resources :venmo
   
-  resources :reviews, only: [:index, :new, :create, :show, :destroy]
+  resources :reviews, only: [:new, :create]
 
   get '/about' => 'home#about'
 

@@ -27,6 +27,8 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
+        <script src="js/newsfeed/favorite.js"></script>
+
 
     </head>
 
@@ -120,6 +122,8 @@
         		        <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
           		        <%= text_field_tag :keywords, params[:search], placeholder: "Search posts by title or description", :class=>"search-input" %>
                       <%= hidden_field_tag :category_id , params[:category_id] %>
+                      <%= hidden_field_tag :price , params[:price] %>
+
           		        <%= submit_tag "Search", :class=>"search-button"%>
         		        <% end %>
         		    </form>
@@ -129,16 +133,16 @@
           	<div class = "row top-buffer-25">
           		<div class = "col-md-6 col-md-offset-1 col-xs-8 col-xs-offset-1">
           			<h5>Filter by price:</h5>
-        	  		<%= link_to "$", posts_path(price: '$', category_id: params[:category_id]), class: "price-button", id: "$" %>
-        	  		<%= link_to "$$", posts_path(price: '$$', category_id: params[:category_id]), class: "price-button", id: "$$" %>
-        	  		<%= link_to "$$$", posts_path(price: '$$$', category_id: params[:category_id]), class: "price-button", id: "$$$" %>
+        	  		<%= link_to "$", posts_path(price: '$', category_id: params[:category_id], keywords: params[:keywords]), class: "price-button", id: "$" %>
+        	  		<%= link_to "$$", posts_path(price: '$$', category_id: params[:category_id], keywords: params[:keywords]), class: "price-button", id: "$$" %>
+        	  		<%= link_to "$$$", posts_path(price: '$$$', category_id: params[:category_id], keywords: params[:keywords]), class: "price-button", id: "$$$" %>
         	  	</div>
           		<div class = "col-md-4 col-md-offset-5 col-xs-6 col-xs-offset-7 shift-up-20">
           			<%= link_to "Create Post!", post_new_path, class: "create-button", id: "Create Post!" %>
           		</div>
         <% end %>
 
-              <div class = "col-md-4 col-md-offset-9 col-xs-6 col-xs-offset-7 shift-up-60">
+              <div class = "col-md-4 col-md-offset-9 col-xs-6 col-xs-offset-7 shift-up-80">
                 <%= will_paginate @posts, :class=>"pagination" %>
               </div>
           	</div>
@@ -152,14 +156,14 @@
       <%= yield %>
     </div>
     <!-- Container for posts -->
-    <div class = "container top-buffer-50 bottom-buffer-50">
+    <div class = "container bottom-buffer-50">
         <% @posts.each do |post| %>
 
-            <div class = "row top-buffer-35 newsfeed-post">
+            <div class = "row top-buffer-35 newsfeed-post" data-id="<%=post.id%>">
             		<h2 class = "post-title">Title: <%= post.title%></h2>
 		            <div class = "col-md-4">
 		            		<!-- <img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt=""> -->
-                    <%= image_tag post.image_url(:thumb) %>
+                    <%= image_tag post.image_url(:thumb), :class=>"img-responsive" %>
 		            </div>
 			          <div class = "col-md-7 col-md-offset-1">
 			            	<div class = "row post-description top-buffer-25">
@@ -185,9 +189,9 @@
                         
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button", id: "Comments" %>
                         <% if current_user.favorites.include?(post) %>
-				                  <%= link_to "Unfavorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Unfavorite" %>
+                            <a class = "unfavorite-button post-option-button" id = "Unfavorite">Unfavorite</a>
                         <% else %>
-                          <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Favorite" %>
+                            <a class = "favorite-button post-option-button" id = "Favorite">Favorite</a>
                         <% end %>
                            </div>
 

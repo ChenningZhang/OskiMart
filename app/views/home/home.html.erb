@@ -25,7 +25,7 @@
 
 <body class="login-img3-body">
 
-	<div class="container">
+	<div class="container" style="margin-top:75px">
 
 		<form class="login-form" action="index.html">        
 			<div class="login-wrap">
@@ -48,20 +48,15 @@
 
       <!--   <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button> -->
 
-
             <% if user_signed_in? %>
                   <p>You are signed in. Click <%= link_to 'here', posts_path %> to go to your page</p>
                   <p>Alternatively, Click <%= link_to 'here', destroy_user_session_path, :method=>'delete' %> to sign out</p>
             <% else %>
-                  <div class="btn btn-primary btn-lg btn-block" value="Log in">
-                    <%= link_to "Log in", new_user_session_path %>
-                  </div>
+                <%= link_to "Login", new_user_session_path,:id =>"Log in", :class=>"btn btn-primary btn-lg btn-block" %>
                   <!--
                           <button class="btn btn-info btn-lg btn-block" type="submit" formaction = "signup.html">Signup</button> -->
 
-                  <div class="btn btn-info btn-lg btn-block" value="Sign up">
-                    <%= link_to "Sign up now!", new_user_registration_path %>
-                  </div>
+                <%= link_to "Sign up now!", new_user_registration_path,:id =>"Sign up", :class=>"btn btn-info btn-lg btn-block" %>
             <% end %>
     </div>
 </form>

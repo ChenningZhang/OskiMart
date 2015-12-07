@@ -4,6 +4,17 @@ module ControllerMacros
 			@request.env["devise.mapping"] = Devise.mappings[:user]
 			@user = FactoryGirl.create(:user)
 			sign_in @user
+			request.env["HTTP_REFERER"] = "http://test.host/posts"
+
+		end
+	end
+
+	def login_venmo_user
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:venmo_user]
+			@venmo_user = FactoryGirl.create(:venmo_user)
+			sign_in @venmo_user
+			request.env["HTTP_REFERER"] = "http://test.host/posts"
 		end
 	end
 
@@ -65,6 +76,16 @@ module ControllerMacros
 		end
 	end
 
+	def create_closed_post
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			@user = FactoryGirl.create(:user)
+			sign_in @user
+			@closed_post = FactoryGirl.create(:closed_post, :user_id => @user.id)
+			request.env["HTTP_REFERER"] = "http://test.host/closed_posts"
+		end
+	end
+
 	def create_post_logout
 		before(:each) do
 			@request.env["devise.mapping"] = Devise.mappings[:user]
@@ -118,6 +139,16 @@ module ControllerMacros
 			sign_in @user
 			@conversation = @user.send_message([@user2, @user3], "This is the body of the message", "This is a subject").conversation
 			sign_out @user
+		end
+	end
+
+	def create_review
+		before(:each) do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			@user = FactoryGirl.create(:user)
+			@user2 = FactoryGirl.create(:user2)
+			sign_in @user
+			FactoryGirl.create(:review, :user_id => @user.id)
 		end
 	end
 

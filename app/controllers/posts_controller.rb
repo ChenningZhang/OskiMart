@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
 
     def new
         @post = Post.new
@@ -10,17 +11,12 @@ class PostsController < ApplicationController
       # if post in favorite list then remove 
       if current_user.favorites.include?(@post)
         current_user.favorites.delete(@post)
+        render json: {favorited: false}
       # add to fav list
       else
         current_user.favorites << @post
+        render json: {favorited: true}
       end
-
-      redirect_to :back  
-    end
-
-    def fav_index
-      @posts = current_user.favorites
-      render 'favorites'
     end
 
     def create
@@ -51,16 +47,17 @@ class PostsController < ApplicationController
       end
 
       if params[:price] #if filter
-        @posts = Post.filter(params[:price], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
-        @title += ", Price = " + params[:price] 
+        if params[:keywords]
+          @posts = Post.search(params[:keywords], params[:category_id], params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        else
+          @posts = Post.filter(params[:price], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        end
+        @title += ", Price = " + params[:price]
       end 
 
       if params[:keywords] #if search
-        @posts = Post.search(params[:keywords], params[:category_id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+        @posts = Post.search(params[:keywords], params[:category_id], params[:price]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
         @title += ", Search = " + params[:keywords]
-        #if @posts.empty?
-          #render "posts/index", :locals=> {:search_err => 'No search results returned'}
-
       end
 
         if params[:favorites]
@@ -89,7 +86,7 @@ class PostsController < ApplicationController
     def destroy
       @post = Post.find(params[:id])
       if current_user.id != @post.user_id
-          redirect_to '/'
+          redirect_to posts_path
       else
           @closed_post = ClosedPost.create(:user_id => current_user.id, :title => @post.title, :description => @post.description, :category => @post.category, :price => @post.price, :image => @post.image)
           current_user.closed_posts << @closed_post

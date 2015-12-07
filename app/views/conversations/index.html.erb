@@ -107,19 +107,19 @@
     </div>
     <div class = "col-md-3 top-buffer-15">
       <ul class="nav nav-pills nav-stacked">
-        <%= mailbox_section 'inbox', @box %>
-        <%= mailbox_section 'sent', @box %>
-        <%= mailbox_section 'trash', @box %>
+        <%= mailbox_section 'inbox', @box, :id => 'Inbox' %>
+        <%= mailbox_section 'sent', @box, :id => 'Sent' %>
+        <%= mailbox_section 'trash', @box, :id => 'Trash' %>
       </ul>
 
       <ul class = "top-buffer-200 shift-left-40">
         <div>
-          <%= link_to 'Start conversation', new_conversation_path, class: 'btn btn-lg btn-primary' %>
+          <%= link_to 'Start conversation', new_conversation_path, class: 'btn btn-lg btn-primary', id: 'Start conversation' %>
         </div>
 
         <% if @box == 'trash' %>
           <div class="top-buffer-25">
-            <%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
+            <%= link_to 'Empty trash', empty_trash_conversations_path, id: 'Empty trash', class: 'btn btn-danger', method: :delete,
                            data: {confirm: 'Are you sure?'} %>
           </div>
         <% end %>
