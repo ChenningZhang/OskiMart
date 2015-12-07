@@ -27,6 +27,8 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 
+        <script src="js/newsfeed/favorite.js"></script>
+
 
     </head>
 
@@ -157,7 +159,7 @@
     <div class = "container top-buffer-50 bottom-buffer-50">
         <% @posts.each do |post| %>
 
-            <div class = "row top-buffer-35 newsfeed-post">
+            <div class = "row top-buffer-35 newsfeed-post" data-id="<%=post.id%>">
             		<h2 class = "post-title">Title: <%= post.title%></h2>
 		            <div class = "col-md-4">
 		            		<!-- <img class="img-responsive" src="http://www.livelifecycling.com/portals/0/Tours/StMaloNice/nice2.jpg" alt=""> -->
@@ -187,9 +189,9 @@
                         
 				                <%= link_to "Comments", comments_path(:post_id => post.id), class: "post-option-button", id: "Comments" %>
                         <% if current_user.favorites.include?(post) %>
-				                  <%= link_to "Unfavorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Unfavorite" %>
+                            <a class = "unfavorite-button post-option-button" id = "Unfavorite">Unfavorite</a>
                         <% else %>
-                          <%= link_to "Favorite" , favorite_path(:post_id => post.id),class: "post-option-button", method: :put, id: "Favorite" %>
+                            <a class = "favorite-button post-option-button" id = "Favorite">Favorite</a>
                         <% end %>
                            </div>
 
