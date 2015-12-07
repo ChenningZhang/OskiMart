@@ -67,7 +67,7 @@ RSpec.describe 'User update post', :type => :feature do
 		page.select 'Furniture', :from => 'post_category'
 		page.select '$$$', :from => 'post_price'
 		click_on 'Update'
-		expect(page).to have_content "Oops, something went wrong while creating a new post."
+		expect(page).to have_content "Oops, something went wrong."
 		expect(page).to have_content "Title can't be blank"
 		expect(page).to have_content "Description can't be blank"
 		click_on 'Back'

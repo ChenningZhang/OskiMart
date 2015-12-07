@@ -48,7 +48,7 @@ RSpec.describe 'User create post', :type => :feature do
 		page.select '$$', :from => 'post_price'
 		click_on 'Create Post!'
 		expect(page).to have_title "Create Post"
-		expect(page).to have_content "Oops, something went wrong while creating a new post."
+		expect(page).to have_content "Oops, something went wrong."
 		expect(page).to have_content "Title can't be blank"
 		expect(page).to have_content "Description can't be blank"
 	end
