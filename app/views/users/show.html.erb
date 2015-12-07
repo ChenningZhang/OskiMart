@@ -186,20 +186,7 @@
 
 </div>
 
-<!-- <<<<<<< HEAD--> 
-<%= link_to "Add Review", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
-<%= link_to "Update Profile", new_review_path(:user_id => @user.id), class: "btn btn-lg btn-primary" %>
 
-<p>
-  <b>Reviews:</b>
-  <table>
-    <%= Review.all.where(:user_id => @user.id).each do |review| %>
-    <td><%= review.score %></td>
-    <td><%= review.feedback %></td>
-    <% end %>
-  </table>
-</p>
-<!-- ======= -->
 
 
   <div class = "container text-center top-buffer-25">
