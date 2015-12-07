@@ -14,4 +14,14 @@ module ConversationsHelper
     end
     s.html_safe
   end
+
+  def participants(participants = [])
+    s = ''
+    participants.delete(current_user)
+    participants.each do |participant|
+      s += participant.full_name + ", "
+    end
+    s = s[0..s.length-3]
+    s.html_safe
+  end
 end

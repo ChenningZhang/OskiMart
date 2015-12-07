@@ -39,14 +39,9 @@ class ConversationsController < ApplicationController
   end
 
   def reply
-    puts "a dirty bitch"
-    
-    puts "a dirty bitch"
     current_user.reply_to_conversation(@conversation, params[:body])
-    @conversation.recipients do |recipient|
-      puts "a dirty bitch"
-      puts recipient
-      @conversation.untrash(recipient)
+    @conversation.recipients.each do |recipient|
+      recipient.untrash(@conversation)
     end
     redirect_to conversation_path(@conversation)
   end
