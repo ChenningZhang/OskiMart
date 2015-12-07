@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
 
     def new
         @post = Post.new
@@ -10,11 +11,12 @@ class PostsController < ApplicationController
       # if post in favorite list then remove 
       if current_user.favorites.include?(@post)
         current_user.favorites.delete(@post)
+        render json: {favorited: false}
       # add to fav list
       else
         current_user.favorites << @post
+        render json: {favorited: true}
       end
-      redirect_to :back  
     end
 
     def create

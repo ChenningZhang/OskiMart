@@ -1,0 +1,15 @@
+$(document).ready(function(){
+  $(".show-comments").on("click", function() {
+    console.log("clicked");
+    var modal = $(this).parent().parent().parent().prev();
+    console.log(modal);
+    modal.fadeIn(500);
+    $("div.overlay").fadeIn(300);
+  });
+
+  $(".hide-comments").on("click", function() {
+    var modal = $(this).parent();
+    modal.fadeOut(500);
+    $("div.overlay").fadeOut(500);
+  })
+});

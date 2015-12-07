@@ -184,17 +184,15 @@ RSpec.describe PostsController, :type => :controller do
 	describe "PUT #favorite" do
 		create_post
 		it 'favorites a post' do
-			put :favorite, post_id: @post.id
 
-			response.should redirect_to :back
+			put :favorite, post_id: @post.id, :format => :json
+      response.should be_success
+      body = JSON.parse(response.body)
+      body.should include('favorited')
+      body['favorited'].should == true
 		end
-
-		it 'favorites a post' do
-			put :favorite, post_id: @post.id
-			response.should redirect_to :back
-		end
-
 	end
+
 
 	describe "GET #index" do
 		create_post
