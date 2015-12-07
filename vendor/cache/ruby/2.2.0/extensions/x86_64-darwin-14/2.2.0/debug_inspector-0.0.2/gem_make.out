@@ -1,0 +1,11 @@
+/usr/local/opt/ruby/bin/ruby -r ./siteconf20151207-778-b46cnv.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20151207-778-lrztu9

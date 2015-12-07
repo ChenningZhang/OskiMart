@@ -63,7 +63,7 @@ gem 'capybara'
 gem 'faker'
 
 # carrierwave for image uploading
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
 gem 'rmagick'
 
 # Use Unicorn as the app server
