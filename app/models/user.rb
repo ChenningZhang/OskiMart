@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 	validates :first_name, presence: true
   	validates :last_name, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@berkeley+\.edu+\z/i
-	validates :email, format: { with: VALID_EMAIL_REGEX, message: "must be Berkeley email!" }, uniqueness: { case_sensitive: false }
+	validates :email, format: { with: VALID_EMAIL_REGEX, message: "must be Berkeley email!" }
 	validates :password, length: {minimum: 8}, on: :create
 
 	#mailboxer mcMagicSauce
